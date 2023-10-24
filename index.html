@@ -1,0 +1,720 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>The ugrep file pattern searcher</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background: white;
+            color: black;
+        }
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 3em;
+            background: #2f8d46;
+            color: white;
+            text-align: center;
+            padding: 20px
+        }
+        h2 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2rem;
+            color: #2f8d46;
+            text-align: center;
+        }
+        h3 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.5rem;
+            color: #2f8d46;
+        }
+        p {
+            font-size: 1.12rem;
+            font-style: italic;
+        }
+        em {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+        }
+        tt {
+            font-family: "Courier New", monospace;
+            font-style: normal;
+        }
+        code {
+            font-family: "Courier New", monospace;
+            font-style: normal;
+            font-weight: bold;
+        }
+        dl dt {
+            font-family: "Courier New", monospace;
+            font-style: normal;
+            font-weight: bold;
+            margin: 3px;
+        }
+        dl dd {
+        }
+        ol {
+            padding: 20px;
+            list-style-type: upper-roman;
+        }
+        ul {
+            padding: 20px;
+            list-style-type: none;
+        }
+        ol li {
+            padding: 5px;
+            margin-left: 20px;
+        }
+        ul li {
+            margin: 5px;
+            margin-left: 20px;
+        }
+        a {
+            color: #2f8d46;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #2f8d46;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>The ugrep file pattern searcher</h1>
+
+<p align=center>ugrep: a powerful, ultra fast, user-friendly and compatible grep
+
+<!-- <p align=center>Do you grep? -->
+
+<a name="install"><h2>Installation</h2></a>
+
+<ul>
+<li>MacOS <a href="https://formulae.brew.sh/formula/ugrep#default">homebrew</a>: <code>brew install ugrep</code>
+<li>Windows with <a href="https://learn.microsoft.com/en-us/windows/package-manager/">Winget</a>: <code>winget install Genivia.ugrep</code>
+<li>Windows with <a href="https://community.chocolatey.org/packages/ugrep">Chocolatey</a>: <code>choco install ugrep</code>
+<li>Windows with <a href="hhttps://scoop.sh">Scoop</a>: <code>scoop install ugrep</code>
+<li>Alpine: <code>apk add ugrep ugrep-doc</code>
+<li>Arch: <code>pacman -S ugrep</code>
+<li>CentOS: <code>dnf install ugrep</code>
+<li>Debian: <code>apt-get install ugrep</code>
+<li>Fedora: <code>dnf install ugrep</code>
+<li>FreeBSD: <code>pkg install ugrep</code>
+<li>NetBSD: <a href="http://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/textproc/ugrep/README.html">textproc/ugrep</a> download
+<li>RHEL: <code>dnf install ugrep</code>
+<li>Other:
+<pre>
+git clone https://github.com/Genivia/ugrep
+cd ugrep
+./build.sh        # build ugrep/bin/ug and ugrep/bin/ugrep
+sudo make install # install as desired
+</pre>
+</ul>
+
+<a name="commands"><h2>Commands</h2></a>
+
+<p>Search for patterns in files with <code>ug</code> or <code>ugrep</code>, where
+
+<dl>
+<dt>ug</dt>                     <dd>searches files using a .ugrep configuration file with your search preferences located in the working directory or home directory; <code>ug+</code> also searches pdfs, documents, e-books, image metadata</dd>
+<dt>ug --save-config <i>OPTIONS</i></dt>
+                                <dd>saves a new .ugrep file in the working directory using the current .ugrep configuration and by copying the relevant <tt><i>OPTIONS</i></tt> (if any) to the new .ugrep file</dd>
+<dt>ugrep</dt>                  <dd>same as <code>ug</code>, but without using a .ugrep configuration file, e.g. use <code>ugrep</code> in scripts; <code>ugrep+</code> also searches pdfs, documents, e-books, image metadata</dd>
+</dl>
+
+<p>Examples:
+
+<dl>
+<dt>ug <i>PATTERN</i></dt>
+                                <dd>recursively search for files matching <tt><i>PATTERN</i></tt></dd>
+<dt>ug <i>PATTERN</i> <i>FILE</i></dt>
+                                <dd>search lines in <tt><i>FILE</i></tt> matching <tt><i>PATTERN</i></tt></dd>
+<dt>ug <i>PATTERN</i> <i>DIR</i></dt>
+                                <dd>search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding sub-directories (like the <code>ls</code> command)</dd>
+<dt>ug -r <i>PATTERN</i> <i>DIR</i></dt>
+                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding symlinks</dd>
+<dt>ug -R <i>PATTERN</i> <i>DIR</i></dt>
+                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files and directories</dd>
+<dt>ug -r -S <i>PATTERN</i> <i>DIR</i></dt>
+                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files only</dd>
+<dt>ug -3 <i>PATTERN</i> <i>DIR</i></dt>
+                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt> does, but up to 3 levels only, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
+</dl>
+
+<ol>
+<li>the regex pattern syntax supports standard POSIX ERE by default, like GNU <code>egrep</code>
+<li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match
+<li>specify <tt><i>"PATTERN"</i></tt> with quotes to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
+<li>an empty pattern <tt>""</tt> matches every line, same as option <tt>--match</tt>
+<li>multiple <tt><i>FILE</i></tt> and <tt><i>DIR</i></tt> pathname arguments may be specified as search targets
+<li>standard input is searched automatically when the standard input is not a terminal, e.g. a pipe redirect
+</ol>
+
+<a name="options"><h2>Command line options</h2></a>
+
+<p>Options can be mixed and specified in no particular order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
+
+<h3>List matching files</h3>
+
+<dl>
+<dt>-l</dt>                     <dd>list matching files</dd>
+<dt>-L</dt>                     <dd>list non-matching files</dd>
+<dt>-c</dt>                     <dd>count matching lines in files</dd>
+<dt>-cv</dt>                    <dd>count non-matching lines in files</dd>
+<dt>-cu</dt>                    <dd>count all pattern matches in files by ungrouping multiple matches from lines</dd>
+<dt>-cm1,</dt>                  <dd>count matching lines in files with at least one match, skip files with zero matches (include the comma in <tt>-m1,</tt>)</dd>
+</dl>
+
+<h3>Displaying matches, match info, match context</h3>
+
+<dl>
+<dt>-H</dt>                     <dd>always display the filename (normally, a filename is not displayed when searching a single specified file)</dd>
+<dt>-n</dt>                     <dd>output the line number of a match</dd>
+<dt>-k</dt>                     <dd>output the column number of a match</dd>
+<dt>-b</dt>                     <dd>output the byte offset of a match</dd>
+<dt>-u</dt>                     <dd>ungroup multiple matches from lines to count and output each match separately</dd>
+<dt>-C3</dt>                    <dd>output matching lines with 3 lines as context before (option <tt>-B3</tt>) and after (option <tt>-A3</tt>)</dd>
+<dt>-y</dt>                     <dd>output matching lines and the rest of the file as context</dd>
+<dt>-o</dt>                     <dd>output only the matching part</dd>
+<dt>-o -C20</dt>                <dd>output only the matching part with the matching line as context before (option <tt>-B20</tt>) and after (option <tt>-A20</tt>) to fit 40 characters</dd>
+<dt>--width=40</dt>             <dd>truncate lines to 40 characters</dd>
+</dl>
+
+<h3>Pattern matching modes</h3>
+
+<dl>
+<dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code>
+<dt>-G</dt>                     <dd>BRE pattern syntax, like GNU <code>grep</code> or <code>grep -G</code>
+<dt>-P</dt>                     <dd>Perl regex pattern search (Unicode) with PCRE, see also <tt>ug --help regex</tt></dd>
+<dt>-U</dt>                     <dd>search with non-Unicode ASCII and binary patterns, e.g. pattern <tt>\xa3</tt> is a byte, not the Unicode code point U+00a3</dd>
+<dt>-Y</dt>                     <dd>permit empty matches like GNU grep, but empty-matching patterns such as <tt>x*y*z*</tt> match all lines instead of matching <tt>x*y*z*</tt>
+<dt>-i</dt>                     <dd>ignore case when matching patterns</dd>
+<dt>-j</dt>                     <dd>smart ignore case, enables <tt>-i</tt> when patterns are specified in lower case</dd>
+<dt>-w</dt>                     <dd>patterns must match as words and not be part of words</dd>
+<dt>-x</dt>                     <dd>patterns must match whole lines from start to end</dd>
+<dt>-v</dt>                     <dd>invert pattern matching; output lines that do not match</dd>
+<dt>-e <i>PATTERN</i></dt>      <dd>specify an additional <tt><i>PATTERN</i></tt> to search</dd>
+<dt>-f <i>FILE</i></dt>         <dd>read (additional) patterns from <tt><i>FILE</i></tt></dd>
+<dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read ugrep built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns</tt>)</dd>
+</dl>
+
+<h3>TUI interactive query mode</h3>
+
+<dl>
+<dt>-Q</dt>                     <dd>start TUI to specify search patterns and options interactively</dd>
+<dt>-Q -e <i>PATTERN</i></dt>   <dd>start TUI and search for <tt><i>PATTERN</i></tt></dd>
+</dl>
+
+<ol>
+<li>any additional options can be specified to start a TUI with these options enabled
+<li><em>ALT-key</em> toggles the option letter corresponding to the key press (for upper case use <em>SHIFT-ALT-key</em>), for example <em>ALT-L</em> lists matching files (option <tt>-l</tt>) and <em>SHIFT-ALT-C</em> shows context (option <tt>-C3</tt>)
+<li>navigate to directories and files with <em>Tab</em>, then <em>SHIFT-Tab</em> to go back and restore previous options and patterns (if changed)
+<li>use the cursor keys, <em>PgUp</em>, <em>PgDn</em> and the scroll wheel to scroll the search results
+<li><em>CTRL-S</em> jumps to the next directory or file in the results, <em>CTRL-W</em> jumps back
+<li><em>CTRL-T</em> toggles the split screen with a file preview
+<li><em>CTRL-Y</em> displays a file in a pager
+<li><em>CTRL-Z</em> displays help and the active search options
+</ol>
+
+<h3>Google-like search</h3>
+
+<dl>
+<dt>-% "foo bar"</dt>           <dd>search files for lines matching both <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
+<dt>-% "foo -bar"</dt>          <dd>search files for lines matching <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
+<dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both <tt>foo</tt> and <tt>bar|baz</tt> (<tt>bar</tt> or <tt>baz</tt>) anywhere on the same line</dd>
+<dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
+<dt>-% "foo -bar -baz"</dt>     <dd>same as above (normalized form)</dd>
+<dt>-% 'foo "-bar"'</dt>        <dd>search files for lines matching both <tt>foo</tt> and <tt>-bar</tt>, where <tt>"-bar"</tt> is quoted to match "as is"</dd>
+<dt>--files -% "foo bar"</dt>   <dd>search files matching both <tt>foo</tt> and <tt>bar</tt> anywhere in the same file</dd>
+<dt>--files -% "foo -bar"</dt>  <dd>search files matching <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file</dd>
+</dl>
+
+<ol>
+<li>white space is a logical AND (low precedence)
+<li>a <tt>|</tt> is a logical OR (taking higher precedence than AND)
+<li>white space followed by a <tt>-</tt> is a logical NOT (taking highest precedence)
+<li>quote strings in a pattern with <tt>"</tt> to match literally
+<li>group patterns with parenthesis
+<li>option <tt>-%</tt> can be combined with any pattern matching modes <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
+</ol>
+
+<h3>Fuzzy search</h3>
+
+<dl>
+<dt>-Z</dt>                     <dd>approximately match patterns up to one extra, missing or replaced character in the input</dd>
+<dt>-Z2</dt>                    <dd>approximately match patterns up to two extra, missing or replaced characters in the input</dd>
+<dt>-Z+2</dt>                   <dd>approximately match patterns up to two extra characters in the input</dd>
+<dt>-Z-2</dt>                   <dd>approximately match patterns up to two missing characters in the input</dd>
+<dt>-Z~2</dt>                   <dd>approximately match patterns up to two replaced characters in the input</dd>
+<dt>-c -Z</dt>                  <dd>count approximate matches in files</dd>
+<dt>-c -Zbest2</dt>             <dd>count <tt>-Z2</tt> approximate matches in files, but only the best matches per file (e.g. if a file has at least one exact match, then only exact matches are counted)</dd>
+<dt>-c -Zbest2 --sort=best</dt> <dd>count the best approximate matches in files and sort by best matching files per directory</dd>
+</dl>
+
+<ol>
+<li>the first characters specified in the search pattern always match; to approximately match the first character(s), replace it with a <tt>.</tt> or <tt>.?</tt>
+<li>no whitespace may be given between <tt>-Z</tt> and its argument
+</ol>
+
+<h3>Archives and compressed files</h3>
+
+<dl>
+<dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and compressed files gz/Z/bz/bz2/lzma/xz/lz4/zstd</dd>
+<dt>-z --zmax=2</dt>            <dd>also search archives, tarballs and compressed files stored within archives</dd>
+<dt>-z -tc,cpp</dt>             <dd>search C and C++ source code files and also those in archives, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
+<dt>-z -g"*.txt,*.md"</dt>      <dd>search files matching the globs <tt>*.txt</tt> and <tt>*.md</tt> and also those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+<dt>-z -g"^bak/"</dt>           <dd>exclude all <tt>bak</tt> directories from the search and skip those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+</dl>
+
+<h3>Binary files and devices</h3>
+
+<dl>
+<dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
+<dt>-W</dt>                     <dd>hexdump the binary matches in files, keeping text matches as is</dd>
+<dt>-X</dt>                     <dd>hexdump matches</dd>
+<dt>-U -X</dt>                  <dd>hexdump with 8-bit binary patterns, not Unicode character-based patterns</dd>
+<dt>--hexdump=4ch</dt>          <dd>hexdump with 4 columns, no character column (c), no hex spacing (h)</dd>
+<dt>--hexdump=4C3</dt>          <dd>hexdump with 4 columns and 3 lines of hexdump context before and after (C3 is B3A3)</dd>
+<dt>-Dread</dt>                 <dd>also read special devices to search them (danger to get stuck on a non-responsive device!)</dd>
+</dl>
+
+<h3>Exclusions and inclusions</h3>
+
+<dl>
+<dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
+<dt>-p</dt>                     <dd>never follow symlinks, even when specified on the command line</dd>
+<dt>-S</dt>                     <dd>when searching recursively, follow symlinks to files, but not to directories</dd>
+<dt>-.</dt>                     <dd>include hidden files in searches (normally, hidden files are excluded from searching)</dd>
+<dt>-tc,cpp</dt>                <dd>only search C and C++ source code files, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
+<dt>-g"*.hpp,*.cpp"</dt>        <dd>only search <tt>.hpp</tt> and <tt>.cpp</tt> files with the specified glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+<dt>-g"src/"</dt>               <dd>only recursively search <tt>src</tt> directories with the glob pattern, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+<dt>-g"^*.txt,^bak/"</dt>       <dd>do not search <tt>.txt</tt> files and <tt>bak</tt> directories with the negated glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+<dt>--iglob="^*.txt,bak/"</dt>  <dd>same as above, but with case-insensitive glob matching (<tt>--glob-ignore-case</tt> applies to all globs)</dd>
+<dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> using only filename extension globs</dd>
+<dt>-K10,99</dt>                <dd>only search files from line 10 up to and including line 99</dd>
+<dt>-m2,9</dt>                  <dd>only search files with at least two matching lines and output up to and including 9 matching lines</dd>
+<dt>-m2,9 -u</dt>               <dd>only search files with at least two matches and output up to and including 9 matches</dd>
+<dt>-3</dt>                     <dd>recursively search up to three directory levels deep, i.e. <tt><i>one/</i></tt>, <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
+<dt>-2-3</dt>                   <dd>only recursively search sub-directories at two to three levels deep, i.e. <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
+<dt>--ignore-files</dt>         <dd>obey .gitignore file exclusions in recursive searches</dd>
+<dt>--filter=<i>"COMMANDS"</i></dt>
+                                <dd>filter files first before searching them by executing a utility on the file based on its type, see also <a href="#filter"><tt>ug --help filter</tt></a></dd>
+<dt>--exclude-fs=<i>"PATH"</i></dt>
+                                <dd>do not search the file system associated with <tt><i>PATH</i></tt> (a mounted directory or mount point)</dd>
+<dt>--exclude-from=<i>"FILE"</i></dt>
+                                <dd>do not search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+<dt>--include-from=<i>"FILE"</i></dt>
+                                <dd>only search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+</dl>
+
+<h3>Formatted output</h3>
+
+<dl>
+<dt>--csv</dt>                  <dd>CSV output format</dd>
+<dt>--json</dt>                 <dd>JSON output format</dd>
+<dt>--xml</dt>                  <dd>XML output format</dd>
+<dt>--format=<i>"FORMAT"</i></dt>
+                                <dd>custom format the output, see also <a href="#format"><tt>ug --help format</tt></a></dd>
+</dl>
+
+<ol>
+<li>formatting can be combined with any other options, such as <tt>-n</tt> to include line numbers
+</ol>
+
+<h3>Pretty things, more or less</h3>
+
+<dl>
+<dt>--pretty</dt>               <dd>enables <tt>-n</tt>, <tt>-T</tt>, <tt>--tree</tt>, <tt>--heading</tt>, <tt>--break</tt></dd>
+<dt>--tree</dt>                 <dd>lists files in a tree-like layout</dd>
+<dt>--heading</dt>              <dd>display file names as headings</dd>
+<dt>--break</dt>                <dd>output an empty line between matching files</dd>
+<dt>-T</dt>                     <dd>tabbed line and column numbers to add spacing</dd>
+<dt>--color</dt>                <dd>colorize the output when displayed on a terminal (default)</dd>
+<dt>--colors=<i>SPEC</i></dt>   <dd>specify a color pallette <tt><i>SPEC</i></tt>, see also <a href="#colors"><tt>ug --help colors</tt></a></dd>
+<dt>--hyperlink</dt>            <dd>embeds hyperlinks in the output when output is displayed on a terminal</dd>
+<dt>--pager</dt>                <dd>output to a pager, default is <tt>more</tt> or <tt>less</tt></dd>
+<dt>--pager=<i>COMMAND</i></dt> <dd>output to <tt><i>COMMAND</i></tt> as a pager</dd>
+<dt>--tag</dt>                  <dd>tag matches in the output as <tt>___<i>match</i>___</tt> instead of colorizing them</dd>
+<dt>--replace=<i>"FORMAT"</i></dt>
+                                <dd>replace matches in the output by <tt><i>FORMAT</i></tt>, see also <a href="#format"><tt>ug --help format</tt></a>
+</dl>
+
+<ol>
+<li><code>ug</code> enables <tt>--pretty</tt> by default
+<li><code>ugrep</code> only enables <tt>--color</tt> by default
+</ol>
+
+<h3>Getting help</h3>
+
+<dl>
+<dt>--help count</dt>           <dd>display help on option <tt>-c</tt> (<tt>--count</tt>) and <tt>-m [MIN,][MAX]</tt> (<tt>--min-count=MIN</tt>, <tt>--max-count=MAX</tt>)</dd>
+<dt>--help regex</dt>           <dd>display help with details on regex patterns</dd>
+<dt>--help globs</dt>           <dd>display help with details on glob patterns, e.g. for option <tt>-g</tt></dd>
+<dt>--help <i>WHAT</i></dt>     <dd>display help on <tt><i>WHAT</i></tt> you are looking for</dd>
+</dl>
+
+<a name="colors"><h2>Colors</h2></a>
+
+<p>The <tt>--colors=</tt> argument is a colon-separated list of parameters, such as <tt>--colors=sl=hy:mt=hyB</tt>, where
+
+<table>
+<tr><td><tt>sl=</tt></td><td>selected lines</td></tr>
+<tr><td><tt>cx=</tt></td><td>context lines</td></tr>
+<tr><td><tt>rv </tt></td><td>swaps the <tt>sl=</tt> and <tt>cx=</tt> capabilities when <tt>-v</tt> is specified</td></tr>
+<tr><td><tt>mt=</tt></td><td>matching text in any matching line</td></tr>
+<tr><td><tt>ms=</tt></td><td>matching text in a selected line, the substring <tt>mt=</tt> by default</td></tr>
+<tr><td><tt>mc=</tt></td><td>matching text in a context line, the substring <tt>mt=</tt> by default</td></tr>
+<tr><td><tt>fn=</tt></td><td>file names</td></tr>
+<tr><td><tt>ln=</tt></td><td>line numbers</td></tr>
+<tr><td><tt>cn=</tt></td><td>column numbers</td></tr>
+<tr><td><tt>bn=</tt></td><td>byte offsets</td></tr>
+<tr><td><tt>se=</tt></td><td>separators</td></tr>
+<tr><td><tt>qp=</tt></td><td>TUI prompt</td></tr>
+<tr><td><tt>qe=</tt></td><td>TUI errors</td></tr>
+<tr><td><tt>qr=</tt></td><td>TUI regex</td></tr>
+<tr><td><tt>qm=</tt></td><td>TUI regex meta characters</td></tr>
+<tr><td><tt>ql=</tt></td><td>TUI regex lists and literals</td></tr>
+<tr><td><tt>qb=</tt></td><td>TUI regex braces</td></tr>
+</table>
+
+<p>Multiple <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters">SGR codes</a> may be specified for a single parameter when separated by a semicolon, e.g. <tt>--colors="mt=1;31"</tt> specifies bright red.  For quick and easy color specification, the corresponding single-letter color names may be used in place of numeric SGR codes and semicolons are not required to separate color names, e.g. <tt>--colors=mt=hr</tt> specifies bright red.  Color letters and numeric codes may be mixed.  The following SGR codes have corresponding letter designations:
+
+<table>
+<tr><td>0   </td><td><tt>n</tt></td><td>normal font and color     </td><td>2   </td><td><tt>f </tt></td><td>faint (not widely supported)</td></tr>
+<tr><td>1   </td><td><tt>h</tt></td><td>highlighted bold font     </td><td>21  </td><td><tt>H </tt></td><td>highlighted bold off</td></tr>
+<tr><td>4   </td><td><tt>u</tt></td><td>underline                 </td><td>24  </td><td><tt>U </tt></td><td>underline off</td></tr>
+<tr><td>7   </td><td><tt>i</tt></td><td>invert video              </td><td>27  </td><td><tt>I </tt></td><td>invert off</td></tr>
+<tr><td>30  </td><td><tt>k</tt></td><td>black text                </td><td>90  </td><td><tt>+k</tt></td><td>bright gray text</td></tr>
+<tr><td>31  </td><td><tt>r</tt></td><td>red text                  </td><td>91  </td><td><tt>+r</tt></td><td>bright red text</td></tr>
+<tr><td>32  </td><td><tt>g</tt></td><td>green text                </td><td>92  </td><td><tt>+g</tt></td><td>bright green text</td></tr>
+<tr><td>33  </td><td><tt>y</tt></td><td>yellow text               </td><td>93  </td><td><tt>+y</tt></td><td>bright yellow text</td></tr>
+<tr><td>34  </td><td><tt>b</tt></td><td>blue text                 </td><td>94  </td><td><tt>+b</tt></td><td>bright blue text</td></tr>
+<tr><td>35  </td><td><tt>m</tt></td><td>magenta text              </td><td>95  </td><td><tt>+m</tt></td><td>bright magenta text</td></tr>
+<tr><td>36  </td><td><tt>c</tt></td><td>cyan text                 </td><td>96  </td><td><tt>+c</tt></td><td>bright cyan text</td></tr>
+<tr><td>37  </td><td><tt>w</tt></td><td>white text                </td><td>97  </td><td><tt>+w</tt></td><td>bright white text</td></tr>
+<tr><td>40  </td><td><tt>K</tt></td><td>black background          </td><td>100 </td><td><tt>+K</tt></td><td>bright gray background</td></tr>
+<tr><td>41  </td><td><tt>R</tt></td><td>dark red background       </td><td>101 </td><td><tt>+R</tt></td><td>bright red background</td></tr>
+<tr><td>42  </td><td><tt>G</tt></td><td>dark green background     </td><td>102 </td><td><tt>+G</tt></td><td>bright green background</td></tr>
+<tr><td>43  </td><td><tt>Y</tt></td><td>dark yellow backgrounda   </td><td>103 </td><td><tt>+Y</tt></td><td>bright yellow background</td></tr>
+<tr><td>44  </td><td><tt>B</tt></td><td>dark blue background      </td><td>104 </td><td><tt>+B</tt></td><td>bright blue background</td></tr>
+<tr><td>45  </td><td><tt>M</tt></td><td>dark magenta background   </td><td>105 </td><td><tt>+M</tt></td><td>bright magenta background</td></tr>
+<tr><td>46  </td><td><tt>C</tt></td><td>dark cyan background      </td><td>106 </td><td><tt>+C</tt></td><td>bright cyan background</td></tr>
+<tr><td>47  </td><td><tt>W</tt></td><td>dark white background     </td><td>107 </td><td><tt>+W</tt></td><td>bright white background</td></tr>
+</table>
+
+<p>The default color scheme is <tt>cx=33:</tt> <tt>mt=1;31:</tt> <tt>fn=1;35:</tt> <tt>ln=1;32:</tt> <tt>cn=1;32:</tt> <tt>bn=1;32:</tt> <tt>se=36:</tt> <tt>qp=1;32:</tt> <tt>qe=1;37;41:</tt> <tt>qm=1;32:</tt> <tt>ql=36:</tt> <tt>qb=1;35</tt>
+
+<a name="types"><h2>File types</h2></a>
+
+<p>The <tt>-t</tt> argument is a comma-separated list of file types.  A file type matches one or more filename extensions, internally using option <tt>-O</tt> for filename extension matching.  For capitalized file types, the search is expanded to include files with matching file signature magic bytes, internally using option <tt>-M</tt>.  When a type is preceded by a <tt>!</tt> or a <tt>^</tt>, excludes files of the specified type.
+
+<table>
+<tr><td><tt>actionscript</tt></td><td>=</td><td><tt>-O as,mxml</tt></td></tr>
+<tr><td><tt>         ada</tt></td><td>=</td><td><tt>-O ada,adb,ads</tt></td></tr>
+<tr><td><tt>         asm</tt></td><td>=</td><td><tt>-O asm,s,S</tt></td></tr>
+<tr><td><tt>         asp</tt></td><td>=</td><td><tt>-O asp</tt></td></tr>
+<tr><td><tt>        aspx</tt></td><td>=</td><td><tt>-O master,ascx,asmx,aspx,svc</tt></td></tr>
+<tr><td><tt>    autoconf</tt></td><td>=</td><td><tt>-O ac,in</tt></td></tr>
+<tr><td><tt>    automake</tt></td><td>=</td><td><tt>-O am,in</tt></td></tr>
+<tr><td><tt>         awk</tt></td><td>=</td><td><tt>-O awk</tt></td></tr>
+<tr><td><tt>         Awk</tt></td><td>=</td><td><tt>-O awk</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '#!\h*/.*\Wg?awk(\W.*)?\n'</tt></td></tr>
+<tr><td><tt>       basic</tt></td><td>=</td><td><tt>-O bas,BAS,cls,frm,ctl,vb,resx</tt></td></tr>
+<tr><td><tt>       batch</tt></td><td>=</td><td><tt>-O bat,BAT,cmd,CMD</tt></td></tr>
+<tr><td><tt>       bison</tt></td><td>=</td><td><tt>-O y,yy,ymm,ypp,yxx</tt></td></tr>
+<tr><td><tt>           c</tt></td><td>=</td><td><tt>-O c,h,H,hdl,xs</tt></td></tr>
+<tr><td><tt>         c++</tt></td><td>=</td><td><tt>-O cpp,CPP,cc,cxx,CXX,h,hh,H,hpp,hxx,Hxx,HXX</tt></td></tr>
+<tr><td><tt>     clojure</tt></td><td>=</td><td><tt>-O clj</tt></td></tr>
+<tr><td><tt>         cpp</tt></td><td>=</td><td><tt>-O cpp,CPP,cc,cxx,CXX,h,hh,H,hpp,hxx,Hxx,HXX</tt></td></tr>
+<tr><td><tt>      csharp</tt></td><td>=</td><td><tt>-O cs</tt></td></tr>
+<tr><td><tt>         css</tt></td><td>=</td><td><tt>-O css</tt></td></tr>
+<tr><td><tt>         csv</tt></td><td>=</td><td><tt>-O csv</tt></td></tr>
+<tr><td><tt>        dart</tt></td><td>=</td><td><tt>-O dart</tt></td></tr>
+<tr><td><tt>        Dart</tt></td><td>=</td><td><tt>-O dart</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '#!\h*/.*\Wdart(\W.*)?\n'</tt></td></tr>
+<tr><td><tt>      delphi</tt></td><td>=</td><td><tt>-O pas,int,dfm,nfm,dof,dpk,dproj,groupproj,bdsgroup,bdsproj</tt></td></tr>
+<tr><td><tt>       elisp</tt></td><td>=</td><td><tt>-O el</tt></td></tr>
+<tr><td><tt>      elixir</tt></td><td>=</td><td><tt>-O ex,exs</tt></td></tr>
+<tr><td><tt>      erlang</tt></td><td>=</td><td><tt>-O erl,hrl</tt></td></tr>
+<tr><td><tt>     fortran</tt></td><td>=</td><td><tt>-O for,ftn,fpp,f,F,f77,F77,f90,F90,f95,F95,f03,F03</tt></td></tr>
+<tr><td><tt>         gif</tt></td><td>=</td><td><tt>-O gif</tt></td></tr>
+<tr><td><tt>         Gif</tt></td><td>=</td><td><tt>-O gif</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M 'GIF87a|GIF89a'</tt></td></tr>
+<tr><td><tt>          go</tt></td><td>=</td><td><tt>-O go</tt></td></tr>
+<tr><td><tt>      groovy</tt></td><td>=</td><td><tt>-O groovy,gtmpl,gpp,grunit,gradle</tt></td></tr>
+<tr><td><tt>         gsp</tt></td><td>=</td><td><tt>-O gsp</tt></td></tr>
+<tr><td><tt>     haskell</tt></td><td>=</td><td><tt>-O hs,lhs</tt></td></tr>
+<tr><td><tt>        html</tt></td><td>=</td><td><tt>-O htm,html,xhtml</tt></td></tr>
+<tr><td><tt>        jade</tt></td><td>=</td><td><tt>-O jade</tt></td></tr>
+<tr><td><tt>        java</tt></td><td>=</td><td><tt>-O java,properties</tt></td></tr>
+<tr><td><tt>        jpeg</tt></td><td>=</td><td><tt>-O jpg,jpeg</tt></td></tr>
+<tr><td><tt>        Jpeg</tt></td><td>=</td><td><tt>-O jpg,jpeg</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '\xff\xd8\xff[\xdb\xe0\xe1\xee]'</tt></td></tr>
+<tr><td><tt>          js</tt></td><td>=</td><td><tt>-O js</tt></td></tr>
+<tr><td><tt>        json</tt></td><td>=</td><td><tt>-O json</tt></td></tr>
+<tr><td><tt>         jsp</tt></td><td>=</td><td><tt>-O jsp,jspx,jthm,jhtml</tt></td></tr>
+<tr><td><tt>       julia</tt></td><td>=</td><td><tt>-O jl</tt></td></tr>
+<tr><td><tt>      kotlin</tt></td><td>=</td><td><tt>-O kt,kts</tt></td></tr>
+<tr><td><tt>        less</tt></td><td>=</td><td><tt>-O less</tt></td></tr>
+<tr><td><tt>         lex</tt></td><td>=</td><td><tt>-O l,ll,lmm,lpp,lxx</tt></td></tr>
+<tr><td><tt>        lisp</tt></td><td>=</td><td><tt>-O lisp,lsp</tt></td></tr>
+<tr><td><tt>         lua</tt></td><td>=</td><td><tt>-O lua</tt></td></tr>
+<tr><td><tt>          m4</tt></td><td>=</td><td><tt>-O m4</tt></td></tr>
+<tr><td><tt>        make</tt></td><td>=</td><td><tt>-O mk,mak</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-g makefile,Makefile,Makefile.Debug,Makefile.Release</tt></td></tr>
+<tr><td><tt>    markdown</tt></td><td>=</td><td><tt>-O md</tt></td></tr>
+<tr><td><tt>      matlab</tt></td><td>=</td><td><tt>-O m</tt></td></tr>
+<tr><td><tt>        node</tt></td><td>=</td><td><tt>-O js</tt></td></tr>
+<tr><td><tt>        Node</tt></td><td>=</td><td><tt>-O js</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '#!\h*/.*\Wnode(\W.*)?\n'</tt></td></tr>
+<tr><td><tt>        objc</tt></td><td>=</td><td><tt>-O m,h</tt></td></tr>
+<tr><td><tt>      objc++</tt></td><td>=</td><td><tt>-O mm,h</tt></td></tr>
+<tr><td><tt>       ocaml</tt></td><td>=</td><td><tt>-O ml,mli,mll,mly</tt></td></tr>
+<tr><td><tt>      parrot</tt></td><td>=</td><td><tt>-O pir,pasm,pmc,ops,pod,pg,tg</tt></td></tr>
+<tr><td><tt>      pascal</tt></td><td>=</td><td><tt>-O pas,pp</tt></td></tr>
+<tr><td><tt>         pdf</tt></td><td>=</td><td><tt>-O pdf</tt></td></tr>
+<tr><td><tt>         Pdf</tt></td><td>=</td><td><tt>-O pdf</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '\x25\x50\x44\x46\x2d'</tt></td></tr>
+<tr><td><tt>        perl</tt></td><td>=</td><td><tt>-O pl,PL,pm,pod,t,psgi
+<tr><td><tt>        Perl</tt></td><td>=</td><td><tt>-O pl,PL,pm,pod,t,psgi</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '#!\h*/.*\Wperl(\W.*)?\n'</tt></td></tr>
+<tr><td><tt>         php</tt></td><td>=</td><td><tt>-O php,php3,php4,phtml</tt></td></tr>
+<tr><td><tt>         Php</tt></td><td>=</td><td><tt>-O php,php3,php4,phtml</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '#!\h*/.*\Wphp(\W.*)?\n'</tt></td></tr>
+<tr><td><tt>         png</tt></td><td>=</td><td><tt>-O png</tt></td></tr>
+<tr><td><tt>         Png</tt></td><td>=</td><td><tt>-O png</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '\x89PNG\x0d\x0a\x1a\x0a'</tt></td></tr>
+<tr><td><tt>      prolog</tt></td><td>=</td><td><tt>-O pl,pro</tt></td></tr>
+<tr><td><tt>      python</tt></td><td>=</td><td><tt>-O py</tt></td></tr>
+<tr><td><tt>      Python</tt></td><td>=</td><td><tt>-O py</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '#!\h*/.*\Wpython[23]?(\W.*)?\n'</tt></td></tr>
+<tr><td><tt>           r</tt></td><td>=</td><td><tt>-O R</tt></td></tr>
+<tr><td><tt>         rpm</tt></td><td>=</td><td><tt>-O rpm</tt></td></tr>
+<tr><td><tt>         Rpm</tt></td><td>=</td><td><tt>-O rpm</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '\xed\xab\xee\xdb'</tt></td></tr>
+<tr><td><tt>         rst</tt></td><td>=</td><td><tt>-O rst</tt></td></tr>
+<tr><td><tt>         rtf</tt></td><td>=</td><td><tt>-O rtf</tt></td></tr>
+<tr><td><tt>         Rtf</tt></td><td>=</td><td><tt>-O rtf</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '\{\rtf1'</tt></td></tr>
+<tr><td><tt>        ruby</tt></td><td>=</td><td><tt>-O rb,rhtml,rjs,rxml,erb,rake,spec</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-g Rakefile</tt></td></tr>
+<tr><td><tt>        Ruby</tt></td><td>=</td><td><tt>-O rb,rhtml,rjs,rxml,erb,rake,spec</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-g Rakefile</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '#!\h*/.*\Wruby(\W.*)?\n'</tt></td></tr>
+<tr><td><tt>        rust</tt></td><td>=</td><td><tt>-O rs</tt></td></tr>
+<tr><td><tt>       scala</tt></td><td>=</td><td><tt>-O scala</tt></td></tr>
+<tr><td><tt>      scheme</tt></td><td>=</td><td><tt>-O scm,ss</tt></td></tr>
+<tr><td><tt>       shell</tt></td><td>=</td><td><tt>-O sh,bash,dash,csh,tcsh,ksh,zsh,fish</tt></td></tr>
+<tr><td><tt>       Shell</tt></td><td>=</td><td><tt>-O sh,bash,dash,csh,tcsh,ksh,zsh,fish</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '#!\h*/.*\W(ba|da|t?c|k|z|fi)?sh(\W.*)?\n'</tt></td></tr>
+<tr><td><tt>   smalltalk</tt></td><td>=</td><td><tt>-O st</tt></td></tr>
+<tr><td><tt>         sql</tt></td><td>=</td><td><tt>-O sql,ctl</tt></td></tr>
+<tr><td><tt>         svg</tt></td><td>=</td><td><tt>-O svg</tt></td></tr>
+<tr><td><tt>       swift</tt></td><td>=</td><td><tt>-O swift</tt></td></tr>
+<tr><td><tt>         tcl</tt></td><td>=</td><td><tt>-O tcl,itcl,itk</tt></td></tr>
+<tr><td><tt>         tex</tt></td><td>=</td><td><tt>-O tex,cls,sty,bib</tt></td></tr>
+<tr><td><tt>        text</tt></td><td>=</td><td><tt>-O text,txt,TXT,md,rst</tt></td></tr>
+<tr><td><tt>        tiff</tt></td><td>=</td><td><tt>-O tif,tiff</tt></td></tr>
+<tr><td><tt>        Tiff</tt></td><td>=</td><td><tt>-O tif,tiff</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '\x49\x49\x2a\x00|\x4d\x4d\x00\x2a'</tt></td></tr>
+<tr><td><tt>          tt</tt></td><td>=</td><td><tt>-O tt,tt2,ttml</tt></td></tr>
+<tr><td><tt>  typescript</tt></td><td>=</td><td><tt>-O ts,tsx</tt></td></tr>
+<tr><td><tt>     verilog</tt></td><td>=</td><td><tt>-O v,vh,sv</tt></td></tr>
+<tr><td><tt>        vhdl</tt></td><td>=</td><td><tt>-O vhd,vhdl</tt></td></tr>
+<tr><td><tt>         vim</tt></td><td>=</td><td><tt>-O vim</tt></td></tr>
+<tr><td><tt>         xml</tt></td><td>=</td><td><tt>-O xml,xsd,xsl,xslt,wsdl,rss,svg,ent,plist</tt></td></tr>
+<tr><td><tt>         Xml</tt></td><td>=</td><td><tt>-O xml,xsd,xsl,xslt,wsdl,rss,svg,ent,plist</tt></td></tr>
+<tr><td><tt>            </tt></td><td> </td><td><tt>-M '&lt;\?xml '</tt></td></tr>
+<tr><td><tt>        yacc</tt></td><td>=</td><td><tt>-O y</tt></td></tr>
+<tr><td><tt>        yaml</tt></td><td>=</td><td><tt>-O yaml,yml</tt></td></tr>
+</table>
+
+<a name="format"><h2>Custom output formatting</h2></a>
+
+<table>
+<tr><td><tt>--format-begin=<i>"FORMAT"</i></tt></td><td>format string for beginning the search</td></tr>
+<tr><td><tt>--format-open=<i>"FORMAT"</i> </tt></td><td>format string for opening a file when a match was found</td></tr>
+<tr><td><tt>--format=<i>"FORMAT"</i>      </tt></td><td>format string for each match in a file</td></tr>
+<tr><td><tt>--format-close=<i>"FORMAT"</i></tt></td><td>format string for closing a file when a match was found</td></tr>
+<tr><td><tt>--format-end=<i>"FORMAT"</i>  </tt></td><td>format string for ending the search</td></tr>
+<tr><td><tt>--replace=<i>"FORMAT"</i>     </tt></td><td>replace matches in the output with the specified formatted string</td></tr>
+</table>
+
+<p>where <tt><i>FORMAT</i></tt> may contain any text and the following format fields:
+
+<table>
+<tr><td><tt>%F                   </tt></td><td>if option <tt>-H</tt> is used: the file pathname and separator</td></tr>
+<tr><td><tt>%[ARG]F              </tt></td><td>if option <tt>-H</tt> is used: <tt>ARG</tt>, the file pathname and separator</td></tr>
+<tr><td><tt>%f                   </tt></td><td>the file pathname</td></tr>
+<tr><td><tt>%a                   </tt></td><td>the file basename without directory path</td></tr>
+<tr><td><tt>%p                   </tt></td><td>the directory path to the file</td></tr>
+<tr><td><tt>%z                   </tt></td><td>the pathname in a (compressed) archive, without <tt>{</tt> and <tt>}</tt></td></tr>
+<tr><td><tt>%H                   </tt></td><td>if option <tt>-H</tt> is used: the quoted pathname and separator, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
+<tr><td><tt>%[ARG]H              </tt></td><td>if option <tt>-H</tt> is used: <tt>ARG</tt>, the quoted pathname and separator, \" and \\ replace " and \</td></tr>
+<tr><td><tt>%h                   </tt></td><td>the quoted file pathname, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
+<tr><td><tt>%N                   </tt></td><td>if option <tt>-n</tt> is used: the line number and separator</td></tr>
+<tr><td><tt>%[ARG]N              </tt></td><td>if option <tt>-n</tt> is used: <tt>ARG</tt>, the line number and separator</td></tr>
+<tr><td><tt>%n                   </tt></td><td>the line number of the match</td></tr>
+<tr><td><tt>%K                   </tt></td><td>if option <tt>-k</tt> is used: the column number and separator</td></tr>
+<tr><td><tt>%[ARG]K              </tt></td><td>if option <tt>-k</tt> is used: <tt>ARG</tt>, the column number and separator</td></tr>
+<tr><td><tt>%k                   </tt></td><td>the column number of the match</td></tr>
+<tr><td><tt>%B                   </tt></td><td>if option <tt>-b</tt> is used: the byte offset and separator</td></tr>
+<tr><td><tt>%[ARG]B              </tt></td><td>if option <tt>-b</tt> is used: <tt>ARG</tt>, the byte offset and separator</td></tr>
+<tr><td><tt>%b                   </tt></td><td>the byte offset of the match</td></tr>
+<tr><td><tt>%T                   </tt></td><td>if option <tt>-T</tt> is used: <tt>ARG</tt> and a tab character</td></tr>
+<tr><td><tt>%[ARG]T              </tt></td><td>if option <tt>-T</tt> is used: <tt>ARG</tt> and a tab character</td></tr>
+<tr><td><tt>%t                   </tt></td><td>a tab character</td></tr>
+<tr><td><tt>%[SEP]$              </tt></td><td>set field separator to <tt>SEP</tt> for the rest of the format fields</td></tr>
+<tr><td><tt>%[ARG]&lt;           </tt></td><td>if the first match: <tt>ARG</tt></td></tr>
+<tr><td><tt>%[ARG]&gt;           </tt></td><td>if not the first match: <tt>ARG</tt></td></tr>
+<tr><td><tt>%,                   </tt></td><td>if not the first match: a comma, same as <tt>%[,]&lt;</tt></td></tr>
+<tr><td><tt>%:                   </tt></td><td>if not the first match: a colon, same as <tt>%[:]&gt;</tt></td></tr>
+<tr><td><tt>%;                   </tt></td><td>if not the first match: a semicolon, same as <tt>%[;]&gt;</tt></td></tr>
+<tr><td><tt>%|                   </tt></td><td>if not the first match: a vertical bar, same as <tt>%[|]&gt;</tt></td></tr>
+<tr><td><tt>%S                   </tt></td><td>if not the first match: separator, see also <tt>%[SEP]$</tt></td></tr>
+<tr><td><tt>%[ARG]S              </tt></td><td>if not the first match: <tt>ARG</tt> and separator, see also <tt>%[SEP]$</tt></td></tr>
+<tr><td><tt>%s                   </tt></td><td>the separator, see also <tt>%[ARG]S</tt> and <tt>%[SEP]$</tt></td></tr>
+<tr><td><tt>%~                   </tt></td><td>a newline character</td></tr>
+<tr><td><tt>%+                   </tt></td><td>if option <tt>--heading</tt> is used: <tt>%F</tt> and a newline character, suppress all <tt>%F</tt> and <tt>%H</tt> afterward</td></tr>
+<tr><td><tt>%m                   </tt></td><td>the number of matches, sequential (or number of matching files with <tt>--format-end</tt>)</td></tr>
+<tr><td><tt>%M                   </tt></td><td>the number of matching lines (or number of matching files with <tt>--format-end</tt>)</td></tr>
+<tr><td><tt>%O                   </tt></td><td>the matching line is output as is (a raw string of bytes)</td></tr>
+<tr><td><tt>%o                   </tt></td><td>the match is output as is (a raw string of bytes)</td></tr>
+<tr><td><tt>%Q                   </tt></td><td>the matching line as a quoted string, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
+<tr><td><tt>%q                   </tt></td><td>the match as a quoted string, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
+<tr><td><tt>%C                   </tt></td><td>the matching line formatted as a quoted C/C++ string</td></tr>
+<tr><td><tt>%c                   </tt></td><td>the match formatted as a quoted C/C++ string</td></tr>
+<tr><td><tt>%J                   </tt></td><td>the matching line formatted as a quoted JSON string</td></tr>
+<tr><td><tt>%j                   </tt></td><td>the match formatted as a quoted JSON string</td></tr>
+<tr><td><tt>%V                   </tt></td><td>the matching line formatted as a quoted CSV string</td></tr>
+<tr><td><tt>%v                   </tt></td><td>the match formatted as a quoted CSV string</td></tr>
+<tr><td><tt>%X                   </tt></td><td>the matching line formatted as XML character data</td></tr>
+<tr><td><tt>%x                   </tt></td><td>the match formatted as XML character data</td></tr>
+<tr><td><tt>%w                   </tt></td><td>the width of the match, counting (wide) characters</td></tr>
+<tr><td><tt>%d                   </tt></td><td>the size of the match, counting bytes</td></tr>
+<tr><td><tt>%e                   </tt></td><td>the ending byte offset of the match</td></tr>
+<tr><td><tt>%Z                   </tt></td><td>the edit distance cost of an approximate match with option <tt>-Z</tt></td></tr>
+<tr><td><tt>%u                   </tt></td><td>select unique lines only unless option <tt>-u</tt> is used</td></tr>
+<tr><td><tt>%1 %2 ... %9         </tt></td><td>the first regex group capture of the match, and so on up to group <tt>%9</tt>, requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM]#              </tt></td><td>the regex group capture NUM; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM]b              </tt></td><td>the byte offset of the group capture NUM; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM]e              </tt></td><td>the ending byte offset of the group capture NUM; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM]d              </tt></td><td>the byte length of the group capture NUM; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]#    </tt></td><td>the first group capture NUM that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]b    </tt></td><td>the byte offset of the first group capture NUM that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]e    </tt></td><td>the ending byte offset of the first group capture NUM that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]d    </tt></td><td>the byte length of the first group capture NUM that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NAME]#             </tt></td><td>the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME]b             </tt></td><td>the byte offset of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME]e             </tt></td><td>the ending byte offset of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME]d             </tt></td><td>the byte length of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME1|NAME2|...]#  </tt></td><td>the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME1|NAME2|...]b  </tt></td><td>the byte offset of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME1|NAME2|...]e  </tt></td><td>the ending byte offset of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME1|NAME2|...]d  </tt></td><td>the byte length of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%G                   </tt></td><td>list of group capture indices/names of the match (see note)</td></tr>
+<tr><td><tt>%[TEXT1|TEXT2|...]G  </tt></td><td>list of <tt>TEXT</tt> indexed by group capture indices that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%g                   </tt></td><td>the group capture index of the match or 1 (see note)</td></tr>
+<tr><td><tt>%[TEXT1|TEXT2|...]g  </tt></td><td>the first <tt>TEXT</tt> indexed by the first group capture index that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%%                   </tt></td><td>the percentage sign</td></tr>
+</table>
+
+<ol>
+<li>output for <tt>--csv</tt> is internally produced with
+<pre>
+--format-open='%+'
+--format='%[,]$%H%N%K%B%V%~%u'
+</pre>
+<li>output for <tt>--json</tt> is internally produced with
+<pre>
+--format-begin='['
+--format-open='%,%~  {%~    %[,%~    ]$%["file": ]H"matches": ['
+--format='%,%~      { %[, ]$%["line": ]N%["column": ]K%["offset": ]B"match": %J }%u'
+--format-close='%~    ]%~  }'
+--format-end='%~]%~'
+</pre>
+
+<li>output for <tt>--xml</tt> is internally produced with
+<pre>
+--format-begin='&lt;grep&gt;%~'
+--format-open='  &lt;file%[]$%[ name=]H&gt;%~'
+--format='    &lt;match%[\"]$%[ line=\"]N%[ column=\"]K%[ offset=\"]B&gt;%X&lt;/match&gt;%~%u'
+--format-close='  &lt;/file&gt;%~'
+--format-end='&lt;/grep&gt;%~'
+</pre>
+</ol>
+
+<a name="globs"><h2>Globs</h2></a>
+
+<p>Ugrep supports gitignore-style globbing for all glob-related options <tt>-g</tt>, <tt>--iglob=</tt>, <tt>--exclude=</tt>, <tt>--include=</tt>, <tt>-include-dir=</tt>, <tt>--exclude-dir=</tt>, <tt>--include-from=</tt>, <tt>--exclude-from=</tt>, and <tt>--ignore-files</tt>, where
+
+<table>
+<tr><td><tt>*       </tt></td><td>matches anything except <tt>/</tt></td></tr>
+<tr><td><tt>?       </tt></td><td>matches any one character except <tt>/</tt></td></tr>
+<tr><td><tt>[abc-e] </tt></td><td>matches one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt></td></tr>
+<tr><td><tt>[^abc-e]</tt></td><td>matches one character not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>/</tt></td></tr>
+<tr><td><tt>[!abc-e]</tt></td><td>matches one character not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>/</tt></td></tr>
+<tr><td><tt>/       </tt></td><td>when used at the start of a glob, matches the working directory</td></tr>
+<tr><td><tt>**/     </tt></td><td>matches zero or more directories</td></tr>
+<tr><td><tt>/**     </tt></td><td>when at the end of a glob, matches everything after the <tt>/</tt></td></tr>
+<tr><td><tt>\?      </tt></td><td>matches a <tt>?</tt> or any other character specified after the backslash</td></tr>
+</table>
+
+<ol>
+<li>when a glob pattern is used with a command-line option such as <tt>-g"*.cpp"</tt>, you must quote the glob <tt>"*.cpp"</tt> to prevent the shell from expanding the glob
+<li>a glob pattern starting with a <tt>^</tt> or a <tt>!</tt> inverts the matching: instead of matching a filename or directory name, the directory or file is ignored and excluded from the search
+<li>when a glob pattern contains a <tt>/</tt>, the full pathname is matched, otherwise, the basename of a file or directory is matched in recursive searches
+<li>when a glob pattern begins with a <tt>/</tt>, files and directories are matched at the working directory, not recursively
+<li>when a glob pattern ends with a <tt>/</tt>, only directories are matched, not files
+</ol>
+
+<a name="filter"><h2>Filters</h2></a>
+
+<p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified command may be included.  The special option <tt>%</tt> is expanded into the pathname of the file to search.  Filters are applied first when the filename extension matches one of the specified filters, then the output is searched.  Some examples:
+
+<dl>
+<dt>--filter="pdf:pdftotext % -"</dt>
+                                <dd>search PDF files, like <code>ug+</code></dd>
+<dt>--filter="doc:antiword %"</dt>
+                                <dd>search documents, like <code>ug+</code></dd>
+<dt>--filter="odt,docx,epub,rtf:pandoc --wrap=preserve -t plain % -o -"</dt>
+                                <dd>search documents and ebooks, like <code>ug+</code></dd>
+<dt>--filter="gif,jpg,jpeg,mpg,mpeg,png,tiff:exiftool %"</dt>
+                                <dd>search image metadata, like <code>ug+</code></dd>
+<dt>--filter="odt,doc,docx,rtf,xls,xlsx,ppt,pptx:soffice --headless --cat %"</dt>
+                                <dd>search documents, spreadsheets and presentations (this is slow)</dd>
+<dt>--filter="pem:openssl x509 -text,cer,crt,der:openssl x509 -text -inform der"</dt>
+                                <dd>search certificates</dd>
+<dt>--filter="jis:iconv -f SHIFT-JIS -t UTF-8"</dt>
+                                <dd>search <tt>.jis</tt> files encoded in Shift-JIS format converted to UTF-8</dd>
+</dl>
+
+<ol>
+<li>UTF-8, UTF-16 and UTF-32 input is automatically searched and does not require a filter
+<li>the Shift-JIS conversion in the example is a special case, option <tt>--encoding=</tt> supports the arguments
+  <tt>binary</tt>, <tt>ASCII</tt>, <tt>UTF-8</tt>, <tt>UTF-16</tt>, <tt>UTF-16BE</tt>,
+  <tt>UTF-16LE</tt>, <tt>UTF-32</tt>, <tt>UTF-32BE</tt>, <tt>UTF-32LE</tt>, <tt>LATIN1</tt>,
+  <tt>ISO-8859-1</tt>, <tt>ISO-8859-2</tt>, <tt>ISO-8859-3</tt>, <tt>ISO-8859-4</tt>,
+  <tt>ISO-8859-5</tt>, <tt>ISO-8859-6</tt>, <tt>ISO-8859-7</tt>, <tt>ISO-8859-8</tt>,
+  <tt>ISO-8859-9</tt>, <tt>ISO-8859-10</tt>, <tt>ISO-8859-11</tt>, <tt>ISO-8859-13</tt>,
+  <tt>ISO-8859-14</tt>, <tt>ISO-8859-15</tt>, <tt>ISO-8859-16</tt>, <tt>MAC</tt>, <tt>MACROMAN</tt>,
+  <tt>EBCDIC</tt>, <tt>CP437</tt>, <tt>CP850</tt>, <tt>CP858</tt>, <tt>CP1250</tt>, <tt>CP1251</tt>, <tt>CP1252</tt>,
+  <tt>CP1253</tt>, <tt>CP1254</tt>, <tt>CP1255</tt>, <tt>CP1256</tt>, <tt>CP1257</tt>, <tt>CP1258</tt>,
+  <tt>KOI8-R</tt>, <tt>KOI8-U</tt>, <tt>KOI8-RU</tt>.
+<li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>LABEL:MAGIC</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>.
+</ol>
+
+<a name="bugs"><h2>Bugs</h2></a>
+
+<p>If you found a bug or an issue, please report it at <a href="https://github.com/Genivia/ugrep/issues">https://github.com/Genivia/ugrep/issues</a>
+
+<p>Last updated: Tue Oct 24, 2023
+
+<hr>
+
+</body>
+
+</html>
