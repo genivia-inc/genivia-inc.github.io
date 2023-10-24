@@ -86,7 +86,7 @@
 
 <h1>The ugrep file pattern searcher</h1>
 
-<p align=center>ugrep: a powerful, ultra fast, user-friendly and compatible grep
+<p align=center>a more powerful, ultra fast, user-friendly and compatible grep
 
 <!-- <p align=center>Do you grep? -->
 
@@ -145,7 +145,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<li>the regex pattern syntax supports standard POSIX ERE by default, like GNU <code>egrep</code>
+<li>the regex pattern syntax supports standard POSIX ERE by default, like GNU <code>egrep</code>, but extended to support Unicode by default
 <li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match
 <li>specify <tt><i>"PATTERN"</i></tt> with quotes to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
 <li>an empty pattern <tt>""</tt> matches every line, same as option <tt>--match</tt>
@@ -712,6 +712,10 @@ sudo make install # install as desired
 <p>If you found a bug or an issue, please report it at <a href="https://github.com/Genivia/ugrep/issues">https://github.com/Genivia/ugrep/issues</a>
 
 <p>Last updated: Tue Oct 24, 2023
+
+<p>Ugrep is written by Dr. Robert van Engelen and others
+
+<p>Licensed under the BSD-3 license
 
 <hr>
 
