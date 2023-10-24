@@ -142,7 +142,7 @@ sudo make install # install as desired
 <dt>ug -r -S <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files only</dd>
 <dt>ug -3 <i>PATTERN</i> <i>DIR</i></dt>
-                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt> does, but up to 3 levels only, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
+                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt>, but up to 3 levels only, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
 </dl>
 
 <ol>
@@ -298,6 +298,7 @@ sudo make install # install as desired
 <dt>--iglob="^*.txt,^bak/"</dt> <dd>same as above, but with case-insensitive glob matching (option <tt>--glob-ignore-case</tt> applies to all globs)</dd>
 <dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> using only filename extension globs</dd>
 <dt>-K10,99</dt>                <dd>only search files from line 10 up to and including line 99</dd>
+<dt>-m1</dt>                    <dd>output only the first matching line</dd>
 <dt>-m2,9</dt>                  <dd>only search files with at least two matching lines and output up to and including 9 matching lines</dd>
 <dt>-m2,9 -u</dt>               <dd>only search files with at least two matches and output up to and including 9 matches</dd>
 <dt>-3</dt>                     <dd>recursively search up to three directory levels deep, i.e. <tt><i>one/</i></tt>, <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
@@ -684,7 +685,7 @@ sudo make install # install as desired
 <dt>--filter="doc:antiword %"</dt>
                                 <dd>search documents, like <code>ug+</code></dd>
 <dt>--filter="odt,docx,epub,rtf:pandoc --wrap=preserve -t plain % -o -"</dt>
-                                <dd>search documents and ebooks, like <code>ug+</code></dd>
+                                <dd>search documents and e-books, like <code>ug+</code></dd>
 <dt>--filter="gif,jpg,jpeg,mpg,mpeg,png,tiff:exiftool %"</dt>
                                 <dd>search image metadata, like <code>ug+</code></dd>
 <dt>--filter="odt,doc,docx,rtf,xls,xlsx,ppt,pptx:soffice --headless --cat %"</dt>
