@@ -122,7 +122,7 @@ sudo make install # install as desired
 <dt>ug</dt>                     <dd>searches files using a .ugrep configuration file with your search preferences located in the working directory or home directory; <code>ug+</code> also searches pdfs, documents, e-books, image metadata</dd>
 <dt>ug --save-config <i>OPTIONS</i></dt>
                                 <dd>saves a new .ugrep file in the working directory using the current .ugrep configuration and by copying the relevant <tt><i>OPTIONS</i></tt> (if any) to the new .ugrep file</dd>
-<dt>ugrep</dt>                  <dd>same as <code>ug</code>, but without using a .ugrep configuration file, e.g. use <code>ugrep</code> in scripts; <code>ugrep+</code> also searches pdfs, documents, e-books, image metadata</dd>
+<dt>ugrep</dt>                  <dd>same as <code>ug</code>, but does not use a .ugrep configuration file, e.g. <code>ugrep</code> works best in shell scripts; <code>ugrep+</code> also searches pdfs, documents, e-books, image metadata</dd>
 </dl>
 
 <p>Examples:
@@ -133,7 +133,7 @@ sudo make install # install as desired
 <dt>ug <i>PATTERN</i> <i>FILE</i></dt>
                                 <dd>search lines in <tt><i>FILE</i></tt> matching <tt><i>PATTERN</i></tt></dd>
 <dt>ug <i>PATTERN</i> <i>DIR</i></dt>
-                                <dd>search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding sub-directories (like the <code>ls</code> command)</dd>
+                                <dd>search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding sub-directories (just like the <code>ls DIR</code> command)</dd>
 <dt>ug -r <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding symlinks</dd>
 <dt>ug -R <i>PATTERN</i> <i>DIR</i></dt>
@@ -155,7 +155,7 @@ sudo make install # install as desired
 
 <a name="options"><h2>Command line options</h2></a>
 
-<p>Options can be mixed and specified in no particular order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
+<p>Ugrep is compatible to GNU grep, but adds many more options, features and improvements over GNU grep.  Options can be mixed and specified in no particular order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
 
 <h3>List matching files</h3>
 
