@@ -163,7 +163,7 @@ sudo make install # install as desired
 <dt>-l</dt>                     <dd>list matching files</dd>
 <dt>-L</dt>                     <dd>list non-matching files</dd>
 <dt>-c</dt>                     <dd>count matching lines in files</dd>
-<dt>-cv</dt>                    <dd>count non-matching lines in files</dd>
+<dt>-cv</dt>                    <dd>count non-matching lines in files; option <tt>-v</tt> inverts pattern matching</dd>
 <dt>-cu</dt>                    <dd>count all pattern matches in files by ungrouping multiple matches from lines</dd>
 <dt>-cm1,</dt>                  <dd>count matching lines in files with at least one match, skip files with zero matches (include the comma in <tt>-m1,</tt>)</dd>
 </dl>
@@ -209,7 +209,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<li>any additional options can be specified to start a TUI with these options enabled
+<li>any additional options can be specified on the command line to start the TUI with these options enabled
 <li><em>ALT-key</em> toggles the option letter corresponding to the key press (for upper case use <em>SHIFT-ALT-key</em>), for example <em>ALT-L</em> lists matching files (option <tt>-l</tt>) and <em>SHIFT-ALT-C</em> shows context (option <tt>-C3</tt>)
 <li>navigate to directories and files with <em>Tab</em>, then <em>SHIFT-Tab</em> to go back and restore previous options and patterns (if changed)
 <li>use the cursor keys, <em>PgUp</em>, <em>PgDn</em> and the scroll wheel to scroll the search results
@@ -275,7 +275,7 @@ sudo make install # install as desired
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
 <dt>-W</dt>                     <dd>hexdump the binary matches in files, keeping text matches as is</dd>
 <dt>-X</dt>                     <dd>hexdump matches</dd>
-<dt>-U -X</dt>                  <dd>hexdump with 8-bit binary patterns, not Unicode character-based patterns</dd>
+<dt>-UX</dt>                    <dd>hexdump matching 8-bit binary patterns, not Unicode character-based patterns (option <tt>-U</tt>)</dd>
 <dt>--hexdump=4ch</dt>          <dd>hexdump with 4 columns, no character column (c), no hex spacing (h)</dd>
 <dt>--hexdump=4C3</dt>          <dd>hexdump with 4 columns and 3 lines of hexdump context before and after (C3 is B3A3)</dd>
 <dt>-Dread</dt>                 <dd>also read special devices to search them (danger to get stuck on a non-responsive device!)</dd>
@@ -290,9 +290,9 @@ sudo make install # install as desired
 <dt>-.</dt>                     <dd>include hidden files in searches (normally, hidden files are excluded from searching)</dd>
 <dt>-tc,cpp</dt>                <dd>only search C and C++ source code files, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-g"*.hpp,*.cpp"</dt>        <dd>only search <tt>.hpp</tt> and <tt>.cpp</tt> files with the specified glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
-<dt>-g"src/"</dt>               <dd>only recursively search <tt>src</tt> directories with the glob pattern, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
-<dt>-g"^*.txt,^bak/"</dt>       <dd>do not search <tt>.txt</tt> files and <tt>bak</tt> directories with the negated glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
-<dt>--iglob="^*.txt,bak/"</dt>  <dd>same as above, but with case-insensitive glob matching (<tt>--glob-ignore-case</tt> applies to all globs)</dd>
+<dt>-g"src/"</dt>               <dd>only recursively search <tt>src</tt> directories with the specified glob pattern ending in a <tt>/</tt> for directories, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+<dt>-g"^*.txt,^bak/"</dt>       <dd>do not search <tt>.txt</tt> files and <tt>bak</tt> directories with the specified negated glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+<dt>--iglob="^*.txt,^bak/"</dt> <dd>same as above, but with case-insensitive glob matching (option <tt>--glob-ignore-case</tt> applies to all globs)</dd>
 <dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> using only filename extension globs</dd>
 <dt>-K10,99</dt>                <dd>only search files from line 10 up to and including line 99</dd>
 <dt>-m2,9</dt>                  <dd>only search files with at least two matching lines and output up to and including 9 matching lines</dd>
