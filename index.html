@@ -2,6 +2,8 @@
 <html>
 
 <head>
+  <meta charset="utf-8"/>
+  <meta name="description" content="The official ugrep file pattern searcher manual"/>
   <title>The ugrep file pattern searcher</title>
     <style>
         body {
@@ -55,7 +57,7 @@
         }
         ol {
             padding: 20px;
-            list-style-type: upper-roman;
+            list-style-type: lower-roman;
         }
         ul {
             padding: 20px;
@@ -155,7 +157,7 @@ sudo make install # install as desired
 
 <a name="options"><h2>Command line options</h2></a>
 
-<p>Ugrep is compatible to GNU grep, but adds many more options, features and improvements over GNU grep.  Options can be mixed and specified in no particular order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
+<p>Ugrep is compatible to GNU grep, but adds many more options, features and improvements over GNU grep.  In general, command-line options can be mixed and specified in any order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
 
 <h3>List matching files</h3>
 
@@ -249,8 +251,9 @@ sudo make install # install as desired
 <dt>-Z+2</dt>                   <dd>approximately match patterns up to two extra characters in the input</dd>
 <dt>-Z-2</dt>                   <dd>approximately match patterns up to two missing characters in the input</dd>
 <dt>-Z~2</dt>                   <dd>approximately match patterns up to two replaced characters in the input</dd>
+<dt>-Z+-2</dt>                  <dd>approximately match patterns up to two extra or missing characters in the input</dd>
 <dt>-c -Z</dt>                  <dd>count approximate matches in files</dd>
-<dt>-c -Zbest2</dt>             <dd>count <tt>-Z2</tt> approximate matches in files, but only the best matches per file (e.g. if a file has at least one exact match, then only exact matches are counted)</dd>
+<dt>-c -Zbest2</dt>             <dd>count <tt>-Z2</tt> approximate matches in files, but only the best matches per file (i.e. if a file has at least one exact match, then only exact matches are counted)</dd>
 <dt>-c -Zbest2 --sort=best</dt> <dd>count the best approximate matches in files and sort by best matching files per directory</dd>
 </dl>
 
@@ -276,8 +279,9 @@ sudo make install # install as desired
 <dt>-W</dt>                     <dd>hexdump the binary matches in files, keeping text matches as is</dd>
 <dt>-X</dt>                     <dd>hexdump matches</dd>
 <dt>-UX</dt>                    <dd>hexdump matching 8-bit binary patterns, not Unicode character-based patterns (option <tt>-U</tt>)</dd>
-<dt>--hexdump=4ch</dt>          <dd>hexdump with 4 columns, no character column (c), no hex spacing (h)</dd>
-<dt>--hexdump=4C3</dt>          <dd>hexdump with 4 columns and 3 lines of hexdump context before and after (C3 is B3A3)</dd>
+<dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns with a <tt>*</tt> for all hex lines that are identical to the previous hex line (a)</dd>
+<dt>--hexdump=4ch</dt>          <dd>hexdump in 4 columns, no character column (c), no hex spacing (h)</dd>
+<dt>--hexdump=4aC3</dt>         <dd>hexdump in 4 columns and 3 lines of hexdump context before and after (C3 is B3A3)</dd>
 <dt>-Dread</dt>                 <dd>also read special devices to search them (danger to get stuck on a non-responsive device!)</dd>
 </dl>
 
@@ -337,7 +341,7 @@ sudo make install # install as desired
 <dt>--hyperlink</dt>            <dd>embeds hyperlinks in the output when output is displayed on a terminal</dd>
 <dt>--pager</dt>                <dd>output to a pager, default is <tt>more</tt> or <tt>less</tt></dd>
 <dt>--pager=<i>COMMAND</i></dt> <dd>output to <tt><i>COMMAND</i></tt> as a pager</dd>
-<dt>--tag</dt>                  <dd>tag matches in the output as <tt>___<i>match</i>___</tt> instead of colorizing them</dd>
+<dt>--tag</dt>                  <dd>output matches as <tt>___<i>match</i>___</tt> instead of colorizing them, where <tt>--tag=<i>TAG,TAG</i></tt> outputs <tt><i>TAGmatchTAG</i></tt></dd>
 <dt>--replace=<i>"FORMAT"</i></dt>
                                 <dd>replace matches in the output by <tt><i>FORMAT</i></tt>, see also <a href="#format"><tt>ug --help format</tt></a>
 </dl>
