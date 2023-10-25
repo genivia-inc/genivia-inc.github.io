@@ -21,7 +21,7 @@
         }
         h2 {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 2rem;
+            font-size: 2.4rem;
             color: #2f8d46;
             text-align: center;
         }
@@ -153,7 +153,7 @@ You grep with a new TUI (shown) or from the command line just like you do with a
 <dt>ug <i>PATTERN</i> <i>FILE</i></dt>
                                 <dd>search lines in <tt><i>FILE</i></tt> matching <tt><i>PATTERN</i></tt></dd>
 <dt>ug <i>PATTERN</i> <i>DIR</i></dt>
-                                <dd>search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding sub-directories (just like the <code>ls DIR</code> command takes a <tt><i>DIR</i></tt> to list)</dd>
+                                <dd>search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding sub-directories (like <code>ls DIR</code> takes a <tt><i>DIR</i></tt> to list)</dd>
 <dt>ug -r <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding symlinks</dd>
 <dt>ug -R <i>PATTERN</i> <i>DIR</i></dt>
@@ -169,11 +169,11 @@ You grep with a new TUI (shown) or from the command line just like you do with a
 <li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match
 <li>specify <tt><i>"PATTERN"</i></tt> with quotes to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
 <li>an empty pattern <tt>""</tt> matches every line, same as option <tt>--match</tt>
-<li>multiple <tt><i>FILE</i></tt> and <tt><i>DIR</i></tt> pathname arguments may be specified as search targets, if none are provided the working directory is recursively searched
-<li>standard input is searched automatically when the standard input is not a terminal, e.g. a pipe redirect
+<li>multiple <tt><i>FILE</i></tt> and <tt><i>DIR</i></tt> pathname arguments may be specified as search targets; if none are provided, the working directory is recursively searched
+<li>standard input is searched if standard input is not a terminal, e.g. a pipe redirect
 </ol>
 
-<a name="options"><h2>Command line options</h2></a>
+<a name="options"><h2>Options</h2></a>
 
 <p>Ugrep is compatible with GNU grep and supports GNU grep's command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
 
