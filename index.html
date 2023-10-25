@@ -571,36 +571,36 @@ Grep with a new TUI (shown) or from the command line just like you do with any o
 
 <table>
 <tr><td><tt>%F                   </tt></td><td>if option <tt>-H</tt> is used: the file pathname and separator</td></tr>
-<tr><td><tt>%[ARG]F              </tt></td><td>if option <tt>-H</tt> is used: <tt>ARG</tt>, the file pathname and separator</td></tr>
+<tr><td><tt>%[TEXT]F             </tt></td><td>if option <tt>-H</tt> is used: <tt>TEXT</tt>, the file pathname and separator</td></tr>
 <tr><td><tt>%f                   </tt></td><td>the file pathname</td></tr>
 <tr><td><tt>%a                   </tt></td><td>the file basename without directory path</td></tr>
 <tr><td><tt>%p                   </tt></td><td>the directory path to the file</td></tr>
 <tr><td><tt>%z                   </tt></td><td>the pathname in a (compressed) archive, without <tt>{</tt> and <tt>}</tt></td></tr>
 <tr><td><tt>%H                   </tt></td><td>if option <tt>-H</tt> is used: the quoted pathname and separator, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
-<tr><td><tt>%[ARG]H              </tt></td><td>if option <tt>-H</tt> is used: <tt>ARG</tt>, the quoted pathname and separator, \" and \\ replace " and \</td></tr>
+<tr><td><tt>%[TEXT]H             </tt></td><td>if option <tt>-H</tt> is used: <tt>TEXT</tt>, the quoted pathname and separator, \" and \\ replace " and \</td></tr>
 <tr><td><tt>%h                   </tt></td><td>the quoted file pathname, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
 <tr><td><tt>%N                   </tt></td><td>if option <tt>-n</tt> is used: the line number and separator</td></tr>
-<tr><td><tt>%[ARG]N              </tt></td><td>if option <tt>-n</tt> is used: <tt>ARG</tt>, the line number and separator</td></tr>
+<tr><td><tt>%[TEXT]N             </tt></td><td>if option <tt>-n</tt> is used: <tt>TEXT</tt>, the line number and separator</td></tr>
 <tr><td><tt>%n                   </tt></td><td>the line number of the match</td></tr>
 <tr><td><tt>%K                   </tt></td><td>if option <tt>-k</tt> is used: the column number and separator</td></tr>
-<tr><td><tt>%[ARG]K              </tt></td><td>if option <tt>-k</tt> is used: <tt>ARG</tt>, the column number and separator</td></tr>
+<tr><td><tt>%[TEXT]K             </tt></td><td>if option <tt>-k</tt> is used: <tt>TEXT</tt>, the column number and separator</td></tr>
 <tr><td><tt>%k                   </tt></td><td>the column number of the match</td></tr>
 <tr><td><tt>%B                   </tt></td><td>if option <tt>-b</tt> is used: the byte offset and separator</td></tr>
-<tr><td><tt>%[ARG]B              </tt></td><td>if option <tt>-b</tt> is used: <tt>ARG</tt>, the byte offset and separator</td></tr>
+<tr><td><tt>%[TEXT]B             </tt></td><td>if option <tt>-b</tt> is used: <tt>TEXT</tt>, the byte offset and separator</td></tr>
 <tr><td><tt>%b                   </tt></td><td>the byte offset of the match</td></tr>
-<tr><td><tt>%T                   </tt></td><td>if option <tt>-T</tt> is used: <tt>ARG</tt> and a tab character</td></tr>
-<tr><td><tt>%[ARG]T              </tt></td><td>if option <tt>-T</tt> is used: <tt>ARG</tt> and a tab character</td></tr>
+<tr><td><tt>%T                   </tt></td><td>if option <tt>-T</tt> is used: <tt>TEXT</tt> and a tab character</td></tr>
+<tr><td><tt>%[TEXT]T             </tt></td><td>if option <tt>-T</tt> is used: <tt>TEXT</tt> and a tab character</td></tr>
 <tr><td><tt>%t                   </tt></td><td>a tab character</td></tr>
 <tr><td><tt>%[SEP]$              </tt></td><td>set field separator to <tt>SEP</tt> for the rest of the format fields</td></tr>
-<tr><td><tt>%[ARG]&lt;           </tt></td><td>if the first match: <tt>ARG</tt></td></tr>
-<tr><td><tt>%[ARG]&gt;           </tt></td><td>if not the first match: <tt>ARG</tt></td></tr>
+<tr><td><tt>%[TEXT]&lt;          </tt></td><td>if the first match: <tt>TEXT</tt></td></tr>
+<tr><td><tt>%[TEXT]&gt;          </tt></td><td>if not the first match: <tt>TEXT</tt></td></tr>
 <tr><td><tt>%,                   </tt></td><td>if not the first match: a comma, same as <tt>%[,]&lt;</tt></td></tr>
 <tr><td><tt>%:                   </tt></td><td>if not the first match: a colon, same as <tt>%[:]&gt;</tt></td></tr>
 <tr><td><tt>%;                   </tt></td><td>if not the first match: a semicolon, same as <tt>%[;]&gt;</tt></td></tr>
 <tr><td><tt>%|                   </tt></td><td>if not the first match: a vertical bar, same as <tt>%[|]&gt;</tt></td></tr>
 <tr><td><tt>%S                   </tt></td><td>if not the first match: separator, see also <tt>%[SEP]$</tt></td></tr>
-<tr><td><tt>%[ARG]S              </tt></td><td>if not the first match: <tt>ARG</tt> and separator, see also <tt>%[SEP]$</tt></td></tr>
-<tr><td><tt>%s                   </tt></td><td>the separator, see also <tt>%[ARG]S</tt> and <tt>%[SEP]$</tt></td></tr>
+<tr><td><tt>%[TEXT]S             </tt></td><td>if not the first match: <tt>TEXT</tt> and separator, see also <tt>%[SEP]$</tt></td></tr>
+<tr><td><tt>%s                   </tt></td><td>the separator, see also <tt>%[TEXT]S</tt> and <tt>%[SEP]$</tt></td></tr>
 <tr><td><tt>%~                   </tt></td><td>a newline character</td></tr>
 <tr><td><tt>%+                   </tt></td><td>if option <tt>--heading</tt> is used: <tt>%F</tt> and a newline character, suppress all <tt>%F</tt> and <tt>%H</tt> afterward</td></tr>
 <tr><td><tt>%m                   </tt></td><td>the number of matches, sequential (or number of matching files with <tt>--format-end</tt>)</td></tr>
@@ -728,7 +728,7 @@ Grep with a new TUI (shown) or from the command line just like you do with any o
   <tt>EBCDIC</tt>, <tt>CP437</tt>, <tt>CP850</tt>, <tt>CP858</tt>, <tt>CP1250</tt>, <tt>CP1251</tt>, <tt>CP1252</tt>,
   <tt>CP1253</tt>, <tt>CP1254</tt>, <tt>CP1255</tt>, <tt>CP1256</tt>, <tt>CP1257</tt>, <tt>CP1258</tt>,
   <tt>KOI8-R</tt>, <tt>KOI8-U</tt>, <tt>KOI8-RU</tt>.
-<li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>LABEL:MAGIC</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>.
+<li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>"LABEL:MAGIC"</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>.
 </ol>
 
 <a name="bugs"><h2>Bugs</h2></a>
