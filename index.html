@@ -60,7 +60,6 @@
             list-style-type: lower-roman;
         }
         ul {
-            padding: 20px;
             list-style-type: none;
         }
         ol li {
@@ -79,6 +78,21 @@
         a:hover {
             text-decoration: underline;
         }
+        div {
+            display: inline-block;
+        }
+        .img-with-text img {
+            display: block;
+            margin: 0 auto;
+            padding: 0px;
+            width: 100%;
+        }
+        .img-with-text {
+            text-align: center;
+            font-style: italic;
+            width: 50%;
+            margin: 20px;
+        }
     </style>
 </head>
 
@@ -86,17 +100,16 @@
 
 <h1>The ugrep file pattern searcher</h1>
 
-<p align=center>a more powerful, ultra fast, user-friendly and compatible grep
+<p align=center>an ultra fast, user-friendly, compatible grep
 
-<!-- <p align=center>Do you grep? -->
-
-<a name="install"><h2>Installation</h2></a>
-
+<div>
+<div>
+<p align=center>ugrep installs on
 <ul>
-<li>MacOS: <code>brew install ugrep</code>
-<li>Windows with <a href="https://learn.microsoft.com/en-us/windows/package-manager/">Winget</a>: <code>winget install Genivia.ugrep</code>
-<li>Windows with <a href="https://community.chocolatey.org/packages/ugrep">Chocolatey</a>: <code>choco install ugrep</code>
-<li>Windows with <a href="hhttps://scoop.sh">Scoop</a>: <code>scoop install ugrep</code>
+<li>MacOS: <code><a href="https://formulae.brew.sh/formula/ugrep">brew</a> install ugrep</code>
+<li>Windows: <code><a href="https://learn.microsoft.com/en-us/windows/package-manager/">winget</a> install Genivia.ugrep</code>
+<li>Windows <code><a href="https://community.chocolatey.org/packages/ugrep">choco</a> install ugrep</code>
+<li>Windows <code><a href="hhttps://scoop.sh">scoop</a> install ugrep</code>
 <li>Alpine: <code>apk add ugrep ugrep-doc</code>
 <li>Android Termux: <code>pkg install ugrep</code>
 <li>Arch: <code>pacman -S ugrep</code>
@@ -104,26 +117,32 @@
 <li>Debian: <code>apt-get install ugrep</code>
 <li>Fedora: <code>dnf install ugrep</code>
 <li>FreeBSD: <code>pkg install ugrep</code>
-<li>NetBSD: <a href="http://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/textproc/ugrep/README.html">textproc/ugrep</a> download
+<li>NetBSD: <a href="http://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/textproc/ugrep/README.html">download textproc/ugrep</a>
 <li>RHEL: <code>dnf install ugrep</code>
 <li>Other:
 <pre>
 git clone https://github.com/Genivia/ugrep
 cd ugrep
-./build.sh        # build ugrep/bin/ug and ugrep/bin/ugrep
+./build.sh # build ug and ugrep in ugrep/bin
 sudo make install # install as desired
 </pre>
 </ul>
+</div>
+<div class="img-with-text">
+<img src="ug.png" alt="ugrep screenshot with TUI"/>
+You grep with a new TUI (shown) or from the command line just like you do with any other grep.  You can also grep with new Google-like Boolean search modes (shown) and fuzzy search modes.  Search inside zip/tar/pax/cpio archives, search gz/bz/bz2/lzma/xz/lz4/zstd/Z files, search binary files with hexdumps, search PDF/doc/docx and more.
+</div>
+</div>
 
-<a name="commands"><h2>Commands</h2></a>
+<a name="commands"><h2>New commands</h2></a>
 
-<p>Search for patterns in files with <code>ug</code> or <code>ugrep</code>, where
+<p>Search for patterns in files with the new commands <code>ug</code> and <code>ugrep</code>, where
 
 <dl>
-<dt>ug</dt>                     <dd>searches files using a .ugrep configuration file with your search preferences located in the working directory or home directory; <code>ug+</code> also searches pdfs, documents, e-books, image metadata</dd>
+<dt>ug</dt>                     <dd>searches files using a .ugrep configuration file with your search preferences located in the working directory or home directory;<br>the <code>ug+</code> command also searches pdfs, documents, e-books, image metadata</dd>
 <dt>ug --save-config <i>OPTIONS</i></dt>
                                 <dd>saves a new .ugrep file in the working directory using the current .ugrep configuration and by copying the relevant <tt><i>OPTIONS</i></tt> (if any) to the new .ugrep file</dd>
-<dt>ugrep</dt>                  <dd>same as <code>ug</code>, but does not use a .ugrep configuration file, e.g. <code>ugrep</code> works best in shell scripts; <code>ugrep+</code> also searches pdfs, documents, e-books, image metadata</dd>
+<dt>ugrep</dt>                  <dd>same as <code>ug</code>, but does not use a .ugrep configuration file, e.g. <code>ugrep</code> works best in shell scripts;<br>the <code>ugrep+</code> command also searches pdfs, documents, e-books, image metadata</dd>
 </dl>
 
 <p>Examples:
@@ -156,7 +175,7 @@ sudo make install # install as desired
 
 <a name="options"><h2>Command line options</h2></a>
 
-<p>Ugrep is compatible to GNU grep, but adds many more options, features and improvements over GNU grep.  In general, command-line options can be mixed and specified in any order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
+<p>Ugrep is compatible with GNU grep and supports GNU grep's command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
 
 <h3>List matching files</h3>
 
@@ -264,7 +283,7 @@ sudo make install # install as desired
 <h3>Archives and compressed files</h3>
 
 <dl>
-<dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and compressed files gz/Z/bz/bz2/lzma/xz/lz4/zstd</dd>
+<dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and compressed files gz/bz/bz2/lzma/xz/lz4/zstd/Z</dd>
 <dt>-z --zmax=2</dt>            <dd>also search archives, tarballs and compressed files stored within archives</dd>
 <dt>-z -tc,cpp</dt>             <dd>search C and C++ source code files and also those in archives, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-z -g"*.txt,*.md"</dt>      <dd>search files matching the globs <tt>*.txt</tt> and <tt>*.md</tt> and also those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
