@@ -259,7 +259,7 @@ You grep with a new TUI (shown) or from the command line just like you do with a
 <li>quote strings in a pattern with <tt>"</tt> to match literally
 <li>group patterns with parenthesis
 <li>option <tt>-%</tt> can be combined with any pattern matching modes <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
-<li>the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when properly spaced, e.g. <code>-% "foo AND NOT (bar OR baz)"</code>
+<li>the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when properly spaced, e.g. <tt>-% "foo AND NOT (bar OR baz)"</tt>
 </ol>
 
 <h3>Fuzzy search</h3>
@@ -297,8 +297,8 @@ You grep with a new TUI (shown) or from the command line just like you do with a
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
 <dt>-W</dt>                     <dd>hexdump the binary matches in files, keeping text matches as is</dd>
 <dt>-X</dt>                     <dd>hexdump matches</dd>
-<dt>-UX</dt>                    <dd>hexdump matching 8-bit binary patterns, not Unicode character-based patterns (option <tt>-U</tt>)</dd>
-<dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns with a <tt>*</tt> for all hex lines that are identical to the previous hex line (a)</dd>
+<dt>-UX</dt>                    <dd>hexdump with 8-bit binary patterns instead of Unicode character-based patterns (option <tt>-U</tt>)</dd>
+<dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns and output a <tt>*</tt> for all hex lines that are identical to the previous hex line (a)</dd>
 <dt>--hexdump=4ch</dt>          <dd>hexdump in 4 columns, no character column (c), no hex spacing (h)</dd>
 <dt>--hexdump=4aC3</dt>         <dd>hexdump in 4 columns and 3 lines of hexdump context before and after (C3 is B3A3)</dd>
 <dt>-Dread</dt>                 <dd>also read special devices to search them (danger to get stuck on a non-responsive device!)</dd>
