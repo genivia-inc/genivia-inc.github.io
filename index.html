@@ -175,7 +175,7 @@ Grep with a new TUI (shown) or from the command line just like you do with any o
 
 <a name="options"><h2>Options</h2></a>
 
-<p>Ugrep is compatible with GNU grep and supports GNU grep's command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
+<p>Ugrep is compatible with GNU grep and supports GNU grep's command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Long options <tt>--<i>OPTION</i></tt> may start with <tt>--no-<i>OPTION</i></tt> to disable them.  Specify <tt>--stats</tt> to output a final summary report of options, patterns, and search statistics.
 
 <h3>List matching files</h3>
 
@@ -184,7 +184,7 @@ Grep with a new TUI (shown) or from the command line just like you do with any o
 <dt>-L</dt>                     <dd>list non-matching files</dd>
 <dt>-c</dt>                     <dd>count matching lines in files</dd>
 <dt>-cv</dt>                    <dd>count non-matching lines in files; option <tt>-v</tt> inverts pattern matching</dd>
-<dt>-cu</dt>                    <dd>count all pattern matches in files by ungrouping multiple matches from lines</dd>
+<dt>-cu</dt>                    <dd>count all pattern matches in files by ungrouping multiple matches from lines (option <tt>-u</tt>)</dd>
 <dt>-cm1,</dt>                  <dd>count matching lines in files with at least one match, skip files with zero matches (include the comma in <tt>-m1,</tt>)</dd>
 </dl>
 
@@ -296,7 +296,7 @@ Grep with a new TUI (shown) or from the command line just like you do with any o
 <dl>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
 <dt>-W</dt>                     <dd>hexdump the binary matches in files, keeping text matches as is</dd>
-<dt>-X</dt>                     <dd>hexdump matches</dd>
+<dt>-X</dt>                     <dd>hexdump all matches</dd>
 <dt>-UX</dt>                    <dd>hexdump with 8-bit binary patterns instead of Unicode character-based patterns (option <tt>-U</tt>)</dd>
 <dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns and output a <tt>*</tt> for all hex lines that are identical to the previous hex line (a)</dd>
 <dt>--hexdump=4ch</dt>          <dd>hexdump in 4 columns, no character column (c), no hex spacing (h)</dd>
@@ -324,14 +324,14 @@ Grep with a new TUI (shown) or from the command line just like you do with any o
 <dt>-3</dt>                     <dd>recursively search up to three directory levels deep, i.e. <tt><i>one/</i></tt>, <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
 <dt>-2-3</dt>                   <dd>only recursively search sub-directories at two to three levels deep, i.e. <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
 <dt>--ignore-files</dt>         <dd>obey .gitignore file exclusions in recursive searches</dd>
-<dt>--filter=<i>"COMMANDS"</i></dt>
-                                <dd>filter files first before searching them by executing a utility on the file based on its type, see also <a href="#filter"><tt>ug --help filter</tt></a></dd>
 <dt>--exclude-fs=<i>"PATH"</i></dt>
                                 <dd>do not search the file system associated with <tt><i>PATH</i></tt> (a mounted directory or mount point)</dd>
-<dt>--exclude-from=<i>"FILE"</i></dt>
+<dt>--exclude-from=<i>FILE</i></dt>
                                 <dd>do not search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
-<dt>--include-from=<i>"FILE"</i></dt>
+<dt>--include-from=<i>FILE</i></dt>
                                 <dd>only search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+<dt>--filter=<i>"COMMANDS"</i></dt>
+                                <dd>filter files first before searching them by executing a utility on the file based on its type, see also <a href="#filter"><tt>ug --help filter</tt></a></dd>
 </dl>
 
 <h3>Formatted output</h3>
