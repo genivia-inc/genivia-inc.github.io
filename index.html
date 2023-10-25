@@ -210,15 +210,15 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <dt>-G</dt>                     <dd>BRE pattern syntax, like GNU <code>grep</code> or <code>grep -G</code>
 <dt>-P</dt>                     <dd>Perl regex pattern search (Unicode) with PCRE, see also <tt>ug --help regex</tt></dd>
 <dt>-U</dt>                     <dd>search with non-Unicode ASCII and binary patterns, e.g. pattern <tt>\xa3</tt> is a byte, not the Unicode code point U+00a3</dd>
-<dt>-Y</dt>                     <dd>permit empty matches like GNU grep, but empty-matching patterns such as <tt>x*y*z*</tt> match all lines instead of matching <tt>x*y*z*</tt>
-<dt>-i</dt>                     <dd>ignore case when matching patterns</dd>
+<dt>-Y</dt>                     <dd>permit empty matches like GNU grep; empty-matching patterns such as <tt>x*y*z*</tt> match all lines instead of returning useful matches</dd>
+<dt>-i</dt>                     <dd>ignore case in matching patterns</dd>
 <dt>-j</dt>                     <dd>smart ignore case, enables <tt>-i</tt> when patterns are specified in lower case</dd>
 <dt>-w</dt>                     <dd>patterns must match as words and not be part of words</dd>
 <dt>-x</dt>                     <dd>patterns must match whole lines from start to end</dd>
 <dt>-v</dt>                     <dd>invert pattern matching; output lines that do not match</dd>
 <dt>-e <i>PATTERN</i></dt>      <dd>specify an additional <tt><i>PATTERN</i></tt> to search</dd>
 <dt>-f <i>FILE</i></dt>         <dd>read (additional) patterns from <tt><i>FILE</i></tt></dd>
-<dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read ugrep built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns</tt>)</dd>
+<dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read ugrep built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns/cpp/names</tt>)</dd>
 </dl>
 
 <h3>TUI interactive query mode</h3>
