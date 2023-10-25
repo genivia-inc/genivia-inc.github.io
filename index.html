@@ -648,12 +648,12 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <ol>
 <li>output for <tt>--csv</tt> is internally produced with
-<pre>
+<pre style="font-size:0.7rem">
 --format-open='%+'
 --format='%[,]$%H%N%K%B%V%~%u'
 </pre>
 <li>output for <tt>--json</tt> is internally produced with
-<pre>
+<pre style="font-size:0.7rem">
 --format-begin='['
 --format-open='%,%~  {%~    %[,%~    ]$%["file": ]H"matches": ['
 --format='%,%~      { %[, ]$%["line": ]N%["column": ]K%["offset": ]B"match": %J }%u'
@@ -662,7 +662,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 </pre>
 
 <li>output for <tt>--xml</tt> is internally produced with
-<pre>
+<pre style="font-size:0.7rem">
 --format-begin='&lt;grep&gt;%~'
 --format-open='  &lt;file%[]$%[ name=]H&gt;%~'
 --format='    &lt;match%[\"]$%[ line=\"]N%[ column=\"]K%[ offset=\"]B&gt;%X&lt;/match&gt;%~%u'
