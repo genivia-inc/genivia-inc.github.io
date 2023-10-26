@@ -188,6 +188,10 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <dt>-cm1,</dt>                  <dd>count matching lines in files with at least one match, skip files with zero matches (include the comma in <tt>-m1,</tt>)</dd>
 </dl>
 
+<ol>
+<li>if you never want <tt>ug -c</tt> to output zero matches, then add <tt>min-count=1</tt> to your ~/.ugrep file.
+</ol>
+
 <h3>Displaying matches, match info, match context</h3>
 
 <dl>
@@ -333,6 +337,11 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <dt>--filter=<i>"COMMANDS"</i></dt>
                                 <dd>filter files first before searching them by executing a utility on the file based on its type, see also <a href="#filter"><tt>ug --help filter</tt></a></dd>
 </dl>
+
+<ol>
+<li>to disable searching binary files by default, add <tt>ignore-binary</tt> to your ~/.ugrep file.
+<li>to obey .gitignore file exclusions in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file.
+</ol>
 
 <h3>Formatted output</h3>
 
