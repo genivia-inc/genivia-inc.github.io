@@ -189,7 +189,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 </dl>
 
 <ol>
-<li>if you never want <tt>ug -c</tt> to output zero matches, then add <tt>min-count=1</tt> to your ~/.ugrep file.
+<li>if you never want <tt>-c</tt> to output zero match counts, then add <tt>min-count=1</tt> to your ~/.ugrep file (outputing zero match counts is a GNU grep behavior)
 </ol>
 
 <h3>Displaying matches, match info, match context</h3>
@@ -339,8 +339,8 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 </dl>
 
 <ol>
-<li>to disable searching binary files by default, add <tt>ignore-binary</tt> to your ~/.ugrep file.
-<li>to obey .gitignore file exclusions in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file.
+<li>to disable searching binary files by default, add <tt>ignore-binary</tt> to your ~/.ugrep file
+<li>to obey .gitignore file exclusions in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file
 </ol>
 
 <h3>Formatted output</h3>
@@ -736,8 +736,8 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
   <tt>ISO-8859-14</tt>, <tt>ISO-8859-15</tt>, <tt>ISO-8859-16</tt>, <tt>MAC</tt>, <tt>MACROMAN</tt>,
   <tt>EBCDIC</tt>, <tt>CP437</tt>, <tt>CP850</tt>, <tt>CP858</tt>, <tt>CP1250</tt>, <tt>CP1251</tt>, <tt>CP1252</tt>,
   <tt>CP1253</tt>, <tt>CP1254</tt>, <tt>CP1255</tt>, <tt>CP1256</tt>, <tt>CP1257</tt>, <tt>CP1258</tt>,
-  <tt>KOI8-R</tt>, <tt>KOI8-U</tt>, <tt>KOI8-RU</tt>.
-<li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>"LABEL:MAGIC"</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>.
+  <tt>KOI8-R</tt>, <tt>KOI8-U</tt>, <tt>KOI8-RU</tt>
+<li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>"LABEL:MAGIC"</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>
 </ol>
 
 <a name="bugs"><h2>Bugs</h2></a>
