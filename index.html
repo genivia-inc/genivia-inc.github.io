@@ -180,7 +180,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 </dl>
 
 <ol>
-<li>the regex pattern syntax supports standard POSIX ERE by default, like GNU <code>egrep</code>, but also adds syntax to support Unicode by default
+<li>the regex pattern syntax supports standard <a href="#regex">POSIX ERE</a> by default, like GNU <code>egrep</code>, but also adds syntax to support Unicode by default
 <li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match
 <li>quote <tt><i>"PATTERN"</i></tt> or <tt><i>'PATTERN'</i></tt> to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
 <li>an empty pattern <tt>""</tt> matches every line, same as option <tt>--match</tt>
@@ -700,6 +700,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <a name="regex"><h2>Regex</h2></a>
 
 <div>
+
 <div class="wide">
 <table>
 <tr><td><tt>.      </tt></td><td>any character except <tt>\n</tt></td></tr>
