@@ -190,6 +190,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <ol>
 <li>if you never want <tt>-c</tt> to output zero match counts, then add <tt>min-count=1</tt> to your ~/.ugrep file (outputing zero match counts is a GNU grep behavior)
+<li>to disable tree-based listings, add <tt>no-tree</tt> to your ~/.ugrep file
 </ol>
 
 <h3>Displaying matches, match info, match context</h3>
@@ -360,7 +361,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <h3>Pretty things, more or less</h3>
 
 <dl>
-<dt>--pretty</dt>               <dd>enables <tt>-n</tt>, <tt>-T</tt>, <tt>--tree</tt>, <tt>--heading</tt>, <tt>--break</tt></dd>
+<dt>--pretty</dt>               <dd>enables <tt>-n</tt>, <tt>-T</tt>, <tt>--tree</tt>, <tt>--heading</tt>, <tt>--break</tt>when output is sent to a terminal</dd>
 <dt>--tree</dt>                 <dd>lists files in a tree-like layout</dd>
 <dt>--heading</dt>              <dd>display file names as headings</dd>
 <dt>--break</dt>                <dd>output an empty line between matching files</dd>
