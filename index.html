@@ -167,7 +167,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <ol>
 <li>the regex pattern syntax supports standard POSIX ERE by default, like GNU <code>egrep</code>, but with an extended syntax to support Unicode by default
 <li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match
-<li>specify <tt><i>"PATTERN"</i></tt> with quotes to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
+<li>specify <tt><i>"PATTERN"</i></tt> with quotes or <tt><i>'PATTERN'</i></tt> to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
 <li>an empty pattern <tt>""</tt> matches every line, same as option <tt>--match</tt>
 <li>multiple <tt><i>FILE</i></tt> and <tt><i>DIR</i></tt> pathname arguments may be specified as search targets; if none are provided, the working directory is recursively searched
 <li>standard input is searched if standard input is not a terminal, e.g. a pipe redirect
