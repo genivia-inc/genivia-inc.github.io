@@ -3,13 +3,16 @@
 
 <head>
   <meta charset="utf-8"/>
-  <meta name="description" content="The official ugrep file pattern searcher -- an ultra fast, user-friendly, compatible grep replacement"/>
+  <meta name="description" content="The official ugrep file pattern searcher -- a more powerful, ultra fast, user-friendly, compatible grep replacement"/>
   <title>The ugrep file pattern searcher</title>
     <style>
         body {
             font-family: "Times New Roman", Times, serif;
             background: white;
             color: black;
+        }
+        div {
+            vertical-align: text-top;
         }
         h1 {
             font-family: Arial, Helvetica, sans-serif;
@@ -70,6 +73,14 @@
             margin: 5px;
             margin-left: 20px;
         }
+        table {
+            border: 2px solid #2f8d46;
+            border-radius: 7px;
+            padding: 5px;
+        }
+        table td {
+            vertical-align: bottom;
+        }
         a {
             color: #2f8d46;
             font-weight: bold;
@@ -92,6 +103,10 @@
             font-style: italic;
             width: 50%;
             margin: 20px;
+        }
+        .wide table {
+            margin-right: 20px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -165,9 +180,9 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 </dl>
 
 <ol>
-<li>the regex pattern syntax supports standard POSIX ERE by default, like GNU <code>egrep</code>, but with an extended syntax to support Unicode by default
+<li>the regex pattern syntax supports standard POSIX ERE by default, like GNU <code>egrep</code>, but also adds syntax to support Unicode by default
 <li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match
-<li>specify <tt><i>"PATTERN"</i></tt> with quotes or <tt><i>'PATTERN'</i></tt> to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
+<li>quote <tt><i>"PATTERN"</i></tt> or <tt><i>'PATTERN'</i></tt> to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
 <li>an empty pattern <tt>""</tt> matches every line, same as option <tt>--match</tt>
 <li>multiple <tt><i>FILE</i></tt> and <tt><i>DIR</i></tt> pathname arguments may be specified as search targets; if none are provided, the working directory is recursively searched
 <li>standard input is searched if standard input is not a terminal, e.g. a pipe redirect
@@ -175,7 +190,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <a name="options"><h2>Options</h2></a>
 
-<p>Ugrep is compatible with GNU grep and supports GNU grep's command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Long options <tt>--<i>OPTION</i></tt> may start with <tt>--no-<i>OPTION</i></tt> to disable them.  All short options have long alternatives.  This page shows short options for the most part.  Specify <tt>--stats</tt> to output a final summary search report of options, patterns, and search statistics.
+<p>Ugrep is compatible with GNU grep and supports GNU grep command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Long options <tt>--<i>OPTION</i></tt> may start with <tt>--no-<i>OPTION</i></tt> to disable them.  All short options have long alternatives.  This page shows short options for the most part.  Specify <tt>--stats</tt> to output a final summary search report of options, patterns, and search statistics.
 
 <h3>List matching files</h3>
 
@@ -190,7 +205,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <ol>
 <li>if you never want <tt>-c</tt> to output zero match counts, then add <tt>min-count=1</tt> to your ~/.ugrep file (outputing zero match counts is a GNU grep behavior)
-<li>to disable tree-based listings, add <tt>no-tree</tt> to your ~/.ugrep file
+<li>to disable tree-based listings, specify option <tt>--no-tree</tt> or permanently add <tt>no-tree</tt> to your ~/.ugrep file
 <li>listings are sorted by name; to sort by date/time or by size, specify <tt>--sort=changed</tt> or <tt>--sort=size</tt>
 </ol>
 
@@ -214,7 +229,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <dl>
 <dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code>
 <dt>-G</dt>                     <dd>BRE pattern syntax, like GNU <code>grep</code> or <code>grep -G</code>
-<dt>-P</dt>                     <dd>Perl regex pattern search (Unicode) with PCRE, see also <tt>ug --help regex</tt></dd>
+<dt>-P</dt>                     <dd>Perl regex pattern search (Unicode) with PCRE, see also <a href="#regex"><tt>ug --help regex</tt></a></dd>
 <dt>-U</dt>                     <dd>search with non-Unicode ASCII and binary patterns, e.g. pattern <tt>\xa3</tt> is a byte, not the Unicode code point U+00a3</dd>
 <dt>-Y</dt>                     <dd>permit empty matches like GNU grep; empty-matching patterns such as <tt>x*y*z*</tt> match all lines instead of returning useful matches</dd>
 <dt>-i</dt>                     <dd>ignore case in matching patterns</dd>
@@ -395,7 +410,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <p>The <tt>--colors=</tt> argument is a colon-separated list of parameters, such as <tt>--colors=sl=hy:mt=hyB</tt>, where
 
-<table>
+<table align=center>
 <tr><td><tt>sl=</tt></td><td>selected lines</td></tr>
 <tr><td><tt>cx=</tt></td><td>context lines</td></tr>
 <tr><td><tt>rv </tt></td><td>swaps the <tt>sl=</tt> and <tt>cx=</tt> capabilities when <tt>-v</tt> is specified</td></tr>
@@ -417,7 +432,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <p>Multiple <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters">SGR codes</a> may be specified for a single parameter when separated by a semicolon, e.g. <tt>--colors="mt=1;31"</tt> specifies bright red.  For quick and easy color specification, the corresponding single-letter color names may be used in place of numeric SGR codes and semicolons are not required to separate color names, e.g. <tt>--colors=mt=hr</tt> specifies bright red.  Color letters and numeric codes may be mixed.  The following SGR codes have corresponding letter designations:
 
-<table>
+<table align=center>
 <tr><td>0   </td><td><tt>n</tt></td><td>normal font and color     </td><td>2   </td><td><tt>f </tt></td><td>faint (not widely supported)</td></tr>
 <tr><td>1   </td><td><tt>h</tt></td><td>highlighted bold font     </td><td>21  </td><td><tt>H </tt></td><td>highlighted bold off</td></tr>
 <tr><td>4   </td><td><tt>u</tt></td><td>underline                 </td><td>24  </td><td><tt>U </tt></td><td>underline off</td></tr>
@@ -446,7 +461,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <p>The <tt>-t</tt> argument is a comma-separated list of file types.  A file type matches one or more filename extensions, internally using option <tt>-O</tt> for filename extension matching.  For capitalized file types, the search is expanded to include files with matching file signature magic bytes, internally using option <tt>-M</tt>.  When a type is preceded by a <tt>!</tt> or a <tt>^</tt>, excludes files of the specified type.
 
-<table>
+<table align=center>
 <tr><td><tt>actionscript</tt></td><td>=</td><td><tt>-O as,mxml</tt></td></tr>
 <tr><td><tt>         ada</tt></td><td>=</td><td><tt>-O ada,adb,ads</tt></td></tr>
 <tr><td><tt>         asm</tt></td><td>=</td><td><tt>-O asm,s,S</tt></td></tr>
@@ -569,7 +584,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <a name="format"><h2>Custom output formatting</h2></a>
 
-<table>
+<table align=center>
 <tr><td><tt>--format-begin=<i>"FORMAT"</i></tt></td><td>format string for beginning the search</td></tr>
 <tr><td><tt>--format-open=<i>"FORMAT"</i> </tt></td><td>format string for opening a file when a match was found</td></tr>
 <tr><td><tt>--format=<i>"FORMAT"</i>      </tt></td><td>format string for each match in a file</td></tr>
@@ -580,7 +595,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <p>where <tt><i>FORMAT</i></tt> may contain any text and the following format fields:
 
-<table>
+<table align=center>
 <tr><td><tt>%F                   </tt></td><td>if option <tt>-H</tt> is used: the file pathname and separator</td></tr>
 <tr><td><tt>%[TEXT]F             </tt></td><td>if option <tt>-H</tt> is used: <tt>TEXT</tt>, the file pathname and separator</td></tr>
 <tr><td><tt>%f                   </tt></td><td>the file pathname</td></tr>
@@ -682,11 +697,113 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 </pre>
 </ol>
 
+<a name="regex"><h2>Regex</h2></a>
+
+<div>
+<div class="wide">
+<table>
+<tr><td><tt>.      </tt></td><td>any character except <tt>\n</tt></td></tr>
+<tr><td><tt>a      </tt></td><td>the character <tt>a</tt></td></tr>
+<tr><td><tt>ab     </tt></td><td>the string <tt>ab</tt></td></tr>
+<tr><td><tt>a|b    </tt></td><td><tt>a</tt> or <tt>b</tt></td></tr>
+<tr><td><tt>a*     </tt></td><td>zero or more <tt>a</tt>'s</td></tr>
+<tr><td><tt>a+     </tt></td><td>one or more <tt>a</tt>'s</td></tr>
+<tr><td><tt>a?     </tt></td><td>zero or one <tt>a</tt></td></tr>
+<tr><td><tt>a{3}   </tt></td><td>3 <tt>a</tt>'s</td></tr>
+<tr><td><tt>a{3,}  </tt></td><td>3 or more <tt>a</tt>'s</td></tr>
+<tr><td><tt>a{3,7} </tt></td><td>3 to 7 <tt>a</tt>'s</td></tr>
+<tr><td><tt>a*?    </tt></td><td>zero or more <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a+?    </tt></td><td>one or more <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a??    </tt></td><td>zero or one <tt>a</tt> lazily</td></tr>
+<tr><td><tt>a{3}?  </tt></td><td>3 <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a{3,}? </tt></td><td>3 or more <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a{3,7}?</tt></td><td>3 to 7 <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>\.             </tt></td><td>escapes <tt>.</tt> to match <tt>.</tt></td></tr>
+<tr><td><tt>\Q...\E        </tt></td><td>the literal string <tt>...</tt></td></tr>
+<tr><td><tt>\f             </tt></td><td>form feed</td></tr>
+<tr><td><tt>\n             </tt></td><td>newline</td></tr>
+<tr><td><tt>\r             </tt></td><td>carriage return</td></tr>
+<tr><td><tt>\R             </tt></td><td>any Unicode line break</td></tr>
+<tr><td><tt>\t             </tt></td><td>tab</td></tr>
+<tr><td><tt>\v             </tt></td><td>vertical tab</td></tr>
+<tr><td><tt>\X             </tt></td><td>any character and <tt>\n</tt></td></tr>
+<tr><td><tt>\c<i>Z</i>     </tt></td><td>control character <tt>^<i>Z</i></tt></td></tr>
+<tr><td><tt>\0             </tt></td><td>NUL</td></tr>
+<tr><td><tt>\0<i>ddd</i>   </tt></td><td>octal character code <tt><i>ddd</i></tt></td></tr>
+<tr><td><tt>\x<i>hh</i>    </tt></td><td>hex character code hh</td></tr>
+<tr><td><tt>\x{<i>hhhh</i>}</tt></td><td>Unicode code point U+<tt><i>hhhh</i></tt></td></tr>
+<tr><td><tt>\u{<i>hhhh</i>}</tt></td><td>Unicode code point U+<tt><i>hhhh</i></tt></td></tr>
+</table>
+</div>
+
+<div>
+<div class="wide">
+<table>
+<tr><td><tt>[abc-e]         </tt></td><td>one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</td></tr>
+<tr><td><tt>[^abc-e]        </tt></td><td>one char not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>\n</tt></td></tr>
+<tr><td><tt>[[:alnum:]]     </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt></td></tr>
+<tr><td><tt>[[:alpha:]]     </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt></td></tr>
+<tr><td><tt>[[:ascii:]]     </tt></td><td>ASCII char <tt>\x00</tt>-<tt>\x7f</tt></td></tr>
+<tr><td><tt>[[:blank:]]     </tt></td><td>space or tab</td></tr>
+<tr><td><tt>[[:cntrl:]]     </tt></td><td>control characters</td></tr>
+<tr><td><tt>[[:digit:]]     </tt></td><td><tt>0</tt>-<tt>9</tt></td></tr>
+<tr><td><tt>[[:graph:]]     </tt></td><td>visible characters</td></tr>
+<tr><td><tt>[[:lower:]]     </tt></td><td><tt>a</tt>-<tt>z</tt></td></tr>
+<tr><td><tt>[[:print:]]     </tt></td><td>visible chars and space</td></tr>
+<tr><td><tt>[[:punct:]]     </tt></td><td>punctuation characters</td></tr>
+<tr><td><tt>[[:space:]]     </tt></td><td>space,<tt>\t,<tt>\v,<tt>\f,<tt>\r</td></tr>
+<tr><td><tt>[[:upper:]]     </tt></td><td><tt>A</tt>-<tt>Z</tt></td></tr>
+<tr><td><tt>[[:word:]]      </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt>,<tt>_</tt></td></tr>
+<tr><td><tt>[[:xdigit:]]    </tt></td><td><tt>0</tt>-<tt>9</tt>,<tt>a</tt>-<tt>f</tt>,<tt>A</tt>-<tt>F</tt></td></tr>
+<tr><td><tt>\p{<i>class</i>}</tt></td><td>one character in <tt><i>class</i></tt></td></tr>
+<tr><td><tt>\P{<i>class</i>}</tt></td><td>one char not in <tt><i>class</i></tt></td></tr>
+<tr><td><tt>\d              </tt></td><td>a digit</td></tr>
+<tr><td><tt>\D              </tt></td><td>a non-digit</td></tr>
+<tr><td><tt>\h              </tt></td><td>a space or tab</td></tr>
+<tr><td><tt>\H              </tt></td><td>not a space or tab</td></tr>
+<tr><td><tt>\s              </tt></td><td>a whitespace except <tt>\n</tt></td></tr>
+<tr><td><tt>\S              </tt></td><td>a non-whitespace</td></tr>
+<tr><td><tt>\w              </tt></td><td>a word character</td></tr>
+<tr><td><tt>\W              </tt></td><td>a non-word character</td></tr>
+</table>
+</div>
+
+<div>
+<table>
+<tr><td><tt>^          </tt></td><td>begin of line anchor</td></tr>
+<tr><td><tt>$          </tt></td><td>end of line anchor</td></tr>
+<tr><td><tt>\b         </tt></td><td>word boundary</td></tr>
+<tr><td><tt>\B         </tt></td><td>non-word boundary</td></tr>
+<tr><td><tt>\&lt;      </tt></td><td>start of word boundary</td></tr>
+<tr><td><tt>\&gt;      </tt></td><td>end of word boundary</td></tr>
+<tr><td><tt>(?=...)    </tt></td><td>lookahead (-P)</td></tr>
+<tr><td><tt>(?!...)    </tt></td><td>negative lookahead (-P)</td></tr>
+<tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind (-P)</td></tr>
+<tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind (-P)</td></tr>
+<tr><td><tt>(...)          </tt></td><td>capturing group (-P)</td></tr>
+<tr><td><tt>(...)          </tt></td><td>non-capturing group</td></tr>
+<tr><td><tt>(?:...)        </tt></td><td>non-capturing group</td></tr>
+<tr><td><tt>(?&lt;X&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (-P)</td></tr>
+<tr><td><tt>\1             </tt></td><td>matches group 1 (-P)</td></tr>
+<tr><td><tt>\g{10}         </tt></td><td>matches group 10 (-P)</td></tr>
+<tr><td><tt>\g{<i>X</i>}   </tt></td><td>matches group name <i>X</i> (-P)</td></tr>
+<tr><td><tt>(?#...)        </tt></td><td>comments <tt>...</tt> are ignored</td></tr>
+</table>
+</div>
+
+</div>
+
+<ol>
+<li>(-P) means the pattern requires option <tt>-P</tt> for PCRE with Perl regex syntax
+<li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax
+<li>BRE (Basic Regular Expression) syntax is enabled with option <tt>-G</tt> and replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
+</ol>
+
 <a name="globs"><h2>Globs</h2></a>
 
 <p>Ugrep supports gitignore-style globbing for all glob-related options <tt>-g</tt>, <tt>--iglob=</tt>, <tt>--exclude=</tt>, <tt>--include=</tt>, <tt>-include-dir=</tt>, <tt>--exclude-dir=</tt>, <tt>--include-from=</tt>, <tt>--exclude-from=</tt>, and <tt>--ignore-files</tt>, where
 
-<table>
+<table align=center>
 <tr><td><tt>*       </tt></td><td>matches anything except <tt>/</tt></td></tr>
 <tr><td><tt>?       </tt></td><td>matches any one character except <tt>/</tt></td></tr>
 <tr><td><tt>[abc-e] </tt></td><td>matches one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt></td></tr>
@@ -744,7 +861,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <a name="bugs"><h2>Bugs</h2></a>
 
-<p>If you found a bug or an issue, please report it at <a href="https://github.com/Genivia/ugrep/issues">https://github.com/Genivia/ugrep/issues</a>
+<p>If you found a bug or an issue, then please report it at <a href="https://github.com/Genivia/ugrep/issues">https://github.com/Genivia/ugrep/issues</a>
 
 <a name="bugs"><h2>License</h2></a>
 
@@ -752,7 +869,7 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 
 <p>Licensed under the BSD-3 license
 
-<p>Last updated: Tue Oct 24, 2023
+<p>Last updated: Tue Oct 26, 2023
 
 <hr>
 
