@@ -651,14 +651,14 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <tr><td><tt>%Z                   </tt></td><td>the edit distance cost of an approximate match with option <tt>-Z</tt></td></tr>
 <tr><td><tt>%u                   </tt></td><td>select unique lines only unless option <tt>-u</tt> is used</td></tr>
 <tr><td><tt>%1 %2 ... %9         </tt></td><td>the first regex group capture of the match, and so on up to group <tt>%9</tt>, requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM]#              </tt></td><td>the regex group capture NUM; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM]b              </tt></td><td>the byte offset of the group capture NUM; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM]e              </tt></td><td>the ending byte offset of the group capture NUM; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM]d              </tt></td><td>the byte length of the group capture NUM; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]#    </tt></td><td>the first group capture NUM that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]b    </tt></td><td>the byte offset of the first group capture NUM that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]e    </tt></td><td>the ending byte offset of the first group capture NUM that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]d    </tt></td><td>the byte length of the first group capture NUM that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM]#              </tt></td><td>the regex group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM]b              </tt></td><td>the byte offset of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM]e              </tt></td><td>the ending byte offset of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM]d              </tt></td><td>the byte length of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]#    </tt></td><td>the first group capture <tt>NUM</tt> that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]b    </tt></td><td>the byte offset of the first group capture <tt>NUM</tt> that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]e    </tt></td><td>the ending byte offset of the first group capture <tt>NUM</tt> that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]d    </tt></td><td>the byte length of the first group capture <tt>NUM</tt> that matched; requires option <tt>-P</tt></td></tr>
 <tr><td><tt>%[NAME]#             </tt></td><td>the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
 <tr><td><tt>%[NAME]b             </tt></td><td>the byte offset of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
 <tr><td><tt>%[NAME]e             </tt></td><td>the ending byte offset of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
@@ -733,13 +733,12 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <tr><td><tt>\c<i>Z</i>     </tt></td><td>control character <tt>^<i>Z</i></tt></td></tr>
 <tr><td><tt>\0             </tt></td><td>NUL</td></tr>
 <tr><td><tt>\0<i>ddd</i>   </tt></td><td>octal character code <tt><i>ddd</i></tt></td></tr>
-<tr><td><tt>\x<i>hh</i>    </tt></td><td>hex character code hh</td></tr>
+<tr><td><tt>\x<i>hh</i>    </tt></td><td>hex character code <tt><i>hh</i></tt></td></tr>
 <tr><td><tt>\x{<i>hhhh</i>}</tt></td><td>Unicode code point U+<tt><i>hhhh</i></tt></td></tr>
 <tr><td><tt>\u{<i>hhhh</i>}</tt></td><td>Unicode code point U+<tt><i>hhhh</i></tt></td></tr>
 </table>
 </div>
 
-<div>
 <div class="wide">
 <table>
 <tr><td><tt>[abc-e]         </tt></td><td>one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</td></tr>
@@ -758,8 +757,8 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <tr><td><tt>[[:upper:]]     </tt></td><td><tt>A</tt>-<tt>Z</tt></td></tr>
 <tr><td><tt>[[:word:]]      </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt>,<tt>_</tt></td></tr>
 <tr><td><tt>[[:xdigit:]]    </tt></td><td><tt>0</tt>-<tt>9</tt>,<tt>a</tt>-<tt>f</tt>,<tt>A</tt>-<tt>F</tt></td></tr>
-<tr><td><tt>\p{<i>class</i>}</tt></td><td>one character in <tt><i>class</i></tt></td></tr>
-<tr><td><tt>\P{<i>class</i>}</tt></td><td>one char not in <tt><i>class</i></tt></td></tr>
+<tr><td><tt>\p{<i>Class</i>}</tt></td><td>one character in <tt><i>Class</i></tt></td></tr>
+<tr><td><tt>\P{<i>Class</i>}</tt></td><td>one char not in <tt><i>Class</i></tt></td></tr>
 <tr><td><tt>\d              </tt></td><td>a digit</td></tr>
 <tr><td><tt>\D              </tt></td><td>a non-digit</td></tr>
 <tr><td><tt>\h              </tt></td><td>a space or tab</td></tr>
@@ -783,22 +782,22 @@ Grep with a new TUI (shown) or search from the command line like any other grep 
 <tr><td><tt>(?!...)    </tt></td><td>negative lookahead (-P)</td></tr>
 <tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind (-P)</td></tr>
 <tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind (-P)</td></tr>
-<tr><td><tt>(...)          </tt></td><td>capturing group (-P)</td></tr>
-<tr><td><tt>(...)          </tt></td><td>non-capturing group</td></tr>
-<tr><td><tt>(?:...)        </tt></td><td>non-capturing group</td></tr>
-<tr><td><tt>(?&lt;X&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (-P)</td></tr>
-<tr><td><tt>\1             </tt></td><td>matches group 1 (-P)</td></tr>
-<tr><td><tt>\g{10}         </tt></td><td>matches group 10 (-P)</td></tr>
-<tr><td><tt>\g{<i>X</i>}   </tt></td><td>matches group name <i>X</i> (-P)</td></tr>
-<tr><td><tt>(?#...)        </tt></td><td>comments <tt>...</tt> are ignored</td></tr>
+<tr><td><tt>(...)                 </tt></td><td>capturing group (-P)</td></tr>
+<tr><td><tt>(...)                 </tt></td><td>non-capturing group</td></tr>
+<tr><td><tt>(?:...)               </tt></td><td>non-capturing group</td></tr>
+<tr><td><tt>(?&lt;<i>X</i>&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (-P)</td></tr>
+<tr><td><tt>\1                    </tt></td><td>matches group 1 (-P)</td></tr>
+<tr><td><tt>\g{10}                </tt></td><td>matches group 10 (-P)</td></tr>
+<tr><td><tt>\g{<i>X</i>}          </tt></td><td>matches group name <i>X</i> (-P)</td></tr>
+<tr><td><tt>(?#...)               </tt></td><td>comments <tt>...</tt> are ignored</td></tr>
 </table>
 </div>
 
 </div>
 
 <ol>
-<li>(-P) means the pattern requires option <tt>-P</tt> for PCRE with Perl regex syntax
-<li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax
+<li>(-P): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
+<li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax shown in the tables
 <li>BRE (Basic Regular Expression) syntax is enabled with option <tt>-G</tt> and replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
 </ol>
 
