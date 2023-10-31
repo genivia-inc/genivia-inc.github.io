@@ -61,14 +61,18 @@
         dl dd {
         }
         ol {
-            padding: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 0px;
             list-style-type: lower-roman;
         }
         ul {
             list-style-type: none;
         }
         ol li {
-            padding: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
             margin-left: 20px;
         }
         ul li {
@@ -93,6 +97,10 @@
         }
         div {
             display: inline-block;
+        }
+        pre {
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
         .img-with-text img {
             display: block;
@@ -151,7 +159,7 @@ sudo make install # install as desired
 </div>
 <div class="img-with-text">
 <img src="ug.png" alt="ugrep screenshot with TUI"/>
-<p>Search with a TUI (shown) or from the command line with grep-compatible options.  Search with new Google-like search modes (shown) and fuzzy search modes.  Search (nested) zip/tar/pax/cpio archives, search gz/bz/bz2/lzma/xz/lz4/zstd/Z files, search binary files with hexdumps, search PDF, doc, docx and more.
+<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/tar/pax/cpio <a href="#zip">archives, tarballs and compressed</a> gz/bz/bz2/lzma/xz/lz4/zstd/Z files, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.
 </div>
 </div>
 
@@ -198,7 +206,7 @@ sudo make install # install as desired
 
 <p>Ugrep is compatible with GNU grep and supports GNU grep command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Long options <tt>--<i>OPTION</i></tt> may start with <tt>--no-<i>OPTION</i></tt> to disable them.  All short options have long alternatives.  This page shows short options for the most part.  Specify <tt>--stats</tt> to output a final summary search report of options, patterns, and search statistics.
 
-<h3>List matching files</h3>
+<a name="list"><h3>List matching files</h3></a>
 
 <dl>
 <dt>-l</dt>                     <dd>list matching files</dd>
@@ -215,7 +223,7 @@ sudo make install # install as desired
 <li>listings are sorted by name; to sort by date/time or by size, specify <tt>--sort=changed</tt> or <tt>--sort=size</tt>
 </ol>
 
-<h3>Displaying matches, match info, match context</h3>
+<a name="match"><h3>Displaying matches, match info, match context</h3></a>
 
 <dl>
 <dt>-H</dt>                     <dd>always display the filename (normally, a filename is not displayed when searching a single specified file)</dd>
@@ -230,7 +238,7 @@ sudo make install # install as desired
 <dt>--width=40</dt>             <dd>truncate lines to 40 characters</dd>
 </dl>
 
-<h3>Pattern matching modes</h3>
+<a name="modes"><h3>Pattern matching modes</h3></a>
 
 <dl>
 <dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code>
@@ -248,7 +256,7 @@ sudo make install # install as desired
 <dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read ugrep built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns/cpp/names</tt>)</dd>
 </dl>
 
-<h3>TUI interactive query mode</h3>
+<a name="TUI"><h3>TUI interactive query mode</h3></a>
 
 <dl>
 <dt>-Q</dt>                     <dd>start TUI to specify search patterns and options interactively</dd>
@@ -266,7 +274,7 @@ sudo make install # install as desired
 <li><em>CTRL-Z</em> displays help and the active search options
 </ol>
 
-<h3>Google-like search</h3>
+<a name="Google"><h3>Googling files</h3></a>
 
 <dl>
 <dt>-% "foo bar"</dt>           <dd>search files for lines matching both <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
@@ -280,16 +288,16 @@ sudo make install # install as desired
 </dl>
 
 <ol>
+<li>option <tt>-%</tt> can be combined with any pattern matching modes <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
 <li>white space is a logical <tt>AND</tt> (lowest precedence)
-<li>a <tt>|</tt> is a logical <tt>OR</tt> (taking higher precedence than AND)
+<li>a <tt>|</tt> is a logical <tt>OR</tt> (taking higher precedence than <tt>AND</tt>)
 <li>white space followed by a <tt>-</tt> is a logical <tt>NOT</tt> (taking highest precedence)
 <li>quote strings in a pattern with <tt>"</tt> to match literally
 <li>group patterns with parenthesis
-<li>option <tt>-%</tt> can be combined with any pattern matching modes <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
 <li>the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when properly spaced, e.g. <tt>-% "foo AND NOT (bar OR baz)"</tt>
 </ol>
 
-<h3>Fuzzy search</h3>
+<a name="fuzzy"><h3>Fuzzy search</h3></a>
 
 <dl>
 <dt>-Z</dt>                     <dd>approximately match patterns up to one extra, missing or replaced character in the input</dd>
@@ -308,7 +316,7 @@ sudo make install # install as desired
 <li>no whitespace may be given between <tt>-Z</tt> and its argument
 </ol>
 
-<h3>Archives and compressed files</h3>
+<a name="zip"><h3>Archives and compressed files</h3></a>
 
 <dl>
 <dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and compressed files gz/bz/bz2/lzma/xz/lz4/zstd/Z</dd>
@@ -318,7 +326,7 @@ sudo make install # install as desired
 <dt>-z -g"^bak/"</dt>           <dd>exclude all <tt>bak</tt> directories from the search and skip those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 </dl>
 
-<h3>Binary files and devices</h3>
+<a name="binary"><h3>Binary files and devices</h3></a>
 
 <dl>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
@@ -331,7 +339,7 @@ sudo make install # install as desired
 <dt>-Dread</dt>                 <dd>also read special devices to search them (danger to get stuck on a non-responsive device!)</dd>
 </dl>
 
-<h3>Exclusions and inclusions</h3>
+<a name="constraints"><h3>Exclusions and inclusions</h3></a>
 
 <dl>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
@@ -366,7 +374,7 @@ sudo make install # install as desired
 <li>to obey .gitignore file exclusions in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file
 </ol>
 
-<h3>Formatted output</h3>
+<a name="formatting"><h3>Formatted output</h3></a>
 
 <dl>
 <dt>--csv</dt>                  <dd>CSV output format</dd>
@@ -380,7 +388,7 @@ sudo make install # install as desired
 <li>formatting can be combined with other options, such as <tt>-n</tt> to include line numbers
 </ol>
 
-<h3>Pretty things, more or less</h3>
+<a name="pretty"><h3>Pretty things, more or less</h3></a>
 
 <dl>
 <dt>--pretty</dt>               <dd>enables <tt>-n</tt>, <tt>-T</tt>, <tt>--tree</tt>, <tt>--heading</tt>, <tt>--break</tt>when output is sent to a terminal</dd>
@@ -403,7 +411,7 @@ sudo make install # install as desired
 <li><code>ugrep</code> only enables <tt>--color</tt> by default
 </ol>
 
-<h3>Getting help</h3>
+<a name="help"><h3>Getting help</h3></a>
 
 <dl>
 <dt>--help count</dt>           <dd>display help on option <tt>-c</tt> (<tt>--count</tt>) and <tt>-m [MIN,][MAX]</tt> (<tt>--min-count=MIN</tt>, <tt>--max-count=MAX</tt>)</dd>
@@ -875,7 +883,7 @@ sudo make install # install as desired
 
 <p>License: BSD-3-Clause
 
-<p>Last updated: Tue Oct 29, 2023
+<p>Last updated: Tue Oct 31, 2023
 
 <hr>
 
