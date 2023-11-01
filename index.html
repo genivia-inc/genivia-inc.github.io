@@ -420,56 +420,131 @@ sudo make install # install as desired
 <dt>--help <i>WHAT</i></dt>     <dd>display help on <tt><i>WHAT</i></tt> you are looking for</dd>
 </dl>
 
-<a name="colors"><h2>Colors</h2></a>
+<a name="regex"><h2>Regex</h2></a>
 
-<p>The <tt>--colors=</tt> argument is a colon-separated list of parameters, such as <tt>--colors=sl=hy:mt=hyB</tt>, where
+<center>
+
+<div class="wide">
+<table>
+<tr><td><tt>.      </tt></td><td>any character except <tt>\n</tt></td></tr>
+<tr><td><tt>a      </tt></td><td>the character <tt>a</tt></td></tr>
+<tr><td><tt>ab     </tt></td><td>the string <tt>ab</tt></td></tr>
+<tr><td><tt>a|b    </tt></td><td><tt>a</tt> or <tt>b</tt></td></tr>
+<tr><td><tt>a*     </tt></td><td>zero or more <tt>a</tt>'s</td></tr>
+<tr><td><tt>a+     </tt></td><td>one or more <tt>a</tt>'s</td></tr>
+<tr><td><tt>a?     </tt></td><td>zero or one <tt>a</tt></td></tr>
+<tr><td><tt>a{3}   </tt></td><td>3 <tt>a</tt>'s</td></tr>
+<tr><td><tt>a{3,}  </tt></td><td>3 or more <tt>a</tt>'s</td></tr>
+<tr><td><tt>a{3,7} </tt></td><td>3 to 7 <tt>a</tt>'s</td></tr>
+<tr><td><tt>a*?    </tt></td><td>zero or more <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a+?    </tt></td><td>one or more <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a??    </tt></td><td>zero or one <tt>a</tt> lazily</td></tr>
+<tr><td><tt>a{3}?  </tt></td><td>3 <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a{3,}? </tt></td><td>3 or more <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a{3,7}?</tt></td><td>3 to 7 <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>\.             </tt></td><td>escapes <tt>.</tt> to match <tt>.</tt></td></tr>
+<tr><td><tt>\Q...\E        </tt></td><td>the literal string <tt>...</tt></td></tr>
+<tr><td><tt>\f             </tt></td><td>form feed</td></tr>
+<tr><td><tt>\n             </tt></td><td>newline</td></tr>
+<tr><td><tt>\r             </tt></td><td>carriage return</td></tr>
+<tr><td><tt>\R             </tt></td><td>any Unicode line break</td></tr>
+<tr><td><tt>\t             </tt></td><td>tab</td></tr>
+<tr><td><tt>\v             </tt></td><td>vertical tab</td></tr>
+<tr><td><tt>\X             </tt></td><td>any character and <tt>\n</tt></td></tr>
+<tr><td><tt>\c<i>Z</i>     </tt></td><td>control character <tt>^<i>Z</i></tt></td></tr>
+<tr><td><tt>\0             </tt></td><td>NUL</td></tr>
+<tr><td><tt>\0<i>ddd</i>   </tt></td><td>octal character code <tt><i>ddd</i></tt></td></tr>
+<tr><td><tt>\x<i>hh</i>    </tt></td><td>hex character code <tt><i>hh</i></tt></td></tr>
+<tr><td><tt>\x{<i>hhhh</i>}</tt></td><td>Unicode code point U+<tt><i>hhhh</i></tt></td></tr>
+<tr><td><tt>\u{<i>hhhh</i>}</tt></td><td>Unicode code point U+<tt><i>hhhh</i></tt></td></tr>
+</table>
+</div>
+
+<div class="wide">
+<table>
+<tr><td><tt>[abc-e]         </tt></td><td>one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</td></tr>
+<tr><td><tt>[^abc-e]        </tt></td><td>one char not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>\n</tt></td></tr>
+<tr><td><tt>[[:alnum:]]     </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt></td></tr>
+<tr><td><tt>[[:alpha:]]     </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt></td></tr>
+<tr><td><tt>[[:ascii:]]     </tt></td><td>ASCII char <tt>\x00</tt>-<tt>\x7f</tt></td></tr>
+<tr><td><tt>[[:blank:]]     </tt></td><td>space or tab</td></tr>
+<tr><td><tt>[[:cntrl:]]     </tt></td><td>control characters</td></tr>
+<tr><td><tt>[[:digit:]]     </tt></td><td><tt>0</tt>-<tt>9</tt></td></tr>
+<tr><td><tt>[[:graph:]]     </tt></td><td>visible characters</td></tr>
+<tr><td><tt>[[:lower:]]     </tt></td><td><tt>a</tt>-<tt>z</tt></td></tr>
+<tr><td><tt>[[:print:]]     </tt></td><td>visible chars and space</td></tr>
+<tr><td><tt>[[:punct:]]     </tt></td><td>punctuation characters</td></tr>
+<tr><td><tt>[[:space:]]     </tt></td><td>space,<tt>\t,<tt>\v,<tt>\f,<tt>\r</td></tr>
+<tr><td><tt>[[:upper:]]     </tt></td><td><tt>A</tt>-<tt>Z</tt></td></tr>
+<tr><td><tt>[[:word:]]      </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt>,<tt>_</tt></td></tr>
+<tr><td><tt>[[:xdigit:]]    </tt></td><td><tt>0</tt>-<tt>9</tt>,<tt>a</tt>-<tt>f</tt>,<tt>A</tt>-<tt>F</tt></td></tr>
+<tr><td><tt>\p{<i>Class</i>}</tt></td><td>one character in <tt><i>Class</i></tt></td></tr>
+<tr><td><tt>\P{<i>Class</i>}</tt></td><td>one char not in <tt><i>Class</i></tt></td></tr>
+<tr><td><tt>\d              </tt></td><td>a digit</td></tr>
+<tr><td><tt>\D              </tt></td><td>a non-digit</td></tr>
+<tr><td><tt>\h              </tt></td><td>a space or tab</td></tr>
+<tr><td><tt>\H              </tt></td><td>not a space or tab</td></tr>
+<tr><td><tt>\s              </tt></td><td>a whitespace except <tt>\n</tt></td></tr>
+<tr><td><tt>\S              </tt></td><td>a non-whitespace</td></tr>
+<tr><td><tt>\w              </tt></td><td>a word character</td></tr>
+<tr><td><tt>\W              </tt></td><td>a non-word character</td></tr>
+</table>
+</div>
+
+<div>
+<table>
+<tr><td><tt>^          </tt></td><td>begin of line anchor</td></tr>
+<tr><td><tt>$          </tt></td><td>end of line anchor</td></tr>
+<tr><td><tt>\b         </tt></td><td>word boundary</td></tr>
+<tr><td><tt>\B         </tt></td><td>non-word boundary</td></tr>
+<tr><td><tt>\&lt;      </tt></td><td>start of word boundary</td></tr>
+<tr><td><tt>\&gt;      </tt></td><td>end of word boundary</td></tr>
+<tr><td><tt>(?=...)    </tt></td><td>lookahead (-P)</td></tr>
+<tr><td><tt>(?!...)    </tt></td><td>negative lookahead (-P)</td></tr>
+<tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind (-P)</td></tr>
+<tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind (-P)</td></tr>
+<tr><td><tt>(...)                 </tt></td><td>capturing group (-P)</td></tr>
+<tr><td><tt>(...)                 </tt></td><td>non-capturing group</td></tr>
+<tr><td><tt>(?:...)               </tt></td><td>non-capturing group</td></tr>
+<tr><td><tt>(?&lt;<i>X</i>&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (-P)</td></tr>
+<tr><td><tt>\1                    </tt></td><td>matches group 1 (-P)</td></tr>
+<tr><td><tt>\g{10}                </tt></td><td>matches group 10 (-P)</td></tr>
+<tr><td><tt>\g{<i>X</i>}          </tt></td><td>matches group name <i>X</i> (-P)</td></tr>
+<tr><td><tt>(?#...)               </tt></td><td>comments <tt>...</tt> are ignored</td></tr>
+</table>
+</div>
+
+</center>
+
+<ol>
+<li>(-P): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
+<li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax (shown)
+<li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
+</ol>
+
+<a name="globs"><h2>Globs</h2></a>
+
+<p>Ugrep supports gitignore-style globbing for all glob-related options <tt>-g</tt>, <tt>--iglob=</tt>, <tt>--exclude=</tt>, <tt>--include=</tt>, <tt>-include-dir=</tt>, <tt>--exclude-dir=</tt>, <tt>--include-from=</tt>, <tt>--exclude-from=</tt>, and <tt>--ignore-files</tt>, where
 
 <table align=center>
-<tr><td><tt>sl=</tt></td><td>selected lines</td></tr>
-<tr><td><tt>cx=</tt></td><td>context lines</td></tr>
-<tr><td><tt>rv </tt></td><td>swaps the <tt>sl=</tt> and <tt>cx=</tt> capabilities when <tt>-v</tt> is specified</td></tr>
-<tr><td><tt>mt=</tt></td><td>matching text in any matching line</td></tr>
-<tr><td><tt>ms=</tt></td><td>matching text in a selected line, the substring <tt>mt=</tt> by default</td></tr>
-<tr><td><tt>mc=</tt></td><td>matching text in a context line, the substring <tt>mt=</tt> by default</td></tr>
-<tr><td><tt>fn=</tt></td><td>file names</td></tr>
-<tr><td><tt>ln=</tt></td><td>line numbers</td></tr>
-<tr><td><tt>cn=</tt></td><td>column numbers</td></tr>
-<tr><td><tt>bn=</tt></td><td>byte offsets</td></tr>
-<tr><td><tt>se=</tt></td><td>separators</td></tr>
-<tr><td><tt>qp=</tt></td><td>TUI prompt</td></tr>
-<tr><td><tt>qe=</tt></td><td>TUI errors</td></tr>
-<tr><td><tt>qr=</tt></td><td>TUI regex</td></tr>
-<tr><td><tt>qm=</tt></td><td>TUI regex meta characters</td></tr>
-<tr><td><tt>ql=</tt></td><td>TUI regex lists and literals</td></tr>
-<tr><td><tt>qb=</tt></td><td>TUI regex braces</td></tr>
+<tr><td><tt>*       </tt></td><td>matches anything except <tt>/</tt></td></tr>
+<tr><td><tt>?       </tt></td><td>matches any one character except <tt>/</tt></td></tr>
+<tr><td><tt>[abc-e] </tt></td><td>matches one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt></td></tr>
+<tr><td><tt>[^abc-e]</tt></td><td>matches one character not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>/</tt></td></tr>
+<tr><td><tt>[!abc-e]</tt></td><td>matches one character not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>/</tt></td></tr>
+<tr><td><tt>/       </tt></td><td>when used at the start of a glob, matches the working directory</td></tr>
+<tr><td><tt>**/     </tt></td><td>matches zero or more directories</td></tr>
+<tr><td><tt>/**     </tt></td><td>when at the end of a glob, matches everything after the <tt>/</tt></td></tr>
+<tr><td><tt>\?      </tt></td><td>matches a <tt>?</tt> or any other character specified after the backslash</td></tr>
 </table>
 
-<p>Multiple <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters">SGR codes</a> may be specified for a single parameter when separated by a semicolon, e.g. <tt>--colors="mt=1;31"</tt> specifies bright red.  For quick and easy color specification, the corresponding single-letter color names may be used in place of numeric SGR codes and semicolons are not required to separate color names, e.g. <tt>--colors=mt=hr</tt> specifies bright red.  Color letters and numeric codes may be mixed.  The following SGR codes have corresponding letter designations:
-
-<table align=center>
-<tr><td>0   </td><td><tt>n</tt></td><td>normal font and color     </td><td>2   </td><td><tt>f </tt></td><td>faint (not widely supported)</td></tr>
-<tr><td>1   </td><td><tt>h</tt></td><td>highlighted bold font     </td><td>21  </td><td><tt>H </tt></td><td>highlighted bold off</td></tr>
-<tr><td>4   </td><td><tt>u</tt></td><td>underline                 </td><td>24  </td><td><tt>U </tt></td><td>underline off</td></tr>
-<tr><td>7   </td><td><tt>i</tt></td><td>invert video              </td><td>27  </td><td><tt>I </tt></td><td>invert off</td></tr>
-<tr><td>30  </td><td><tt>k</tt></td><td>black text                </td><td>90  </td><td><tt>+k</tt></td><td>bright gray text</td></tr>
-<tr><td>31  </td><td><tt>r</tt></td><td>red text                  </td><td>91  </td><td><tt>+r</tt></td><td>bright red text</td></tr>
-<tr><td>32  </td><td><tt>g</tt></td><td>green text                </td><td>92  </td><td><tt>+g</tt></td><td>bright green text</td></tr>
-<tr><td>33  </td><td><tt>y</tt></td><td>yellow text               </td><td>93  </td><td><tt>+y</tt></td><td>bright yellow text</td></tr>
-<tr><td>34  </td><td><tt>b</tt></td><td>blue text                 </td><td>94  </td><td><tt>+b</tt></td><td>bright blue text</td></tr>
-<tr><td>35  </td><td><tt>m</tt></td><td>magenta text              </td><td>95  </td><td><tt>+m</tt></td><td>bright magenta text</td></tr>
-<tr><td>36  </td><td><tt>c</tt></td><td>cyan text                 </td><td>96  </td><td><tt>+c</tt></td><td>bright cyan text</td></tr>
-<tr><td>37  </td><td><tt>w</tt></td><td>white text                </td><td>97  </td><td><tt>+w</tt></td><td>bright white text</td></tr>
-<tr><td>40  </td><td><tt>K</tt></td><td>black background          </td><td>100 </td><td><tt>+K</tt></td><td>bright gray background</td></tr>
-<tr><td>41  </td><td><tt>R</tt></td><td>dark red background       </td><td>101 </td><td><tt>+R</tt></td><td>bright red background</td></tr>
-<tr><td>42  </td><td><tt>G</tt></td><td>dark green background     </td><td>102 </td><td><tt>+G</tt></td><td>bright green background</td></tr>
-<tr><td>43  </td><td><tt>Y</tt></td><td>dark yellow backgrounda   </td><td>103 </td><td><tt>+Y</tt></td><td>bright yellow background</td></tr>
-<tr><td>44  </td><td><tt>B</tt></td><td>dark blue background      </td><td>104 </td><td><tt>+B</tt></td><td>bright blue background</td></tr>
-<tr><td>45  </td><td><tt>M</tt></td><td>dark magenta background   </td><td>105 </td><td><tt>+M</tt></td><td>bright magenta background</td></tr>
-<tr><td>46  </td><td><tt>C</tt></td><td>dark cyan background      </td><td>106 </td><td><tt>+C</tt></td><td>bright cyan background</td></tr>
-<tr><td>47  </td><td><tt>W</tt></td><td>dark white background     </td><td>107 </td><td><tt>+W</tt></td><td>bright white background</td></tr>
-</table>
-
-<p>The default color scheme is <tt>cx=33:</tt> <tt>mt=1;31:</tt> <tt>fn=1;35:</tt> <tt>ln=1;32:</tt> <tt>cn=1;32:</tt> <tt>bn=1;32:</tt> <tt>se=36:</tt> <tt>qp=1;32:</tt> <tt>qe=1;37;41:</tt> <tt>qm=1;32:</tt> <tt>ql=36:</tt> <tt>qb=1;35</tt>
+<ol>
+<li>when a glob pattern is used with a command-line option such as <tt>-g"*.cpp"</tt>, you must quote the glob <tt>"*.cpp"</tt> to prevent the shell from expanding the glob
+<li>a glob pattern starting with a <tt>^</tt> or a <tt>!</tt> inverts the matching: instead of matching a filename or directory name, the directory or file is ignored and excluded from the search
+<li>when a glob pattern contains a <tt>/</tt>, the full pathname is matched, otherwise, the basename of a file or directory is matched in recursive searches
+<li>when a glob pattern begins with a <tt>/</tt>, files and directories are matched at the working directory, not recursively
+<li>when a glob pattern ends with a <tt>/</tt>, only directories are matched, not files
+</ol>
 
 <a name="types"><h2>File types</h2></a>
 
@@ -596,6 +671,93 @@ sudo make install # install as desired
 <tr><td><tt>        yaml</tt></td><td>=</td><td><tt>-O yaml,yml</tt></td></tr>
 </table>
 
+<a name="filter"><h2>Filters</h2></a>
+
+<p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified command may be included.  The special option <tt>%</tt> is expanded into the pathname of the file to search.  Filters are applied first when the filename extension matches one of the specified filters, then the output is searched.  Some examples:
+
+<dl>
+<dt>--filter="pdf:pdftotext % -"</dt>
+                                <dd>search PDF files, like <code>ug+</code></dd>
+<dt>--filter="doc:antiword %"</dt>
+                                <dd>search documents, like <code>ug+</code></dd>
+<dt>--filter="odt,docx,epub,rtf:pandoc --wrap=preserve -t plain % -o -"</dt>
+                                <dd>search documents and e-books, like <code>ug+</code></dd>
+<dt>--filter="gif,jpg,jpeg,mpg,mpeg,png,tiff:exiftool %"</dt>
+                                <dd>search image metadata, like <code>ug+</code></dd>
+<dt>--filter="odt,doc,docx,rtf,xls,xlsx,ppt,pptx:soffice --headless --cat %"</dt>
+                                <dd>search documents, spreadsheets and presentations (this is slow)</dd>
+<dt>--filter="pem:openssl x509 -text,cer,crt,der:openssl x509 -text -inform der"</dt>
+                                <dd>search certificates</dd>
+<dt>--filter="jis:iconv -f SHIFT-JIS -t UTF-8"</dt>
+                                <dd>search <tt>.jis</tt> files encoded in Shift-JIS format converted to UTF-8</dd>
+</dl>
+
+<ol>
+<li>UTF-8, UTF-16 and UTF-32 input is automatically searched and does not require a filter
+<li>the Shift-JIS conversion in the example is a special case, option <tt>--encoding=</tt> supports the arguments
+  <tt>binary</tt>, <tt>ASCII</tt>, <tt>UTF-8</tt>, <tt>UTF-16</tt>, <tt>UTF-16BE</tt>,
+  <tt>UTF-16LE</tt>, <tt>UTF-32</tt>, <tt>UTF-32BE</tt>, <tt>UTF-32LE</tt>, <tt>LATIN1</tt>,
+  <tt>ISO-8859-1</tt>, <tt>ISO-8859-2</tt>, <tt>ISO-8859-3</tt>, <tt>ISO-8859-4</tt>,
+  <tt>ISO-8859-5</tt>, <tt>ISO-8859-6</tt>, <tt>ISO-8859-7</tt>, <tt>ISO-8859-8</tt>,
+  <tt>ISO-8859-9</tt>, <tt>ISO-8859-10</tt>, <tt>ISO-8859-11</tt>, <tt>ISO-8859-13</tt>,
+  <tt>ISO-8859-14</tt>, <tt>ISO-8859-15</tt>, <tt>ISO-8859-16</tt>, <tt>MAC</tt>, <tt>MACROMAN</tt>,
+  <tt>EBCDIC</tt>, <tt>CP437</tt>, <tt>CP850</tt>, <tt>CP858</tt>, <tt>CP1250</tt>, <tt>CP1251</tt>, <tt>CP1252</tt>,
+  <tt>CP1253</tt>, <tt>CP1254</tt>, <tt>CP1255</tt>, <tt>CP1256</tt>, <tt>CP1257</tt>, <tt>CP1258</tt>,
+  <tt>KOI8-R</tt>, <tt>KOI8-U</tt>, <tt>KOI8-RU</tt>
+<li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>"LABEL:MAGIC"</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>
+</ol>
+
+<a name="colors"><h2>Colors</h2></a>
+
+<p>The <tt>--colors=</tt> argument is a colon-separated list of parameters, such as <tt>--colors=sl=hy:mt=hyB</tt>, where
+
+<table align=center>
+<tr><td><tt>sl=</tt></td><td>selected lines</td></tr>
+<tr><td><tt>cx=</tt></td><td>context lines</td></tr>
+<tr><td><tt>rv </tt></td><td>swaps the <tt>sl=</tt> and <tt>cx=</tt> capabilities when <tt>-v</tt> is specified</td></tr>
+<tr><td><tt>mt=</tt></td><td>matching text in any matching line</td></tr>
+<tr><td><tt>ms=</tt></td><td>matching text in a selected line, the substring <tt>mt=</tt> by default</td></tr>
+<tr><td><tt>mc=</tt></td><td>matching text in a context line, the substring <tt>mt=</tt> by default</td></tr>
+<tr><td><tt>fn=</tt></td><td>file names</td></tr>
+<tr><td><tt>ln=</tt></td><td>line numbers</td></tr>
+<tr><td><tt>cn=</tt></td><td>column numbers</td></tr>
+<tr><td><tt>bn=</tt></td><td>byte offsets</td></tr>
+<tr><td><tt>se=</tt></td><td>separators</td></tr>
+<tr><td><tt>qp=</tt></td><td>TUI prompt</td></tr>
+<tr><td><tt>qe=</tt></td><td>TUI errors</td></tr>
+<tr><td><tt>qr=</tt></td><td>TUI regex</td></tr>
+<tr><td><tt>qm=</tt></td><td>TUI regex meta characters</td></tr>
+<tr><td><tt>ql=</tt></td><td>TUI regex lists and literals</td></tr>
+<tr><td><tt>qb=</tt></td><td>TUI regex braces</td></tr>
+</table>
+
+<p>Multiple <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters">SGR codes</a> may be specified for a single parameter when separated by a semicolon, e.g. <tt>--colors="mt=1;31"</tt> specifies bright red.  For quick and easy color specification, the corresponding single-letter color names may be used in place of numeric SGR codes and semicolons are not required to separate color names, e.g. <tt>--colors=mt=hr</tt> specifies bright red.  Color letters and numeric codes may be mixed.  The following SGR codes have corresponding letter designations:
+
+<table align=center>
+<tr><td>0   </td><td><tt>n</tt></td><td>normal font and color     </td><td>2   </td><td><tt>f </tt></td><td>faint (not widely supported)</td></tr>
+<tr><td>1   </td><td><tt>h</tt></td><td>highlighted bold font     </td><td>21  </td><td><tt>H </tt></td><td>highlighted bold off</td></tr>
+<tr><td>4   </td><td><tt>u</tt></td><td>underline                 </td><td>24  </td><td><tt>U </tt></td><td>underline off</td></tr>
+<tr><td>7   </td><td><tt>i</tt></td><td>invert video              </td><td>27  </td><td><tt>I </tt></td><td>invert off</td></tr>
+<tr><td>30  </td><td><tt>k</tt></td><td>black text                </td><td>90  </td><td><tt>+k</tt></td><td>bright gray text</td></tr>
+<tr><td>31  </td><td><tt>r</tt></td><td>red text                  </td><td>91  </td><td><tt>+r</tt></td><td>bright red text</td></tr>
+<tr><td>32  </td><td><tt>g</tt></td><td>green text                </td><td>92  </td><td><tt>+g</tt></td><td>bright green text</td></tr>
+<tr><td>33  </td><td><tt>y</tt></td><td>yellow text               </td><td>93  </td><td><tt>+y</tt></td><td>bright yellow text</td></tr>
+<tr><td>34  </td><td><tt>b</tt></td><td>blue text                 </td><td>94  </td><td><tt>+b</tt></td><td>bright blue text</td></tr>
+<tr><td>35  </td><td><tt>m</tt></td><td>magenta text              </td><td>95  </td><td><tt>+m</tt></td><td>bright magenta text</td></tr>
+<tr><td>36  </td><td><tt>c</tt></td><td>cyan text                 </td><td>96  </td><td><tt>+c</tt></td><td>bright cyan text</td></tr>
+<tr><td>37  </td><td><tt>w</tt></td><td>white text                </td><td>97  </td><td><tt>+w</tt></td><td>bright white text</td></tr>
+<tr><td>40  </td><td><tt>K</tt></td><td>black background          </td><td>100 </td><td><tt>+K</tt></td><td>bright gray background</td></tr>
+<tr><td>41  </td><td><tt>R</tt></td><td>dark red background       </td><td>101 </td><td><tt>+R</tt></td><td>bright red background</td></tr>
+<tr><td>42  </td><td><tt>G</tt></td><td>dark green background     </td><td>102 </td><td><tt>+G</tt></td><td>bright green background</td></tr>
+<tr><td>43  </td><td><tt>Y</tt></td><td>dark yellow backgrounda   </td><td>103 </td><td><tt>+Y</tt></td><td>bright yellow background</td></tr>
+<tr><td>44  </td><td><tt>B</tt></td><td>dark blue background      </td><td>104 </td><td><tt>+B</tt></td><td>bright blue background</td></tr>
+<tr><td>45  </td><td><tt>M</tt></td><td>dark magenta background   </td><td>105 </td><td><tt>+M</tt></td><td>bright magenta background</td></tr>
+<tr><td>46  </td><td><tt>C</tt></td><td>dark cyan background      </td><td>106 </td><td><tt>+C</tt></td><td>bright cyan background</td></tr>
+<tr><td>47  </td><td><tt>W</tt></td><td>dark white background     </td><td>107 </td><td><tt>+W</tt></td><td>bright white background</td></tr>
+</table>
+
+<p>The default color scheme is <tt>cx=33:</tt> <tt>mt=1;31:</tt> <tt>fn=1;35:</tt> <tt>ln=1;32:</tt> <tt>cn=1;32:</tt> <tt>bn=1;32:</tt> <tt>se=36:</tt> <tt>qp=1;32:</tt> <tt>qe=1;37;41:</tt> <tt>qm=1;32:</tt> <tt>ql=36:</tt> <tt>qb=1;35</tt>
+
 <a name="format"><h2>Custom output formatting</h2></a>
 
 <table align=center>
@@ -711,179 +873,21 @@ sudo make install # install as desired
 </pre>
 </ol>
 
-<a name="regex"><h2>Regex</h2></a>
-
-<div>
-
-<div class="wide">
-<table>
-<tr><td><tt>.      </tt></td><td>any character except <tt>\n</tt></td></tr>
-<tr><td><tt>a      </tt></td><td>the character <tt>a</tt></td></tr>
-<tr><td><tt>ab     </tt></td><td>the string <tt>ab</tt></td></tr>
-<tr><td><tt>a|b    </tt></td><td><tt>a</tt> or <tt>b</tt></td></tr>
-<tr><td><tt>a*     </tt></td><td>zero or more <tt>a</tt>'s</td></tr>
-<tr><td><tt>a+     </tt></td><td>one or more <tt>a</tt>'s</td></tr>
-<tr><td><tt>a?     </tt></td><td>zero or one <tt>a</tt></td></tr>
-<tr><td><tt>a{3}   </tt></td><td>3 <tt>a</tt>'s</td></tr>
-<tr><td><tt>a{3,}  </tt></td><td>3 or more <tt>a</tt>'s</td></tr>
-<tr><td><tt>a{3,7} </tt></td><td>3 to 7 <tt>a</tt>'s</td></tr>
-<tr><td><tt>a*?    </tt></td><td>zero or more <tt>a</tt>'s lazily</td></tr>
-<tr><td><tt>a+?    </tt></td><td>one or more <tt>a</tt>'s lazily</td></tr>
-<tr><td><tt>a??    </tt></td><td>zero or one <tt>a</tt> lazily</td></tr>
-<tr><td><tt>a{3}?  </tt></td><td>3 <tt>a</tt>'s lazily</td></tr>
-<tr><td><tt>a{3,}? </tt></td><td>3 or more <tt>a</tt>'s lazily</td></tr>
-<tr><td><tt>a{3,7}?</tt></td><td>3 to 7 <tt>a</tt>'s lazily</td></tr>
-<tr><td><tt>\.             </tt></td><td>escapes <tt>.</tt> to match <tt>.</tt></td></tr>
-<tr><td><tt>\Q...\E        </tt></td><td>the literal string <tt>...</tt></td></tr>
-<tr><td><tt>\f             </tt></td><td>form feed</td></tr>
-<tr><td><tt>\n             </tt></td><td>newline</td></tr>
-<tr><td><tt>\r             </tt></td><td>carriage return</td></tr>
-<tr><td><tt>\R             </tt></td><td>any Unicode line break</td></tr>
-<tr><td><tt>\t             </tt></td><td>tab</td></tr>
-<tr><td><tt>\v             </tt></td><td>vertical tab</td></tr>
-<tr><td><tt>\X             </tt></td><td>any character and <tt>\n</tt></td></tr>
-<tr><td><tt>\c<i>Z</i>     </tt></td><td>control character <tt>^<i>Z</i></tt></td></tr>
-<tr><td><tt>\0             </tt></td><td>NUL</td></tr>
-<tr><td><tt>\0<i>ddd</i>   </tt></td><td>octal character code <tt><i>ddd</i></tt></td></tr>
-<tr><td><tt>\x<i>hh</i>    </tt></td><td>hex character code <tt><i>hh</i></tt></td></tr>
-<tr><td><tt>\x{<i>hhhh</i>}</tt></td><td>Unicode code point U+<tt><i>hhhh</i></tt></td></tr>
-<tr><td><tt>\u{<i>hhhh</i>}</tt></td><td>Unicode code point U+<tt><i>hhhh</i></tt></td></tr>
-</table>
-</div>
-
-<div class="wide">
-<table>
-<tr><td><tt>[abc-e]         </tt></td><td>one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</td></tr>
-<tr><td><tt>[^abc-e]        </tt></td><td>one char not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>\n</tt></td></tr>
-<tr><td><tt>[[:alnum:]]     </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt></td></tr>
-<tr><td><tt>[[:alpha:]]     </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt></td></tr>
-<tr><td><tt>[[:ascii:]]     </tt></td><td>ASCII char <tt>\x00</tt>-<tt>\x7f</tt></td></tr>
-<tr><td><tt>[[:blank:]]     </tt></td><td>space or tab</td></tr>
-<tr><td><tt>[[:cntrl:]]     </tt></td><td>control characters</td></tr>
-<tr><td><tt>[[:digit:]]     </tt></td><td><tt>0</tt>-<tt>9</tt></td></tr>
-<tr><td><tt>[[:graph:]]     </tt></td><td>visible characters</td></tr>
-<tr><td><tt>[[:lower:]]     </tt></td><td><tt>a</tt>-<tt>z</tt></td></tr>
-<tr><td><tt>[[:print:]]     </tt></td><td>visible chars and space</td></tr>
-<tr><td><tt>[[:punct:]]     </tt></td><td>punctuation characters</td></tr>
-<tr><td><tt>[[:space:]]     </tt></td><td>space,<tt>\t,<tt>\v,<tt>\f,<tt>\r</td></tr>
-<tr><td><tt>[[:upper:]]     </tt></td><td><tt>A</tt>-<tt>Z</tt></td></tr>
-<tr><td><tt>[[:word:]]      </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt>,<tt>_</tt></td></tr>
-<tr><td><tt>[[:xdigit:]]    </tt></td><td><tt>0</tt>-<tt>9</tt>,<tt>a</tt>-<tt>f</tt>,<tt>A</tt>-<tt>F</tt></td></tr>
-<tr><td><tt>\p{<i>Class</i>}</tt></td><td>one character in <tt><i>Class</i></tt></td></tr>
-<tr><td><tt>\P{<i>Class</i>}</tt></td><td>one char not in <tt><i>Class</i></tt></td></tr>
-<tr><td><tt>\d              </tt></td><td>a digit</td></tr>
-<tr><td><tt>\D              </tt></td><td>a non-digit</td></tr>
-<tr><td><tt>\h              </tt></td><td>a space or tab</td></tr>
-<tr><td><tt>\H              </tt></td><td>not a space or tab</td></tr>
-<tr><td><tt>\s              </tt></td><td>a whitespace except <tt>\n</tt></td></tr>
-<tr><td><tt>\S              </tt></td><td>a non-whitespace</td></tr>
-<tr><td><tt>\w              </tt></td><td>a word character</td></tr>
-<tr><td><tt>\W              </tt></td><td>a non-word character</td></tr>
-</table>
-</div>
-
-<div>
-<table>
-<tr><td><tt>^          </tt></td><td>begin of line anchor</td></tr>
-<tr><td><tt>$          </tt></td><td>end of line anchor</td></tr>
-<tr><td><tt>\b         </tt></td><td>word boundary</td></tr>
-<tr><td><tt>\B         </tt></td><td>non-word boundary</td></tr>
-<tr><td><tt>\&lt;      </tt></td><td>start of word boundary</td></tr>
-<tr><td><tt>\&gt;      </tt></td><td>end of word boundary</td></tr>
-<tr><td><tt>(?=...)    </tt></td><td>lookahead (-P)</td></tr>
-<tr><td><tt>(?!...)    </tt></td><td>negative lookahead (-P)</td></tr>
-<tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind (-P)</td></tr>
-<tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind (-P)</td></tr>
-<tr><td><tt>(...)                 </tt></td><td>capturing group (-P)</td></tr>
-<tr><td><tt>(...)                 </tt></td><td>non-capturing group</td></tr>
-<tr><td><tt>(?:...)               </tt></td><td>non-capturing group</td></tr>
-<tr><td><tt>(?&lt;<i>X</i>&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (-P)</td></tr>
-<tr><td><tt>\1                    </tt></td><td>matches group 1 (-P)</td></tr>
-<tr><td><tt>\g{10}                </tt></td><td>matches group 10 (-P)</td></tr>
-<tr><td><tt>\g{<i>X</i>}          </tt></td><td>matches group name <i>X</i> (-P)</td></tr>
-<tr><td><tt>(?#...)               </tt></td><td>comments <tt>...</tt> are ignored</td></tr>
-</table>
-</div>
-
-</div>
-
-<ol>
-<li>(-P): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
-<li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax shown in the tables
-<li>BRE (Basic Regular Expression) syntax is enabled with option <tt>-G</tt> and replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
-</ol>
-
-<a name="globs"><h2>Globs</h2></a>
-
-<p>Ugrep supports gitignore-style globbing for all glob-related options <tt>-g</tt>, <tt>--iglob=</tt>, <tt>--exclude=</tt>, <tt>--include=</tt>, <tt>-include-dir=</tt>, <tt>--exclude-dir=</tt>, <tt>--include-from=</tt>, <tt>--exclude-from=</tt>, and <tt>--ignore-files</tt>, where
-
-<table align=center>
-<tr><td><tt>*       </tt></td><td>matches anything except <tt>/</tt></td></tr>
-<tr><td><tt>?       </tt></td><td>matches any one character except <tt>/</tt></td></tr>
-<tr><td><tt>[abc-e] </tt></td><td>matches one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt></td></tr>
-<tr><td><tt>[^abc-e]</tt></td><td>matches one character not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>/</tt></td></tr>
-<tr><td><tt>[!abc-e]</tt></td><td>matches one character not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>/</tt></td></tr>
-<tr><td><tt>/       </tt></td><td>when used at the start of a glob, matches the working directory</td></tr>
-<tr><td><tt>**/     </tt></td><td>matches zero or more directories</td></tr>
-<tr><td><tt>/**     </tt></td><td>when at the end of a glob, matches everything after the <tt>/</tt></td></tr>
-<tr><td><tt>\?      </tt></td><td>matches a <tt>?</tt> or any other character specified after the backslash</td></tr>
-</table>
-
-<ol>
-<li>when a glob pattern is used with a command-line option such as <tt>-g"*.cpp"</tt>, you must quote the glob <tt>"*.cpp"</tt> to prevent the shell from expanding the glob
-<li>a glob pattern starting with a <tt>^</tt> or a <tt>!</tt> inverts the matching: instead of matching a filename or directory name, the directory or file is ignored and excluded from the search
-<li>when a glob pattern contains a <tt>/</tt>, the full pathname is matched, otherwise, the basename of a file or directory is matched in recursive searches
-<li>when a glob pattern begins with a <tt>/</tt>, files and directories are matched at the working directory, not recursively
-<li>when a glob pattern ends with a <tt>/</tt>, only directories are matched, not files
-</ol>
-
-<a name="filter"><h2>Filters</h2></a>
-
-<p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified command may be included.  The special option <tt>%</tt> is expanded into the pathname of the file to search.  Filters are applied first when the filename extension matches one of the specified filters, then the output is searched.  Some examples:
-
-<dl>
-<dt>--filter="pdf:pdftotext % -"</dt>
-                                <dd>search PDF files, like <code>ug+</code></dd>
-<dt>--filter="doc:antiword %"</dt>
-                                <dd>search documents, like <code>ug+</code></dd>
-<dt>--filter="odt,docx,epub,rtf:pandoc --wrap=preserve -t plain % -o -"</dt>
-                                <dd>search documents and e-books, like <code>ug+</code></dd>
-<dt>--filter="gif,jpg,jpeg,mpg,mpeg,png,tiff:exiftool %"</dt>
-                                <dd>search image metadata, like <code>ug+</code></dd>
-<dt>--filter="odt,doc,docx,rtf,xls,xlsx,ppt,pptx:soffice --headless --cat %"</dt>
-                                <dd>search documents, spreadsheets and presentations (this is slow)</dd>
-<dt>--filter="pem:openssl x509 -text,cer,crt,der:openssl x509 -text -inform der"</dt>
-                                <dd>search certificates</dd>
-<dt>--filter="jis:iconv -f SHIFT-JIS -t UTF-8"</dt>
-                                <dd>search <tt>.jis</tt> files encoded in Shift-JIS format converted to UTF-8</dd>
-</dl>
-
-<ol>
-<li>UTF-8, UTF-16 and UTF-32 input is automatically searched and does not require a filter
-<li>the Shift-JIS conversion in the example is a special case, option <tt>--encoding=</tt> supports the arguments
-  <tt>binary</tt>, <tt>ASCII</tt>, <tt>UTF-8</tt>, <tt>UTF-16</tt>, <tt>UTF-16BE</tt>,
-  <tt>UTF-16LE</tt>, <tt>UTF-32</tt>, <tt>UTF-32BE</tt>, <tt>UTF-32LE</tt>, <tt>LATIN1</tt>,
-  <tt>ISO-8859-1</tt>, <tt>ISO-8859-2</tt>, <tt>ISO-8859-3</tt>, <tt>ISO-8859-4</tt>,
-  <tt>ISO-8859-5</tt>, <tt>ISO-8859-6</tt>, <tt>ISO-8859-7</tt>, <tt>ISO-8859-8</tt>,
-  <tt>ISO-8859-9</tt>, <tt>ISO-8859-10</tt>, <tt>ISO-8859-11</tt>, <tt>ISO-8859-13</tt>,
-  <tt>ISO-8859-14</tt>, <tt>ISO-8859-15</tt>, <tt>ISO-8859-16</tt>, <tt>MAC</tt>, <tt>MACROMAN</tt>,
-  <tt>EBCDIC</tt>, <tt>CP437</tt>, <tt>CP850</tt>, <tt>CP858</tt>, <tt>CP1250</tt>, <tt>CP1251</tt>, <tt>CP1252</tt>,
-  <tt>CP1253</tt>, <tt>CP1254</tt>, <tt>CP1255</tt>, <tt>CP1256</tt>, <tt>CP1257</tt>, <tt>CP1258</tt>,
-  <tt>KOI8-R</tt>, <tt>KOI8-U</tt>, <tt>KOI8-RU</tt>
-<li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>"LABEL:MAGIC"</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>
-</ol>
-
 <a name="bugs"><h2>Bugs</h2></a>
 
 <p>If you found a bug or an issue, then please report it at <a href="https://github.com/Genivia/ugrep/issues">https://github.com/Genivia/ugrep/issues</a>
 
 <a name="bugs"><h2>License</h2></a>
 
-<p>Ugrep is written by Robert van Engelen and others: <a href="https://github.com/Genivia/ugrep">"https://github.com/Genivia/ugrep</a>
+<p>Ugrep is written by Robert van Engelen and others: <a href="https://github.com/Genivia/ugrep">https://github.com/Genivia/ugrep</a>
+
+<p>Ugrep uses the RE/flex regex library: <a href="https://github.com/Genivia/RE-flex">https://github.com/Genivia/RE-flex</a>
+
+<p>Ugrep <tt>-P</tt> uses the PCRE2 library: <a href="https://www.pcre.org">https://www.pcre.org</a>
 
 <p>License: BSD-3-Clause
 
-<p>Last updated: Tue Oct 31, 2023
+<p>Last updated: Wed Nov 1, 2023
 
 <hr>
 
