@@ -285,8 +285,8 @@ sudo make install # install as desired
 <dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
 <dt>-% "foo -bar -baz"</dt>     <dd>same as above (normalized form)</dd>
 <dt>-% 'foo "-bar"'</dt>        <dd>search files for lines matching both <tt>foo</tt> and <tt>-bar</tt>, where <tt>"-bar"</tt> is quoted to match "as is"</dd>
-<dt>--files -% "foo bar"</dt>   <dd>search files matching both <tt>foo</tt> and <tt>bar</tt> anywhere in the same file</dd>
-<dt>--files -% "foo -bar"</dt>  <dd>search files matching <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file</dd>
+<dt>--files -% "foo bar"</dt>   <dd>find files matching both <tt>foo</tt> and <tt>bar</tt> anywhere in the same file</dd>
+<dt>--files -% "foo -bar"</dt>  <dd>find files matching <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file</dd>
 </dl>
 
 <ol>
@@ -322,7 +322,7 @@ sudo make install # install as desired
 
 <dl>
 <dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and compressed files gz/bz/bz2/lzma/xz/lz4/zstd/Z</dd>
-<dt>-z --zmax=2</dt>            <dd>also search archives, tarballs and compressed files stored within archives</dd>
+<dt>-z --zmax=2</dt>            <dd>also search archives, tarballs and compressed files stored within archives (max 2 levels)</dd>
 <dt>-z -tc,cpp</dt>             <dd>search C and C++ source code files and also those in archives, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-z -g"*.txt,*.md"</dt>      <dd>search files matching the globs <tt>*.txt</tt> and <tt>*.md</tt> and also those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>-z -g"^bak/"</dt>           <dd>exclude all <tt>bak</tt> directories from the search and skip those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
@@ -349,11 +349,11 @@ sudo make install # install as desired
 <dt>-S</dt>                     <dd>when searching recursively, follow symlinks to files, but not to directories</dd>
 <dt>-.</dt>                     <dd>include hidden files in searches (normally, hidden files are excluded from searching)</dd>
 <dt>-tc,cpp</dt>                <dd>only search C and C++ source code files, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
+<dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> using only filename extension globs</dd>
 <dt>-g"*.hpp,*.cpp"</dt>        <dd>only search <tt>.hpp</tt> and <tt>.cpp</tt> files with the specified glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>-g"src/"</dt>               <dd>only recursively search <tt>src</tt> directories with the specified glob pattern ending in a <tt>/</tt> for directories, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>-g"^*.txt,^bak/"</dt>       <dd>do not search <tt>.txt</tt> files and <tt>bak</tt> directories with the specified negated glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>--iglob="^*.txt,^bak/"</dt> <dd>same as above, but with case-insensitive glob matching (option <tt>--glob-ignore-case</tt> applies to all globs)</dd>
-<dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> using only filename extension globs</dd>
 <dt>-K10,99</dt>                <dd>only search files from line 10 up to and including line 99</dd>
 <dt>-m1</dt>                    <dd>output only the first matching line</dd>
 <dt>-m2,9</dt>                  <dd>only search files with at least two matching lines and output up to and including 9 matching lines</dd>
@@ -361,7 +361,7 @@ sudo make install # install as desired
 <dt>-3</dt>                     <dd>recursively search up to three directory levels deep, i.e. <tt><i>one/</i></tt>, <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
 <dt>-2-3</dt>                   <dd>only recursively search sub-directories at two to three levels deep, i.e. <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
 <dt>--ignore-files</dt>         <dd>obey .gitignore file exclusions in recursive searches</dd>
-<dt>--exclude-fs=<i>"PATH"</i></dt>
+<dt>--exclude-fs=<i>PATH</i></dt>
                                 <dd>do not search the file system associated with <tt><i>PATH</i></tt> (a mounted directory or mount point)</dd>
 <dt>--exclude-from=<i>FILE</i></dt>
                                 <dd>do not search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
@@ -416,10 +416,10 @@ sudo make install # install as desired
 <a name="help"><h3>Getting help</h3></a>
 
 <dl>
+<dt>--help <i>WHAT</i></dt>     <dd>display help on <tt><i>WHAT</i></tt> you are looking for</dd>
 <dt>--help count</dt>           <dd>display help on option <tt>-c</tt> (<tt>--count</tt>) and <tt>-m [MIN,][MAX]</tt> (<tt>--min-count=MIN</tt>, <tt>--max-count=MAX</tt>)</dd>
 <dt>--help regex</dt>           <dd>display help with details on regex patterns</dd>
 <dt>--help globs</dt>           <dd>display help with details on glob patterns, e.g. for option <tt>-g</tt></dd>
-<dt>--help <i>WHAT</i></dt>     <dd>display help on <tt><i>WHAT</i></tt> you are looking for</dd>
 </dl>
 
 <a name="regex"><h2>Regex</h2></a>
@@ -544,8 +544,8 @@ sudo make install # install as desired
 <li>when a glob pattern is used with a command-line option such as <tt>-g"*.cpp"</tt>, you must quote the glob <tt>"*.cpp"</tt> to prevent the shell from expanding the glob
 <li>a glob pattern starting with a <tt>^</tt> or a <tt>!</tt> inverts the matching: instead of matching a filename or directory name, the directory or file is ignored and excluded from the search
 <li>when a glob pattern contains a <tt>/</tt>, the full pathname is matched, otherwise, the basename of a file or directory is matched in recursive searches
-<li>when a glob pattern begins with a <tt>/</tt>, files and directories are matched at the working directory, not recursively
-<li>when a glob pattern ends with a <tt>/</tt>, only directories are matched, not files
+<li>when a glob pattern starts with a <tt>/</tt>, the glob matches files and directories from the working directory path, not recursively
+<li>when a glob pattern ends with a <tt>/</tt>, the glob matches directories, not files
 </ol>
 
 <a name="types"><h2>File types</h2></a>
@@ -889,7 +889,7 @@ sudo make install # install as desired
 
 <p>License: BSD-3-Clause
 
-<p>Last updated: Wed Nov 1, 2023
+<p>Last updated: Wed Nov 2, 2023
 
 <hr>
 
