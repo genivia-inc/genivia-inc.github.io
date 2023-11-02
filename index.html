@@ -155,7 +155,7 @@ sudo make install # install as desired
 <p align=center>how fast is ugrep?
 <ul>
 <li><a target="_blank" href="https://github.com/Genivia/ugrep-benchmarks">Benchmarks</a>: ugrep is one of the fastest grep
-<li>New <a target="_blank" href="https://github.com/Genivia/ugrep-indexer">file indexer</a> to speed up cold search
+<li>New <a target="_blank" href="https://github.com/Genivia/ugrep-indexer">file indexer</a> to speed up cold FS search
 </ul>
 </div>
 <div class="img-with-text">
@@ -169,10 +169,10 @@ sudo make install # install as desired
 <p>Search for patterns in files with the <code>ug</code> and <code>ugrep</code> commands, where
 
 <dl>
-<dt>ug</dt>                     <dd>searches files using a .ugrep configuration file with your search preferences located in the working directory or in your home directory;<br>the <code>ug+</code> command also searches pdfs, documents, e-books, image metadata</dd>
+<dt>ug</dt>                     <dd>uses a .ugrep configuration file with your preferences located in the working directory or in your home directory;<br>the <code>ug+</code> command also searches pdfs, documents, e-books, image metadata</dd>
 <dt>ug --save-config <i>OPTIONS</i></dt>
                                 <dd>saves a new .ugrep file in the working directory using the current .ugrep configuration and by copying the relevant <tt><i>OPTIONS</i></tt> (if any) to the new .ugrep file</dd>
-<dt>ugrep</dt>                  <dd>same as <code>ug</code>, but does not use a .ugrep configuration file, e.g. <code>ugrep</code> works best in shell scripts;<br>the <code>ugrep+</code> command also searches pdfs, documents, e-books, image metadata</dd>
+<dt>ugrep</dt>                  <dd>same as <code>ug</code>, but does not use a .ugrep configuration file: <code>ugrep</code> works best in shell scripts;<br>the <code>ugrep+</code> command also searches pdfs, documents, e-books, image metadata</dd>
 </dl>
 
 <p>Examples:
@@ -214,20 +214,20 @@ sudo make install # install as desired
 <dt>-L</dt>                     <dd>list non-matching files</dd>
 <dt>-c</dt>                     <dd>count matching lines in files</dd>
 <dt>-cv</dt>                    <dd>count non-matching lines in files; option <tt>-v</tt> inverts pattern matching</dd>
-<dt>-cu</dt>                    <dd>count all pattern matches in files by ungrouping multiple matches from lines (option <tt>-u</tt>)</dd>
-<dt>-cm1,</dt>                  <dd>count matching lines in files with at least one match, skip files with zero matches (include the comma in <tt>-m1,</tt>)</dd>
+<dt>-cu</dt>                    <dd>count all pattern matches by ungrouping multiple matches from lines (option <tt>-u</tt>)</dd>
+<dt>-cm1,</dt>                  <dd>count matching lines in files, but skip files with zero matches (include the comma in <tt>-m1,</tt>)</dd>
 </dl>
 
 <ol>
 <li>if you never want <tt>-c</tt> to output zero match counts, then add <tt>min-count=1</tt> to your ~/.ugrep file (outputing zero match counts is a GNU grep behavior)
-<li>to disable tree-based listings, specify option <tt>--no-tree</tt> or permanently add <tt>no-tree</tt> to your ~/.ugrep file
+<li>to disable directory tree-based listings, specify <tt>--no-tree</tt> or permanently add <tt>no-tree</tt> to your ~/.ugrep file
 <li>listings are sorted by name; to sort by date/time or by size, specify <tt>--sort=changed</tt> or <tt>--sort=size</tt>
 </ol>
 
 <a name="match"><h3>Displaying matches, match info, match context</h3></a>
 
 <dl>
-<dt>-H</dt>                     <dd>always display the filename (normally, a filename is not displayed when searching a single specified file)</dd>
+<dt>-H</dt>                     <dd>always display the filename; normally, a filename is not displayed when searching a single specified file</dd>
 <dt>-n</dt>                     <dd>output the line number of a match</dd>
 <dt>-k</dt>                     <dd>output the column number of a match</dd>
 <dt>-b</dt>                     <dd>output the byte offset of a match</dd>
@@ -236,7 +236,7 @@ sudo make install # install as desired
 <dt>-y</dt>                     <dd>output matching lines and the rest of the file as context</dd>
 <dt>-o</dt>                     <dd>output only the matching part</dd>
 <dt>-o -C20</dt>                <dd>output only the matching part with the matching line as context before (option <tt>-B20</tt>) and after (option <tt>-A20</tt>) to fit 40 characters</dd>
-<dt>--width=40</dt>             <dd>truncate lines to 40 characters</dd>
+<dt>--width=40</dt>             <dd>truncate lines to 40 characters in the output</dd>
 </dl>
 
 <a name="modes"><h3>Pattern matching modes</h3></a>
@@ -245,16 +245,17 @@ sudo make install # install as desired
 <dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code>
 <dt>-G</dt>                     <dd>BRE pattern syntax, like GNU <code>grep</code> or <code>grep -G</code>
 <dt>-P</dt>                     <dd>Perl regex pattern search (Unicode) with PCRE, see also <a href="#regex"><tt>ug --help regex</tt></a></dd>
-<dt>-U</dt>                     <dd>search with non-Unicode ASCII and binary patterns, e.g. pattern <tt>\xa3</tt> is a byte, not the Unicode code point U+00a3</dd>
+<dt>-U</dt>                     <dd>search with non-Unicode ASCII and binary patterns, for example pattern <tt>\xa3</tt> is a byte, not the Unicode code point U+00a3</dd>
 <dt>-Y</dt>                     <dd>permit empty matches like GNU grep; empty-matching patterns such as <tt>x*y*z*</tt> match all lines instead of returning useful matches</dd>
 <dt>-i</dt>                     <dd>ignore case in matching patterns</dd>
 <dt>-j</dt>                     <dd>smart ignore case, enables <tt>-i</tt> when patterns are specified in lower case</dd>
 <dt>-w</dt>                     <dd>patterns must match as words and not be part of words</dd>
 <dt>-x</dt>                     <dd>patterns must match whole lines from start to end</dd>
 <dt>-v</dt>                     <dd>invert pattern matching; output lines that do not match</dd>
-<dt>-e <i>PATTERN</i></dt>      <dd>specify an additional <tt><i>PATTERN</i></tt> to search</dd>
+<dt>-e <i>PATTERN</i></dt>      <dd>explicitly specify <tt><i>PATTERN</i></tt>; <tt>-e</tt> is used to specify multiple patterns and when specifying a pattern after <tt><i>FILE</i></tt></dd>
+<dt>-N <i>PATTERN</i></dt>      <dd>do not match <tt><i>PATTERN</i></tt> when combined with <tt>-e</tt>; for example <tt>-e "[0-9]+" -N "0+"</tt> matches nonzero numbers</dd>
 <dt>-f <i>FILE</i></dt>         <dd>read (additional) patterns from <tt><i>FILE</i></tt></dd>
-<dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read ugrep built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns/cpp/names</tt>)</dd>
+<dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns/cpp/names</tt>)</dd>
 </dl>
 
 <a name="TUI"><h3>TUI interactive query mode</h3></a>
@@ -308,12 +309,12 @@ sudo make install # install as desired
 <dt>-Z~2</dt>                   <dd>approximately match patterns up to two replaced characters in the input</dd>
 <dt>-Z+-2</dt>                  <dd>approximately match patterns up to two extra or missing characters in the input</dd>
 <dt>-c -Z</dt>                  <dd>count approximate matches in files</dd>
-<dt>-c -Zbest2</dt>             <dd>count <tt>-Z2</tt> approximate matches in files, but only the best matches per file (i.e. if a file has at least one exact match, then only exact matches are counted)</dd>
+<dt>-c -Zbest2</dt>             <dd>count <tt>-Z2</tt> approximate matches in files, but only the best matches per file, i.e. if a file has at least one exact match, then only exact matches are counted</dd>
 <dt>-c -Zbest2 --sort=best</dt> <dd>count the best approximate matches in files and sort by best matching files per directory</dd>
 </dl>
 
 <ol>
-<li>the first characters specified in the search pattern always match; to approximately match the first character(s), replace it with a <tt>.</tt> or <tt>.?</tt>
+<li>the first character or characters that make up a pattern always match; to approximately match the first character(s), replace it with a <tt>.</tt> or <tt>.?</tt>
 <li>no whitespace may be given between <tt>-Z</tt> and its argument
 </ol>
 
@@ -331,13 +332,13 @@ sudo make install # install as desired
 
 <dl>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
-<dt>-W</dt>                     <dd>hexdump the binary matches in files, keeping text matches as is</dd>
+<dt>-W</dt>                     <dd>hexdump the binary matches, keeping text matches as is</dd>
 <dt>-X</dt>                     <dd>hexdump all matches</dd>
 <dt>-UX</dt>                    <dd>hexdump with 8-bit binary patterns instead of Unicode character-based patterns (option <tt>-U</tt>)</dd>
 <dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns and output a <tt>*</tt> for all hex lines that are identical to the previous hex line (a)</dd>
 <dt>--hexdump=4ch</dt>          <dd>hexdump in 4 columns, no character column (c), no hex spacing (h)</dd>
 <dt>--hexdump=4aC3</dt>         <dd>hexdump in 4 columns and 3 lines of hexdump context before and after (C3 is B3A3)</dd>
-<dt>-Dread</dt>                 <dd>also read special devices to search them (danger to get stuck on a non-responsive device!)</dd>
+<dt>-Dread</dt>                 <dd>also read special devices to search them; danger: can get stuck on a non-responsive device!</dd>
 </dl>
 
 <a name="constraints"><h3>Exclusions and inclusions</h3></a>
@@ -392,14 +393,14 @@ sudo make install # install as desired
 <a name="pretty"><h3>Pretty things, more or less</h3></a>
 
 <dl>
-<dt>--pretty</dt>               <dd>enables <tt>-n</tt>, <tt>-T</tt>, <tt>--tree</tt>, <tt>--heading</tt>, <tt>--break</tt>when output is sent to a terminal</dd>
-<dt>--tree</dt>                 <dd>lists files in a tree-like layout</dd>
+<dt>--pretty</dt>               <dd>enables <tt>-n</tt>, <tt>-T</tt>, <tt>--color</tt>, <tt>--tree</tt>, <tt>--heading</tt>, <tt>--break</tt> when output is sent to a terminal</dd>
+<dt>--tree</dt>                 <dd>lists files in a directory tree for options <tt>-l</tt> and <tt>-c</tt></dd>
 <dt>--heading</dt>              <dd>display file names as headings</dd>
 <dt>--break</dt>                <dd>output an empty line between matching files</dd>
 <dt>-T</dt>                     <dd>tabbed line and column numbers to add spacing</dd>
 <dt>--color</dt>                <dd>colorize the output when displayed on a terminal (default)</dd>
-<dt>--colors=<i>SPEC</i></dt>   <dd>specify a color pallette <tt><i>SPEC</i></tt>, see also <a href="#colors"><tt>ug --help colors</tt></a></dd>
-<dt>--hyperlink</dt>            <dd>embeds hyperlinks in the output when output is displayed on a terminal</dd>
+<dt>--colors=<i>COLORS</i></dt> <dd>specify a color pallette <tt><i>COLORS</i></tt>, see also <a href="#colors"><tt>ug --help colors</tt></a></dd>
+<dt>--hyperlink</dt>            <dd>embeds hyperlinks in the output when output is sent to a terminal</dd>
 <dt>--pager</dt>                <dd>output to a pager, default is <tt>more</tt> or <tt>less</tt></dd>
 <dt>--pager=<i>COMMAND</i></dt> <dd>output to <tt><i>COMMAND</i></tt> as a pager</dd>
 <dt>--tag</dt>                  <dd>output matches as <tt>___<i>match</i>___</tt> instead of colorizing them, where <tt>--tag=<i>TAG,TAG</i></tt> outputs <tt><i>TAGmatchTAG</i></tt></dd>
@@ -732,7 +733,7 @@ sudo make install # install as desired
 <tr><td><tt>qb=</tt></td><td>TUI regex braces</td></tr>
 </table>
 
-<p>Multiple <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters">SGR codes</a> may be specified for a single parameter when separated by a semicolon, e.g. <tt>--colors="mt=1;31"</tt> specifies bright red.  For quick and easy color specification, the corresponding single-letter color names may be used in place of numeric SGR codes and semicolons are not required to separate color names, e.g. <tt>--colors=mt=hr</tt> specifies bright red.  Color letters and numeric codes may be mixed.  The following SGR codes have corresponding letter designations:
+<p>Multiple <a href="https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters">SGR codes</a> may be specified for a single parameter when separated by a semicolon, for example <tt>--colors="mt=1;31"</tt> specifies bright red.  For quick and easy color specification, the corresponding single-letter color names may be used in place of numeric SGR codes and semicolons are not required to separate color names, for example <tt>--colors=mt=hr</tt> specifies bright red.  Color letters and numeric codes may be mixed.  The following SGR codes have corresponding letter designations:
 
 <table align=center>
 <tr><td>0   </td><td><tt>n</tt></td><td>normal font and color     </td><td>2   </td><td><tt>f </tt></td><td>faint (not widely supported)</td></tr>
