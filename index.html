@@ -133,8 +133,8 @@
 <ul>
 <li>MacOS: <code><a href="https://formulae.brew.sh/formula/ugrep">brew</a> install ugrep</code>
 <li>Windows: <code><a href="https://learn.microsoft.com/en-us/windows/package-manager/">winget</a> install Genivia.ugrep</code>
-<li>Windows <code><a href="https://community.chocolatey.org/packages/ugrep">choco</a> install ugrep</code>
-<li>Windows <code><a href="https://scoop.sh">scoop</a> install ugrep</code>
+<li>Windows: <code><a href="https://community.chocolatey.org/packages/ugrep">choco</a> install ugrep</code>
+<li>Windows: <code><a href="https://scoop.sh">scoop</a> install ugrep</code>
 <li>Alpine: <code>apk add ugrep ugrep-doc</code>
 <li>Android Termux: <code>pkg install ugrep</code>
 <li>Arch: <code>pacman -S ugrep</code>
@@ -155,7 +155,7 @@ sudo make install # install as desired
 <p align=center>how fast is ugrep?
 <ul>
 <li><a target="_blank" href="https://github.com/Genivia/ugrep-benchmarks">Benchmarks</a>: ugrep is one of the fastest grep
-<li>New: <a target="_blank" href="https://github.com/Genivia/ugrep-indexer">file indexer</a> to speed up cold FS search
+<li>New <a target="_blank" href="https://github.com/Genivia/ugrep-indexer">file indexer</a> to speed up cold FS search
 </ul>
 </div>
 <div class="img-with-text">
@@ -189,7 +189,7 @@ sudo make install # install as desired
 <dt>ug -R <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files and directories</dd>
 <dt>ug -r -S <i>PATTERN</i> <i>DIR</i></dt>
-                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files only</dd>
+                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files, but not to directories</dd>
 <dt>ug -3 <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt>, but up to 3 levels only, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
 </dl>
@@ -227,7 +227,7 @@ sudo make install # install as desired
 <a name="match"><h3>Displaying matches, match info, match context</h3></a>
 
 <dl>
-<dt>-H</dt>                     <dd>always display the filename; normally, a filename is not displayed when searching a single specified file</dd>
+<dt>-H</dt>                     <dd>always display the filename (normally, a filename is not displayed when searching a single specified file)</dd>
 <dt>-n</dt>                     <dd>output the line number of a match</dd>
 <dt>-k</dt>                     <dd>output the column number of a match</dd>
 <dt>-b</dt>                     <dd>output the byte offset of a match</dd>
@@ -252,7 +252,7 @@ sudo make install # install as desired
 <dt>-w</dt>                     <dd>patterns must match as words and not be part of words</dd>
 <dt>-x</dt>                     <dd>patterns must match whole lines from start to end</dd>
 <dt>-v</dt>                     <dd>invert pattern matching; output lines that do not match</dd>
-<dt>-e <i>PATTERN</i></dt>      <dd>explicitly specify <tt><i>PATTERN</i></tt>; <tt>-e</tt> is used to specify multiple patterns and when specifying a pattern after <tt><i>FILE</i></tt></dd>
+<dt>-e <i>PATTERN</i></dt>      <dd>explicitly specify <tt><i>PATTERN</i></tt>; <tt>-e</tt> is used to specify multiple patterns and when specifying a pattern after the <tt><i>FILE</i></tt> argument</dd>
 <dt>-N <i>PATTERN</i></dt>      <dd>do not match <tt><i>PATTERN</i></tt> when combined with <tt>-e</tt>; for example <tt>-e "[0-9]+" -N "0+"</tt> matches nonzero numbers</dd>
 <dt>-f <i>FILE</i></dt>         <dd>read (additional) patterns from <tt><i>FILE</i></tt></dd>
 <dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns/cpp/names</tt>)</dd>
@@ -296,7 +296,7 @@ sudo make install # install as desired
 <li>white space followed by a <tt>-</tt> is a logical <tt>NOT</tt> (taking highest precedence)
 <li>quote strings in a pattern with <tt>"</tt> to match literally
 <li>group patterns with parentheses
-<li>the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when properly spaced, e.g. <tt>-% "foo AND NOT (bar OR baz)"</tt>
+<li>the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when spaced apart, for example <tt>-% "foo AND NOT (bar OR baz)"</tt>
 </ol>
 
 <a name="fuzzy"><h3>Fuzzy search</h3></a>
@@ -349,7 +349,7 @@ sudo make install # install as desired
 <dt>-S</dt>                     <dd>when searching recursively, follow symlinks to files, but not to directories</dd>
 <dt>-.</dt>                     <dd>include hidden files in searches (normally, hidden files are excluded from searching)</dd>
 <dt>-tc,cpp</dt>                <dd>only search C and C++ source code files, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
-<dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> using only filename extension globs</dd>
+<dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> with filename extension globs to search <tt>.hpp</tt> and <tt>.cpp</tt> files</dd>
 <dt>-g"*.hpp,*.cpp"</dt>        <dd>only search <tt>.hpp</tt> and <tt>.cpp</tt> files with the specified glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>-g"src/"</dt>               <dd>only recursively search <tt>src</tt> directories with the specified glob pattern ending in a <tt>/</tt> for directories, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>-g"^*.txt,^bak/"</dt>       <dd>do not search <tt>.txt</tt> files and <tt>bak</tt> directories with the specified negated glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
@@ -397,7 +397,7 @@ sudo make install # install as desired
 <dt>--tree</dt>                 <dd>lists files in a directory tree for options <tt>-l</tt> and <tt>-c</tt></dd>
 <dt>--heading</dt>              <dd>display file names as headings</dd>
 <dt>--break</dt>                <dd>output an empty line between matching files</dd>
-<dt>-T</dt>                     <dd>tabbed line and column numbers to add spacing</dd>
+<dt>-T</dt>                     <dd>tabulate line and column numbers to add spacing</dd>
 <dt>--color</dt>                <dd>colorize the output when displayed on a terminal (default)</dd>
 <dt>--colors=<i>COLORS</i></dt> <dd>specify a color pallette <tt><i>COLORS</i></tt>, see also <a href="#colors"><tt>ug --help colors</tt></a></dd>
 <dt>--hyperlink</dt>            <dd>embeds hyperlinks in the output when output is sent to a terminal</dd>
@@ -671,6 +671,7 @@ sudo make install # install as desired
 <tr><td><tt>            </tt></td><td> </td><td><tt>-M '&lt;\?xml '</tt></td></tr>
 <tr><td><tt>        yacc</tt></td><td>=</td><td><tt>-O y</tt></td></tr>
 <tr><td><tt>        yaml</tt></td><td>=</td><td><tt>-O yaml,yml</tt></td></tr>
+<tr><td><tt>         zig</tt></td><td>=</td><td><tt>-O zig,zon</tt></td></tr>
 </table>
 
 <a name="filter"><h2>Filters</h2></a>
@@ -889,7 +890,7 @@ sudo make install # install as desired
 
 <p>License: BSD-3-Clause
 
-<p>Last updated: Wed Nov 2, 2023
+<p>Last updated: Wed Nov 6, 2023
 
 <hr>
 
