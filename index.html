@@ -279,10 +279,10 @@ sudo make install # install as desired
 <a name="Google"><h3>Googling files</h3></a>
 
 <dl>
-<dt>-% "foo bar"</dt>           <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
-<dt>-F -% "*foo* bar?"</dt>     <dd>search files for lines matching both fixed strings (<tt>-F</tt>) <tt>*foo*</tt> and <tt>bar?</tt> anywhere on the same line</dd>
+<dt>-% "foo bar"</dt>           <dd>search files for lines matching both regex patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
+<dt>-F -% "*foo* bar?"</dt>     <dd>search files for lines matching both fixed (<tt>-F</tt>) strings <tt>*foo*</tt> and <tt>bar?</tt> anywhere on the same line</dd>
 <dt>-% "foo -bar"</dt>          <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
-<dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> (<tt>bar</tt> or <tt>baz</tt>) anywhere on the same line</dd>
+<dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> (<tt>bar OR baz</tt>) anywhere on the same line</dd>
 <dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
 <dt>-% "foo -bar -baz"</dt>     <dd>same as above (normalized form)</dd>
 <dt>-% 'foo "-bar"'</dt>        <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>-bar</tt>, where <tt>"-bar"</tt> is quoted to match literally "as is"</dd>
