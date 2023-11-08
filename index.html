@@ -245,7 +245,7 @@ sudo make install # install as desired
 <dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code>
 <dt>-G</dt>                     <dd>BRE pattern syntax, like GNU <code>grep</code> or <code>grep -G</code>
 <dt>-P</dt>                     <dd>Perl regex pattern search (Unicode) with PCRE, see also <a href="#regex"><tt>ug --help regex</tt></a></dd>
-<dt>-U</dt>                     <dd>search with non-Unicode ASCII and binary patterns, for example pattern <tt>\xa3</tt> is a byte, not the Unicode code point U+00a3</dd>
+<dt>-U</dt>                     <dd>search with non-Unicode ASCII and binary patterns, for example pattern <tt>\xa3</tt> matches a byte, not the Unicode code point U+00a3</dd>
 <dt>-Y</dt>                     <dd>permit empty matches like GNU grep; empty-matching patterns such as <tt>x*y*z*</tt> match all lines instead of returning useful matches</dd>
 <dt>-i</dt>                     <dd>ignore case in matching patterns</dd>
 <dt>-j</dt>                     <dd>smart ignore case, enables <tt>-i</tt> when patterns are specified in lower case</dd>
@@ -279,14 +279,15 @@ sudo make install # install as desired
 <a name="Google"><h3>Googling files</h3></a>
 
 <dl>
-<dt>-% "foo bar"</dt>           <dd>search files for lines matching both <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
-<dt>-% "foo -bar"</dt>          <dd>search files for lines matching <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
-<dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both <tt>foo</tt> and <tt>bar|baz</tt> (<tt>bar</tt> or <tt>baz</tt>) anywhere on the same line</dd>
-<dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
+<dt>-% "foo bar"</dt>           <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
+<dt>-F -% "*foo* bar?"</dt>     <dd>search files for lines matching both fixed strings (<tt>-F</tt>) <tt>*foo*</tt> and <tt>bar?</tt> anywhere on the same line</dd>
+<dt>-% "foo -bar"</dt>          <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
+<dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> (<tt>bar</tt> or <tt>baz</tt>) anywhere on the same line</dd>
+<dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
 <dt>-% "foo -bar -baz"</dt>     <dd>same as above (normalized form)</dd>
-<dt>-% 'foo "-bar"'</dt>        <dd>search files for lines matching both <tt>foo</tt> and <tt>-bar</tt>, where <tt>"-bar"</tt> is quoted to match "as is"</dd>
-<dt>--files -% "foo bar"</dt>   <dd>find files matching both <tt>foo</tt> and <tt>bar</tt> anywhere in the same file</dd>
-<dt>--files -% "foo -bar"</dt>  <dd>find files matching <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file</dd>
+<dt>-% 'foo "-bar"'</dt>        <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>-bar</tt>, where <tt>"-bar"</tt> is quoted to match literally "as is"</dd>
+<dt>--files -% "foo bar"</dt>   <dd>find files matching both patterns <tt>foo</tt> and <tt>bar</tt> anywhere in the same file</dd>
+<dt>--files -% "foo -bar"</dt>  <dd>find files matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file</dd>
 </dl>
 
 <ol>
