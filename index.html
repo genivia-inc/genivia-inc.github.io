@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8"/>
-  <meta name="description" content="The official ugrep file pattern searcher -- more powerful, ultra fast, user-friendly, compatible grep replacement"/>
-  <meta name="keywords" content="ugrep, search, regex, pattern, ack, grep, ripgrep, silver searcher, alternative, replacement"/>
+  <meta name="description" content="The official ugrep file pattern searcher -- a more powerful, ultra fast, user-friendly, compatible grep replacement"/>
+  <meta name="keywords" content="ugrep manual, search, regex, pattern, ack, grep, ripgrep, silver searcher, grep compatible, grep alternative, grep replacement, file search, file indexing, zip search, tar search, tarball search, gzip search"/>
   <meta name="author" content="Robert A. van Engelen, Genivia Inc">
   <title>The ugrep file pattern searcher</title>
     <style>
@@ -160,7 +160,7 @@ sudo make install # install as desired
 </div>
 <div class="img-with-text">
 <img src="ug.png" alt="ugrep screenshot with TUI"/>
-<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/tar/pax/cpio <a href="#zip">archives, tarballs and compressed</a> gz/bz/bz2/lzma/xz/lz4/zstd/Z files, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.
+<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/tar/pax/cpio <a href="#zip">archives, tarballs and compressed</a> gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli files, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.
 </div>
 </div>
 
@@ -266,8 +266,8 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<li>any additional options can be specified on the command line to start the TUI with these options enabled
-<li><em>ALT-key</em> toggles the option letter corresponding to the key press (for upper case use <em>SHIFT-ALT-key</em>), for example <em>ALT-L</em> lists matching files (option <tt>-l</tt>) and <em>SHIFT-ALT-C</em> shows context (option <tt>-C3</tt>)
+<li>additional options can be specified on the command line to start the TUI with these options
+<li><em>ALT-key</em> toggles the option letter corresponding to the key press, for example <em>ALT-L</em> lists matching files (option <tt>-l</tt>) and <em>SHIFT-ALT-C</em> shows context (option <tt>-C3</tt>)
 <li>navigate to directories and files with <em>Tab</em>, then <em>SHIFT-Tab</em> to go back and restore previous options and patterns (if changed)
 <li>use the cursor keys, <em>PgUp</em>, <em>PgDn</em> and the scroll wheel to scroll the search results
 <li><em>CTRL-S</em> jumps to the next directory or file in the results, <em>CTRL-W</em> jumps back
@@ -280,7 +280,7 @@ sudo make install # install as desired
 
 <dl>
 <dt>-% "foo bar"</dt>           <dd>search files for lines matching both regex patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
-<dt>-F -% "*foo* bar?"</dt>     <dd>search files for lines matching both fixed (<tt>-F</tt>) strings <tt>*foo*</tt> and <tt>bar?</tt> anywhere on the same line</dd>
+<dt>-F -% "*foo* bar?"</dt>     <dd>search files for lines matching both fixed (option <tt>-F</tt>) strings <tt>*foo*</tt> and <tt>bar?</tt> anywhere on the same line</dd>
 <dt>-% "foo -bar"</dt>          <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
 <dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> (<tt>bar OR baz</tt>) anywhere on the same line</dd>
 <dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
@@ -298,6 +298,7 @@ sudo make install # install as desired
 <li>quote strings in a pattern with <tt>"</tt> to match literally
 <li>group patterns with parentheses
 <li>the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when spaced apart, for example <tt>-% "foo AND NOT (bar OR baz)"</tt>
+<li>the default search mode is <tt>--lines</tt> to match lines; option <tt>--files</tt> switches the search mode to find files<!-- (also <tt>-%%</tt> specifies both options <tt>--files -%</tt> since 4.3.2) -->
 </ol>
 
 <a name="fuzzy"><h3>Fuzzy search</h3></a>
@@ -322,7 +323,7 @@ sudo make install # install as desired
 <a name="zip"><h3>Archives and compressed files</h3></a>
 
 <dl>
-<dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and compressed files gz/bz/bz2/lzma/xz/lz4/zstd/Z</dd>
+<dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli compressed files</dd>
 <dt>-z --zmax=2</dt>            <dd>also search archives, tarballs and compressed files stored within archives (max 2 levels)</dd>
 <dt>-z -tc,cpp</dt>             <dd>search C and C++ source code files and also those in archives, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-z -g"*.txt,*.md"</dt>      <dd>search files matching the globs <tt>*.txt</tt> and <tt>*.md</tt> and also those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
@@ -336,9 +337,9 @@ sudo make install # install as desired
 <dt>-W</dt>                     <dd>hexdump the binary matches, keeping text matches as is</dd>
 <dt>-X</dt>                     <dd>hexdump all matches</dd>
 <dt>-UX</dt>                    <dd>hexdump with 8-bit binary patterns instead of Unicode character-based patterns (option <tt>-U</tt>)</dd>
-<dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns and output a <tt>*</tt> for all hex lines that are identical to the previous hex line (a)</dd>
-<dt>--hexdump=4ch</dt>          <dd>hexdump in 4 columns, no character column (c), no hex spacing (h)</dd>
-<dt>--hexdump=4aC3</dt>         <dd>hexdump in 4 columns and 3 lines of hexdump context before and after (C3 is B3A3)</dd>
+<dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns and output a <tt>*</tt> for hex lines that are identical to the previous line (<tt>a</tt>)</dd>
+<dt>--hexdump=4ch</dt>          <dd>hexdump in 4 columns, no character column (<tt>c</tt>), no hex spacing (<tt>h</tt>)</dd>
+<dt>--hexdump=4aC3</dt>         <dd>hexdump in 4 columns with 3 hex lines of context before and after (<tt>C3</tt> or <tt>B3A3</tt>)</dd>
 <dt>-Dread</dt>                 <dd>also read special devices to search them; danger: can get stuck on a non-responsive device!</dd>
 </dl>
 
@@ -410,7 +411,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<li><code>ug</code> enables <tt>--pretty</tt> by default
+<li><code>ug</code> enables <tt>--pretty</tt> and <tt>--sort</tt> by default
 <li><code>ugrep</code> only enables <tt>--color</tt> by default
 </ol>
 
@@ -891,7 +892,7 @@ sudo make install # install as desired
 
 <p>License: BSD-3-Clause
 
-<p>Last updated: Wed Nov 6, 2023
+<p>Last updated: Wed Nov 11, 2023
 
 <hr>
 
