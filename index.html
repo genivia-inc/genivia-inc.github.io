@@ -681,6 +681,8 @@ sudo make install # install as desired
 <p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified command may be included.  The special option <tt>%</tt> is expanded into the pathname of the file to search.  Filters are applied first when the filename extension matches one of the specified filters, then the output is searched.  Some examples:
 
 <dl>
+<dt>--filter="7z:7z x -so %" -W</dt>
+                                <dd>search 7zip files as one piece; specify option <tt>-W</tt> to permit binaries in the archive</dd>
 <dt>--filter="pdf:pdftotext % -"</dt>
                                 <dd>search PDF files, like <code>ug+</code></dd>
 <dt>--filter="doc:antiword %"</dt>
