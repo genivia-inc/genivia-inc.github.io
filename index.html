@@ -234,7 +234,7 @@ sudo make install # install as desired
 <dt>-b</dt>                     <dd>output the byte offset of a match</dd>
 <dt>-u</dt>                     <dd>ungroup multiple matches from lines to count and output each match separately</dd>
 <dt>-C3</dt>                    <dd>output matching lines with 3 lines as context before (option <tt>-B3</tt>) and after (option <tt>-A3</tt>)</dd>
-<dt>-y</dt>                     <dd>output matching lines and the rest of the file as context</dd>
+<dt>-y</dt>                     <dd>output matching lines with the rest of the file as context (<tt>--any-line</tt> or <tt>--passthru</tt>)</dd>
 <dt>-o</dt>                     <dd>output only the matching part</dd>
 <dt>-o -C20</dt>                <dd>output only the matching part with the matching line as context before (option <tt>-B20</tt>) and after (option <tt>-A20</tt>) to fit 40 characters</dd>
 <dt>--width=40</dt>             <dd>truncate lines to 40 characters in the output</dd>
@@ -850,10 +850,10 @@ sudo make install # install as desired
 <tr><td><tt>%[NAME1|NAME2|...]b  </tt></td><td>the byte offset of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
 <tr><td><tt>%[NAME1|NAME2|...]e  </tt></td><td>the ending byte offset of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
 <tr><td><tt>%[NAME1|NAME2|...]d  </tt></td><td>the byte length of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%G                   </tt></td><td>list of group capture indices/names of the match (see note)</td></tr>
-<tr><td><tt>%[TEXT1|TEXT2|...]G  </tt></td><td>list of <tt>TEXT</tt> indexed by group capture indices that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%g                   </tt></td><td>the group capture index of the match or 1 (see note)</td></tr>
-<tr><td><tt>%[TEXT1|TEXT2|...]g  </tt></td><td>the first <tt>TEXT</tt> indexed by the first group capture index that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%G                   </tt></td><td>all group capture indices/names of the match</td></tr>
+<tr><td><tt>%[TEXT1|TEXT2|...]G  </tt></td><td>all <tt>TEXT</tt> indexed by group capture indices that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%g                   </tt></td><td>the group capture index of the match or 1</td></tr>
+<tr><td><tt>%[TEXT1|TEXT2|...]g  </tt></td><td>the <tt>TEXT</tt> indexed by the first group capture index that matched; requires option <tt>-P</tt></td></tr>
 <tr><td><tt>%%                   </tt></td><td>the percentage sign</td></tr>
 </table>
 
