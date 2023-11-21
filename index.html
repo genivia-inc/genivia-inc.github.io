@@ -505,17 +505,17 @@ sudo make install # install as desired
 <tr><td><tt>\B         </tt></td><td>non-word boundary</td></tr>
 <tr><td><tt>\&lt;      </tt></td><td>start of word boundary</td></tr>
 <tr><td><tt>\&gt;      </tt></td><td>end of word boundary</td></tr>
-<tr><td><tt>(?=...)    </tt></td><td>lookahead (-P)</td></tr>
-<tr><td><tt>(?!...)    </tt></td><td>negative lookahead (-P)</td></tr>
-<tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind (-P)</td></tr>
-<tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind (-P)</td></tr>
-<tr><td><tt>(...)                 </tt></td><td>capturing group (-P)</td></tr>
+<tr><td><tt>(?=...)    </tt></td><td>lookahead (<tt>-P</tt>)</td></tr>
+<tr><td><tt>(?!...)    </tt></td><td>negative lookahead (<tt>-P</tt>)</td></tr>
+<tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind (<tt>-P</tt>)</td></tr>
+<tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind (<tt>-P</tt>)</td></tr>
+<tr><td><tt>(...)                 </tt></td><td>capturing group (<tt>-P</tt>)</td></tr>
 <tr><td><tt>(...)                 </tt></td><td>non-capturing group</td></tr>
 <tr><td><tt>(?:...)               </tt></td><td>non-capturing group</td></tr>
-<tr><td><tt>(?&lt;<i>X</i>&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (-P)</td></tr>
-<tr><td><tt>\1                    </tt></td><td>matches group 1 (-P)</td></tr>
-<tr><td><tt>\g{10}                </tt></td><td>matches group 10 (-P)</td></tr>
-<tr><td><tt>\g{<i>X</i>}          </tt></td><td>matches group name <i>X</i> (-P)</td></tr>
+<tr><td><tt>(?&lt;<i>X</i>&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (<tt>-P</tt>)</td></tr>
+<tr><td><tt>\1                    </tt></td><td>matches group 1 (<tt>-P</tt>)</td></tr>
+<tr><td><tt>\g{10}                </tt></td><td>matches group 10 (<tt>-P</tt>)</td></tr>
+<tr><td><tt>\g{<i>X</i>}          </tt></td><td>matches group name <i>X</i> (<tt>-P</tt>)</td></tr>
 <tr><td><tt>(?#...)               </tt></td><td>comments <tt>...</tt> are ignored</td></tr>
 </table>
 </div>
@@ -523,7 +523,7 @@ sudo make install # install as desired
 </center>
 
 <ol>
-<li>(-P): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
+<li>(<tt>-P</tt>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
 <li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax (shown)
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
 </ol>
@@ -924,7 +924,7 @@ sudo make install # install as desired
 </table>
 </div>
 
-<p>Last updated: Wed Nov 16, 2023
+<p>Last updated: Wed Nov 20, 2023
 
 <hr>
 
