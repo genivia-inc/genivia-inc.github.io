@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="description" content="The official ugrep file pattern searcher -- a more powerful, ultra fast, user-friendly, compatible grep replacement"/>
-  <meta name="keywords" content="ugrep manual, search, regex, pattern, ack, grep, ripgrep, silver searcher, grep compatible, grep alternative, grep replacement, file search, file indexing, Google search files, fuzzy search, zip search, tar search, tarball search, gzip search"/>
+  <meta name="keywords" content="ugrep manual, regex, ack, grep, ripgrep, silver searcher, grep compatible, grep alternative, grep replacement, file search, file indexing, Google search files, fuzzy search, zip search, tar search, tarball search, gzip search"/>
   <meta name="author" content="Robert A. van Engelen, Genivia Inc">
   <title>The ugrep file pattern searcher</title>
     <style>
@@ -12,6 +12,7 @@
             font-family: "Times New Roman", Times, serif;
             background: white;
             color: black;
+            margin-top: 30px;
         }
         div {
             vertical-align: text-top;
@@ -30,11 +31,13 @@
             font-size: 2.4rem;
             color: #2f8d46;
             text-align: center;
+            margin-top: 5px;
         }
         h3 {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 1.5rem;
             color: #2f8d46;
+            margin-top: 5px;
         }
         p {
             font-size: 1.16rem;
@@ -65,7 +68,7 @@
             padding-top: 10px;
             padding-bottom: 10px;
             padding-left: 20px;
-            padding-right: 0px;
+            padding-right: 0;
             list-style-type: lower-roman;
         }
         ul {
@@ -106,7 +109,7 @@
         .img-with-text img {
             display: block;
             margin: 0 auto;
-            padding: 0px;
+            padding: 0;
             width: 100%;
         }
         .img-with-text {
@@ -119,10 +122,101 @@
             margin-right: 20px;
             margin-bottom: 10px;
         }
+        .menu {
+            display: block;
+            position: absolute;
+            z-index: 1;
+        }
+        .menu ul {
+            position: fixed;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background: black;
+        }
+        .menu li {
+            display: inline-block;
+            line-height: 24px;
+            text-align: center;
+            float: left;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0;
+            position: relative;
+        }
+        .menu a {
+            display: inline-block;
+            padding-left: 5px;
+            padding-right: 5px;
+            height: 24px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            color: white;
+            text-decoration: none
+        }
+        .menu a:hover {
+            background-color: gray;
+        }
+        .menu li ul {
+            display: none;
+            position: absolute;
+            top: 24px;
+            left: -20px;
+            width: 250px;
+            background-color: gray;
+            z-index: 2;
+        }
+        .menu li:hover ul {
+            display: block !important;
+        }
+        /* .menu li:active ul {
+            display: none; /* perhaps hides the menu after click? But doesn't */
+        } */
+        .menu li ul li {
+            clear: left;
+            display: inline-block;
+        }
+        .menu li ul a {
+            text-align: left;
+            width: 210px;
+        }
+        .menu li ul a:hover {
+            background-color: black;
+        }
     </style>
 </head>
 
 <body>
+
+<div class="menu">
+  <ul>
+    <li><a href="#commands">Commands</a></li>
+    <li><a href="#options">Options</a>
+      <ul>
+        <li><a href="#list">List matching files</a></li>
+        <li><a href="#match">Displaying matches</a></li>
+        <li><a href="#modes">Pattern matching modes</a></li>
+        <li><a href="#TUI">The interactive TUI</a></li>
+        <li><a href="#Google">Googling files</a></li>
+        <li><a href="#fuzzy">Fuzzy search</a></li>
+        <li><a href="#zip">Archives &amp; compressed files</a></li>
+        <li><a href="#binary">Binary files &amp; devices</a></li>
+        <li><a href="#constraints">Exclusions &amp; inclusions</a></li>
+        <li><a href="#formatting">Formatted output</a></li>
+        <li><a href="#pretty">Pretty things, more or less</a></li>
+        <li><a href="#help">Help</a></li>
+      </ul>
+    </li>
+    <li><a href="#regex">Regex</a></li>
+    <li><a href="#globs">Globs</a></li>
+    <li><a href="#types">Types</a></li>
+    <li><a href="#filter">Filters</a></li>
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#format">Formatting</a></li>
+  </ul>
+</div>
 
 <h1>The ugrep file pattern searcher</h1>
 
@@ -165,7 +259,8 @@ sudo make install # install as desired
 </div>
 </div>
 
-<a name="commands"><h2>Commands</h2></a>
+<a name="commands">&nbsp;</a>
+<h2>Commands</h2>
 
 <p>Search for patterns in files with the <code>ug</code> and <code>ugrep</code> commands, where
 
@@ -192,7 +287,7 @@ sudo make install # install as desired
 <dt>ug -r -S <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files, but not to directories</dd>
 <dt>ug -3 <i>PATTERN</i> <i>DIR</i></dt>
-                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt>, but up to 3 levels only, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
+                                <dd>recursively search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt>, but up to 3 levels, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
 <dt>ug --save-config --ignore-files --no-tree</dt>
                                 <dd>save a .ugrep configuration file that obeys <a href="#constraints">.gitignore file exclusions</a> in recursive searches and turns <a href="#pretty">directory tree output</a> off</dd>
 </dl>
@@ -206,11 +301,13 @@ sudo make install # install as desired
 <li>standard input is searched if standard input is not a terminal, such as a pipe redirect
 </ol>
 
-<a name="options"><h2>Options</h2></a>
+<a name="options">&nbsp;</a>
+<h2>Options</h2>
 
 <p>Ugrep is compatible with GNU grep and supports GNU grep command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Long options <tt>--<i>OPTION</i></tt> may start with <tt>--no-<i>OPTION</i></tt> to disable them.  All short options have long alternatives.  This page shows short options for the most part.  Specify <tt>--stats</tt> to output a final summary search report of options, patterns, and search statistics.
 
-<a name="list"><h3>List matching files</h3></a>
+<a name="list">&nbsp;</a>
+<h3>List matching files</h3>
 
 <dl>
 <dt>-l</dt>                     <dd>list matching files</dd>
@@ -227,7 +324,8 @@ sudo make install # install as desired
 <li>listings are sorted by name; to sort by date/time or by size, specify <tt>--sort=changed</tt> or <tt>--sort=size</tt>
 </ol>
 
-<a name="match"><h3>Displaying matches, match info, match context</h3></a>
+<a name="match">&nbsp;</a>
+<h3>Displaying matches, match info, match context</h3>
 
 <dl>
 <dt>-H</dt>                     <dd>always display the filename (normally, a filename is not displayed when searching a single specified file)</dd>
@@ -242,7 +340,8 @@ sudo make install # install as desired
 <dt>--width=40</dt>             <dd>truncate lines to 40 characters in the output</dd>
 </dl>
 
-<a name="modes"><h3>Pattern matching modes</h3></a>
+<a name="modes">&nbsp;</a>
+<h3>Pattern matching modes</h3>
 
 <dl>
 <dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code>
@@ -261,7 +360,8 @@ sudo make install # install as desired
 <dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns/cpp/names</tt>)</dd>
 </dl>
 
-<a name="TUI"><h3>TUI interactive query mode</h3></a>
+<a name="TUI">&nbsp;</a>
+<h3>The interactive TUI</h3>
 
 <dl>
 <dt>-Q</dt>                     <dd>start TUI to specify search patterns and options interactively</dd>
@@ -279,7 +379,8 @@ sudo make install # install as desired
 <li><em>CTRL-Z</em> displays help and the active search options
 </ol>
 
-<a name="Google"><h3>Googling files</h3></a>
+<a name="Google">&nbsp;</a>
+<h3>Googling files</h3>
 
 <dl>
 <dt>-% "foo bar"</dt>           <dd>search files for lines matching both regex patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
@@ -304,7 +405,8 @@ sudo make install # install as desired
 <li>the default search mode is <tt>--lines</tt> to match lines; option <tt>--files</tt> switches the search mode to find files<!-- (also <tt>-%%</tt> specifies both options <tt>--files -%</tt> since 4.3.2) -->
 </ol>
 
-<a name="fuzzy"><h3>Fuzzy search</h3></a>
+<a name="fuzzy">&nbsp;</a>
+<h3>Fuzzy search</h3>
 
 <dl>
 <dt>-Z</dt>                     <dd>approximately match patterns up to one extra, missing or replaced character in the input</dd>
@@ -323,7 +425,8 @@ sudo make install # install as desired
 <li>no whitespace may be given between <tt>-Z</tt> and its argument
 </ol>
 
-<a name="zip"><h3>Archives and compressed files</h3></a>
+<a name="zip">&nbsp;</a>
+<h3>Archives and compressed files</h3>
 
 <dl>
 <dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli compressed files</dd>
@@ -333,7 +436,8 @@ sudo make install # install as desired
 <dt>-z -g"^bak/"</dt>           <dd>exclude all <tt>bak</tt> directories from the search and skip those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 </dl>
 
-<a name="binary"><h3>Binary files and devices</h3></a>
+<a name="binary">&nbsp;</a>
+<h3>Binary files and devices</h3>
 
 <dl>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
@@ -346,7 +450,8 @@ sudo make install # install as desired
 <dt>-Dread</dt>                 <dd>also read special devices to search them; danger: can get stuck on a non-responsive device!</dd>
 </dl>
 
-<a name="constraints"><h3>Exclusions and inclusions</h3></a>
+<a name="constraints">&nbsp;</a>
+<h3>Exclusions and inclusions</h3>
 
 <dl>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
@@ -383,7 +488,8 @@ sudo make install # install as desired
 <li>to obey .gitignore file exclusions in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file
 </ol>
 
-<a name="formatting"><h3>Formatted output</h3></a>
+<a name="formatting">&nbsp;</a>
+<h3>Formatted output</h3>
 
 <dl>
 <dt>--csv</dt>                  <dd>CSV output format</dd>
@@ -397,7 +503,8 @@ sudo make install # install as desired
 <li>formatting can be combined with other options, such as <tt>-n</tt> to include line numbers
 </ol>
 
-<a name="pretty"><h3>Pretty things, more or less</h3></a>
+<a name="pretty">&nbsp;</a>
+<h3>Pretty things, more or less</h3>
 
 <dl>
 <dt>--pretty</dt>               <dd>enables <tt>-n</tt>, <tt>-T</tt>, <tt>--color</tt>, <tt>--tree</tt>, <tt>--heading</tt>, <tt>--break</tt> and <tt>--sort</tt> when output is sent to a terminal</dd>
@@ -407,13 +514,15 @@ sudo make install # install as desired
 <dt>-T</dt>                     <dd>tabulate line and column numbers to add spacing</dd>
 <dt>--color</dt>                <dd>colorize the output when displayed on a terminal (default)</dd>
 <dt>--colors=<i>COLORS</i></dt> <dd>specify a color pallette <tt><i>COLORS</i></tt>, see also <a href="#colors"><tt>ug --help colors</tt></a></dd>
-<dt>--hyperlink</dt>            <dd>embeds hyperlinks in the output when output is sent to a terminal</dd>
+<dt>--hyperlink=+</dt>          <dd>embeds hyperlinks in the output when sent to a terminal, with linked line/column numbers when <tt>=+</tt> is specified</dd>
 <dt>--pager</dt>                <dd>output to a pager, default is <tt>more</tt> or <tt>less</tt></dd>
 <dt>--pager=<i>COMMAND</i></dt> <dd>output to <tt><i>COMMAND</i></tt> as a pager</dd>
 <dt>--tag</dt>                  <dd>output matches as <tt>___<i>match</i>___</tt> instead of colorizing them, where <tt>--tag=<i>TAG,TAG</i></tt> outputs <tt><i>TAGmatchTAG</i></tt></dd>
 <dt>--replace=<i>"FORMAT"</i></dt>
                                 <dd>replace matches in the output by <tt><i>FORMAT</i></tt>, see also <a href="#format"><tt>ug --help format</tt></a>
 <dt>--separator=<i>SEP</i></dt> <dd>specify <i>SEP</i> to separate line and column numbers from the match</dd>
+<dt>--group-separator=<i>SEP</i></dt>
+                                <dd>specify <i>SEP</i> to separate context for options <tt>-ABC</tt></dd>
 </dl>
 
 <ol>
@@ -421,7 +530,8 @@ sudo make install # install as desired
 <li><code>ugrep</code> only enables <tt>--color</tt> by default
 </ol>
 
-<a name="help"><h3>Getting help</h3></a>
+<a name="help">&nbsp;</a>
+<h3>Getting help</h3>
 
 <dl>
 <dt>--help <i>WHAT</i></dt>     <dd>display help on <tt><i>WHAT</i></tt> you are looking for</dd>
@@ -430,7 +540,8 @@ sudo make install # install as desired
 <dt>--help globs</dt>           <dd>display help with details on glob patterns, e.g. for option <tt>-g</tt></dd>
 </dl>
 
-<a name="regex"><h2>Regex</h2></a>
+<a name="regex">&nbsp;</a>
+<h2>Regex</h2>
 
 <center>
 
@@ -532,7 +643,8 @@ sudo make install # install as desired
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
 </ol>
 
-<a name="globs"><h2>Globs</h2></a>
+<a name="globs">&nbsp;</a>
+<h2>Globs</h2>
 
 <p>Ugrep supports gitignore-style globbing for all glob-related options <tt>-g</tt>, <tt>--iglob=</tt>, <tt>--exclude=</tt>, <tt>--include=</tt>, <tt>-include-dir=</tt>, <tt>--exclude-dir=</tt>, <tt>--include-from=</tt>, <tt>--exclude-from=</tt>, and <tt>--ignore-files</tt>, where
 
@@ -556,7 +668,8 @@ sudo make install # install as desired
 <li>when a glob pattern ends with a <tt>/</tt>, the glob matches directories, not files
 </ol>
 
-<a name="types"><h2>File types</h2></a>
+<a name="types">&nbsp;</a>
+<h2>File types</h2>
 
 <p>The <tt>-t</tt> argument is a comma-separated list of file types.  A file type matches one or more filename extensions, internally using option <tt>-O</tt> for filename extension matching.  For capitalized file types, the search is expanded to include files with matching file signature magic bytes, internally using option <tt>-M</tt>.  When a type is preceded by a <tt>!</tt> or a <tt>^</tt>, excludes files of the specified type.
 
@@ -682,7 +795,8 @@ sudo make install # install as desired
 <tr><td><tt>         zig</tt></td><td>=</td><td><tt>-O zig,zon</tt></td></tr>
 </table>
 
-<a name="filter"><h2>Filters</h2></a>
+<a name="filter">&nbsp;</a>
+<h2>Filters</h2>
 
 <p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified <tt>command</tt> may be included.  The special option <tt>%</tt> is expanded into the pathname of the file to search.  Filters are applied first when the filename extension matches one of the specified filters, then the output of the filter is searched.  Some examples:
 
@@ -721,7 +835,8 @@ sudo make install # install as desired
   <tt>KOI8-R</tt>, <tt>KOI8-U</tt>, <tt>KOI8-RU</tt>
 </ol>
 
-<a name="colors"><h2>Colors</h2></a>
+<a name="colors">&nbsp;</a>
+<h2>Colors</h2>
 
 <p>The <tt>--colors=</tt> argument is a colon-separated list of parameters, such as <tt>--colors=sl=hy:mt=hyB</tt>, where
 
@@ -773,7 +888,8 @@ sudo make install # install as desired
 
 <p>The default color scheme is <tt>cx=33:</tt> <tt>mt=1;31:</tt> <tt>fn=1;35:</tt> <tt>ln=1;32:</tt> <tt>cn=1;32:</tt> <tt>bn=1;32:</tt> <tt>se=36:</tt> <tt>qp=1;32:</tt> <tt>qe=1;37;41:</tt> <tt>qm=1;32:</tt> <tt>ql=36:</tt> <tt>qb=1;35</tt>
 
-<a name="format"><h2>Custom output formatting</h2></a>
+<a name="format">&nbsp;</a>
+<h2>Custom output formatting</h2>
 
 <table align=center>
 <tr><td><tt>--format-begin=<i>"FORMAT"</i></tt></td><td>format string for beginning the search</td></tr>
@@ -888,11 +1004,13 @@ sudo make install # install as desired
 </pre>
 </ol>
 
-<a name="bugs"><h2>Bugs</h2></a>
+<a name="bugs">&nbsp;</a>
+<h2>Bugs</h2>
 
 <p>If you found a bug or an issue, then please report it at <a href="https://github.com/Genivia/ugrep/issues">https://github.com/Genivia/ugrep/issues</a>
 
-<a name="license"><h2>License</h2></a>
+<a name="license">&nbsp;</a>
+<h2>License</h2>
 
 <p>Ugrep is written by Robert A. van Engelen: <a href="https://github.com/Genivia/ugrep">https://github.com/Genivia/ugrep</a> copyright (c) 2023 Robert A. van Engelen, Genivia Inc.
 
