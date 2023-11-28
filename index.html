@@ -347,9 +347,9 @@ sudo make install # install as desired
 <dl>
 <dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code>
 <dt>-G</dt>                     <dd>BRE pattern syntax, like GNU <code>grep</code> or <code>grep -G</code>
-<dt>-P</dt>                     <dd>Perl regex pattern search (Unicode) with PCRE, see also <a href="#regex"><tt>ug --help regex</tt></a></dd>
-<dt>-U</dt>                     <dd>search with non-Unicode ASCII and binary patterns, for example pattern <tt>\xa3</tt> matches a byte, not the Unicode code point U+00a3</dd>
-<dt>-Y</dt>                     <dd>permit empty matches like GNU grep; empty-matching patterns such as <tt>x*y*z*</tt> match all lines instead of returning useful matches</dd>
+<dt>-P</dt>                     <dd>Perl regex pattern search with PCRE, see also <a href="#regex"><tt>ug --help regex</tt></a></dd>
+<dt>-U</dt>                     <dd>non-Unicode ASCII/binary search like GNU grep; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point</dd>
+<dt>-Y</dt>                     <dd>permit empty pattern matches like GNU grep; empty-matching patterns such as <tt>x*y*z*</tt> match all lines instead of returning useful matches</dd>
 <dt>-i</dt>                     <dd>ignore case in matching patterns</dd>
 <dt>-j</dt>                     <dd>smart ignore case, enables <tt>-i</tt> when patterns are specified in lower case</dd>
 <dt>-w</dt>                     <dd>patterns must match as words and not be part of words</dd>
