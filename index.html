@@ -436,6 +436,7 @@ sudo make install # install as desired
 <dl>
 <dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli compressed files</dd>
 <dt>-z --zmax=2</dt>            <dd>also search archives, tarballs and compressed files stored within archives (max 2 levels)</dd>
+<dt>-z -I --zmax=2</dt>         <dd>same as above, but ignore binary files and also those in (nested) archives and compressed files</dd>
 <dt>-z -tc,cpp</dt>             <dd>search C and C++ source code files and also those in archives, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-z -g"*.txt,*.md"</dt>      <dd>search files matching the globs <tt>*.txt</tt> and <tt>*.md</tt> and also those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>-z -g"^bak/"</dt>           <dd>exclude all <tt>bak</tt> directories from the search and skip those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
