@@ -283,10 +283,10 @@ sudo make install # install as desired
                                 <dd>search files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding sub-directories (like <code>ls DIR</code> takes a <tt><i>DIR</i></tt> to list)</dd>
 <dt>ug -r <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, excluding symlinks</dd>
+<dt>ug -rS <i>PATTERN</i> <i>DIR</i></dt>
+                                <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, <a href="#constraints">including symlinks to files</a> (option <tt>-S</tt>), but not to directories</dd>
 <dt>ug -R <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files and directories</dd>
-<dt>ug -r -S <i>PATTERN</i> <i>DIR</i></dt>
-                                <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, <a href="#constraints">including symlinks to files</a> (<tt>-S</tt>), but not to directories</dd>
 <dt>ug -3 <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt>, but up to 3 levels, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
 <dt>ug --save-config --ignore-files --no-tree</dt>
@@ -333,7 +333,7 @@ sudo make install # install as desired
 <h3>Displaying matches, match info, match context</h3>
 
 <dl>
-<dt>-H</dt>                     <dd>always output the filename (normally, a filename is not output when searching a single specified file)</dd>
+<dt>-H</dt>                     <dd>always output the filename; normally, a filename is not output when searching a single specified file</dd>
 <dt>-n</dt>                     <dd>output the line number of a match</dd>
 <dt>-k</dt>                     <dd>output the column number of a match</dd>
 <dt>-b</dt>                     <dd>output the byte offset of a match</dd>
@@ -463,9 +463,9 @@ sudo make install # install as desired
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
 <dt>-p</dt>                     <dd>never follow symlinks, even when specified on the command line</dd>
 <dt>-r</dt>                     <dd>search recursively without following symlinks</dd>
-<dt>-rS</dt>                    <dd>search recursively following symlinks to files, but not to directories (<tt>-S</tt>)</dd>
+<dt>-rS</dt>                    <dd>search recursively following symlinks to files, but not to directories (option <tt>-S</tt>)</dd>
 <dt>-R</dt>                     <dd>search recursively following symlinks to files and directories</dd>
-<dt>-.</dt>                     <dd>include hidden files in searches (normally, hidden files are excluded from searching)</dd>
+<dt>-.</dt>                     <dd>include hidden files in searches; normally, hidden files are excluded from searching</dd>
 <dt>-tc,cpp</dt>                <dd>only search C and C++ source code files, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> with filename extension globs to search <tt>.hpp</tt> and <tt>.cpp</tt> files</dd>
 <dt>-g"*.hpp,*.cpp"</dt>        <dd>only search <tt>.hpp</tt> and <tt>.cpp</tt> files with the specified glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
