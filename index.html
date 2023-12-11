@@ -173,7 +173,7 @@
             display: block !important;
         }
         /* .menu li:active ul {
-            display: none; /* perhaps hides the menu after click? But doesn't */
+            display: none; /* should hide the menu after click? But doesn't */
         } */
         .menu li ul li {
             clear: left;
@@ -216,6 +216,7 @@
     <li><a href="#filter">Filters</a></li>
     <li><a href="#colors">Colors</a></li>
     <li><a href="#format">Formatting</a></li>
+    <li><a href="#index">Indexing</a></li>
   </ul>
 </div>
 
@@ -252,7 +253,7 @@ sudo make install # install as desired
 <p align=center>how fast is ugrep?
 <ul>
 <li><a target="_blank" href="https://github.com/Genivia/ugrep-benchmarks">Benchmarks</a>: ugrep is one of the fastest grep
-<li>New <a target="_blank" href="https://github.com/Genivia/ugrep-indexer">file indexer</a> to speed up cold FS search
+<li>New <a href="#index">file indexer</a> to speed up cold FS search
 </ul>
 </div>
 <div class="img-with-text">
@@ -1012,6 +1013,42 @@ sudo make install # install as desired
 </pre>
 </ol>
 
+<a name="index">&nbsp;</a>
+<h2>Indexing</h2>
+
+<p>The new <a target="_blank" href="https://github.com/Genivia/ugrep-indexer"><tt>ugrep-indexer</tt></a> tool indexes a directory tree to accelerate cold searching.  File searching is generally slow when a file system on a drive is not cached in memory, i.e. when most files are "cold".  Indexing accelerates recursive searching by performing a quick check on precomputed indexes to only search those files that may match.
+
+<p>Indexed-based search with ugrep is safe and never skips new or updated files that may now match.  If any files and directories are added or changed after indexing, then ugrep will search these additions and changes made to the file system by comparing file and directory time stamps to the indexing time stamp.  When many files were added or changed, then you may want to re-index to bring the indexes up to date.  Re-indexing is incremental, it will not take as much time as the initial indexing process.
+
+<p>Please note that indexing is effective for large file systems on slower storage media or when searching many zip and tarball archives.  Indexing won't speed up regular file searching on fast nVME SSDs, for example.
+
+<dl>
+<dt>ugrep-indexer -Iz -v</dt>  <dd>recursively (re-)index the working directory tree, ignore binary files (option <tt>-I</tt>), index archives and compressed files (option <tt>-z</tt>), showing verbose output (option <tt>-v</tt>)</dd>
+<dt>ugrep-indexer -Iz -v <i>PATH</i></dt>
+                               <dd>same as above, but (re-)index the specified directory tree <tt><i>PATH</i></tt></dd>
+<dt>ugrep-indexer -f -0 -Iz -v <i>PATH</i></dt>
+                               <dd>force full re-indexing with lowest index match accuracy to minimize index files (option <tt>-0</tt> for zero, default is <tt>-5</tt> for five)</dd>
+<dt>ugrep-indexer -c <i>PATH</i></dt>
+                               <dd>check the directory tree <tt><i>PATH</i></tt> indexes, the default is to check the working directory tree</dd>
+<dt>ugrep-indexer -d <i>PATH</i></dt>
+                               <dd>delete the hidden index files from the directory tree <tt><i>PATH</i></tt>, the default is to delete index files from the working directory tree</dd>
+<dt>ug --index -Iz <i>OPTIONS</i> <i>PATTERN</i></dt>
+                               <dd>perform an index-based recursive search, ignore binary files (option <tt>-I</tt>), also search archives and compressed files (option <tt>-z</tt>)</dd>
+<dt>ug --index -r -Iz <i>OPTIONS</i> <i>PATTERN</i> <i>PATH</i></dt>
+                               <dd>same as above, but perform an index-based recursive search on the specified directory tree <tt><i>PATH</i></tt></dd>
+<dt>ug --index <i>OPTIONS</i> <i>PATTERN</i> <i>FILE</i></dt>
+                               <dd>search <tt><i>FILE</i></tt>, but <u>not using an index</u> (only <u>recursive searching</u> is accelerated)
+</dl>
+
+<ol>
+<li><tt>ugrep-indexer</tt> option <tt>-v</tt> reports progress; to create a log, redirect <tt>ugrep-indexer</tt> output to a log file
+<li><tt>ugrep-indexer</tt> option <tt>-S</tt> follows symlinks to files, never follows symlinks to directories
+<li><tt>ugrep-indexer</tt> option <tt>--ignore-files</tt> obeys gitignore files
+<li><tt>ugrep-indexer</tt> options <tt>-z --zmax=2</tt> index nested archives and tarballs
+<li><tt>ug</tt> option <tt>--index</tt> works with all other search options, except for options <tt>-P</tt>, <tt>-Z</tt>, <tt>-v</tt> and <tt>--filter</tt>
+<li><tt>ug</tt> option <tt>--stats</tt> reports index-based search details, including false positives; false positives are reduced with higher indexing accuracy and/or by using more specific search patterns
+</ol>
+
 <a name="bugs">&nbsp;</a>
 <h2>Bugs</h2>
 
@@ -1020,15 +1057,7 @@ sudo make install # install as desired
 <a name="license">&nbsp;</a>
 <h2>License</h2>
 
-<p>Ugrep is written by Robert A. van Engelen: <a href="https://github.com/Genivia/ugrep">https://github.com/Genivia/ugrep</a> copyright (c) 2023 Robert A. van Engelen, Genivia Inc.
-
-<p>The ugrep author received the 🏆 <a href="https://opensource.googleblog.com/2022/03/Announcing-First-Group-of-Google-Open-Source-Peer-Bonus-Winners-in-2022.html">Google Peer Bonus Award 2022</a> for developing ugrep
-
-<p>Ugrep uses the RE/flex regex library: <a href="https://github.com/Genivia/RE-flex">https://github.com/Genivia/RE-flex</a>
-
-<p>Ugrep <tt>-P</tt> uses the PCRE2 library: <a href="https://www.pcre.org">https://www.pcre.org</a>
-
-<p>Ugrep is open source: BSD-3 license
+<p>Ugrep is open source BSD-3 licensed:
 
 <div class="wide">
 <table>
@@ -1056,11 +1085,21 @@ sudo make install # install as desired
 </table>
 </div>
 
+<p>Ugrep is written by Robert A. van Engelen, Copyright (c) 2023 Robert A. van Engelen, Genivia Inc.
+
+<p>The ugrep author received the 🏆 <a href="https://opensource.googleblog.com/2022/03/Announcing-First-Group-of-Google-Open-Source-Peer-Bonus-Winners-in-2022.html">Google Peer Bonus Award 2022</a> for developing ugrep
+
+<p>Ugrep project repo: <a href="https://github.com/Genivia/ugrep">https://github.com/Genivia/ugrep</a> ⭐️ thank you for starring the project!
+
+<p>Ugrep uses the RE/flex regex library: <a href="https://github.com/Genivia/RE-flex">https://github.com/Genivia/RE-flex</a>
+
+<p>Ugrep <tt>-P</tt> uses the PCRE2 library: <a href="https://www.pcre.org">https://www.pcre.org</a>
+
 <hr>
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Fri Dec 8, 2023</small>
+<p><small>Last updated: Mon Dec 11, 2023</small>
 
 <hr>
 
