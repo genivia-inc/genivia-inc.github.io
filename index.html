@@ -424,7 +424,7 @@ sudo make install # install as desired
 <dt>-Z~2</dt>                   <dd>approximately match patterns up to two replaced characters in the input</dd>
 <dt>-Z+-2</dt>                  <dd>approximately match patterns up to two extra or missing characters in the input</dd>
 <dt>-c -Z</dt>                  <dd>count approximate matches in files</dd>
-<dt>-c -Zbest2</dt>             <dd>count <tt>-Z2</tt> approximate matches in files, but only the best matches per file, i.e. if a file has at least one exact match, then only exact matches are counted</dd>
+<dt>-c -Zbest2</dt>             <dd>count <tt>-Z2</tt> approximate matches in files, but only keep the best matches, i.e. if a file has at least one exact match, then only exact matches are counted</dd>
 <dt>-c -Zbest2 --sort=best</dt> <dd>count the best approximate matches in files and sort by best matching files per directory</dd>
 </dl>
 
