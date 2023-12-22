@@ -901,6 +901,8 @@ sudo make install # install as desired
 <a name="format">&nbsp;</a>
 <h2>Custom output formatting</h2>
 
+<p>Formatted output and match replacement puts you in full control of the output.  In fact, CSV (<tt>--csv</tt>), JSON (<tt>--json</tt>) and XML (<tt>--xml</tt>) are all produced this way.
+
 <table align=center>
 <tr><td><tt>--format-begin=<i>"FORMAT"</i></tt></td><td>format string for beginning the search</td></tr>
 <tr><td><tt>--format-open=<i>"FORMAT"</i> </tt></td><td>format string for opening a file when a match was found</td></tr>
@@ -970,18 +972,18 @@ sudo make install # install as desired
 <tr><td><tt>%[NUM]b              </tt></td><td>the byte offset of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
 <tr><td><tt>%[NUM]e              </tt></td><td>the ending byte offset of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
 <tr><td><tt>%[NUM]d              </tt></td><td>the byte length of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]#    </tt></td><td>the first group capture <tt>NUM</tt> that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]b    </tt></td><td>the byte offset of the first group capture <tt>NUM</tt> that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]e    </tt></td><td>the ending byte offset of the first group capture <tt>NUM</tt> that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]d    </tt></td><td>the byte length of the first group capture <tt>NUM</tt> that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]#    </tt></td><td>the first group capture <tt>NUM</tt> in the list that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]b    </tt></td><td>the byte offset of the first group capture <tt>NUM</tt> in the list that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]e    </tt></td><td>the ending byte offset of the first group capture <tt>NUM</tt> in the list that matched; requires option <tt>-P</tt></td></tr>
+<tr><td><tt>%[NUM1|NUM2|...]d    </tt></td><td>the byte length of the first group capture <tt>NUM</tt> in the list that matched; requires option <tt>-P</tt></td></tr>
 <tr><td><tt>%[NAME]#             </tt></td><td>the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
 <tr><td><tt>%[NAME]b             </tt></td><td>the byte offset of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
 <tr><td><tt>%[NAME]e             </tt></td><td>the ending byte offset of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
 <tr><td><tt>%[NAME]d             </tt></td><td>the byte length of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME1|NAME2|...]#  </tt></td><td>the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME1|NAME2|...]b  </tt></td><td>the byte offset of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME1|NAME2|...]e  </tt></td><td>the ending byte offset of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME1|NAME2|...]d  </tt></td><td>the byte length of the first <tt>NAME</tt>d group capture that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME1|NAME2|...]#  </tt></td><td>the first <tt>NAME</tt>d group capture in the list that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME1|NAME2|...]b  </tt></td><td>the byte offset of the first <tt>NAME</tt>d group capture in the list that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME1|NAME2|...]e  </tt></td><td>the ending byte offset of the first <tt>NAME</tt>d group capture in the list that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
+<tr><td><tt>%[NAME1|NAME2|...]d  </tt></td><td>the byte length of the first <tt>NAME</tt>d group capture in the list that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
 <tr><td><tt>%G                   </tt></td><td>all group capture indices/names of the match</td></tr>
 <tr><td><tt>%[TEXT1|TEXT2|...]G  </tt></td><td>all <tt>TEXT</tt> indexed by group capture indices that matched; requires option <tt>-P</tt></td></tr>
 <tr><td><tt>%g                   </tt></td><td>the group capture index of the match or 1</td></tr>
@@ -1003,7 +1005,6 @@ sudo make install # install as desired
 --format-close='%~    ]%~  }'
 --format-end='%~]%~'
 </pre>
-
 <li>output for <tt>--xml</tt> is internally produced with
 <pre style="font-size:0.7rem">
 --format-begin='&lt;grep&gt;%~'
@@ -1012,6 +1013,8 @@ sudo make install # install as desired
 --format-close='  &lt;/file&gt;%~'
 --format-end='&lt;/grep&gt;%~'
 </pre>
+<li>to output replaced matches in a file while keeping the rest of the file unchanged, use option <tt>--replace=<i>"FORMAT"</i></tt> and <tt>-y</tt> (<tt>--any-line</tt> or <tt>--passthru</tt>)
+<li>to replace matches with corresponding text substitutions, you can use <tt>-P "(PATTERN1)|(PATTERN2)|...|(PATTERNn)"</tt> <tt>--replace="%[TEXT1|TEXT2|...|TEXTn]g"</tt> for example <tt>-P -iw "(one)|(two)|(three)" --replace="%[ūnum|duo|tria]g"</tt>
 </ol>
 
 <a name="index">&nbsp;</a>
@@ -1100,7 +1103,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Tue Dec 19, 2023</small>
+<p><small>Last updated: Fri Dec 22, 2023</small>
 
 <hr>
 
