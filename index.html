@@ -259,7 +259,7 @@ sudo make install # install as desired
 </div>
 <div class="img-with-text">
 <img src="ug.png" alt="ugrep screenshot with TUI"/>
-<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a>, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.
+<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a>, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.
 </div>
 </div>
 
@@ -437,7 +437,7 @@ sudo make install # install as desired
 <h3>Archives and compressed files</h3>
 
 <dl>
-<dt>-z</dt>                     <dd>also search zip/tar/pax/cpio archives, tarballs and gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli compressed files</dd>
+<dt>-z</dt>                     <dd>also search zip/7z/tar/pax/cpio archives, tarballs and gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli compressed files</dd>
 <dt>-z --zmax=2</dt>            <dd>also search archives, tarballs and compressed files stored within archives (max 2 levels)</dd>
 <dt>-z -I --zmax=2</dt>         <dd>same as above, but ignore binary files and also those in (nested) archives and compressed files</dd>
 <dt>-z -tc,cpp</dt>             <dd>search C and C++ source code files and also those in archives, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
@@ -811,8 +811,6 @@ sudo make install # install as desired
 <p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified <tt>command</tt> may be included.  The special option <tt>%</tt> is expanded into the pathname of the file to search.  Filters are applied first when the filename extension matches one of the specified filters, then the output of the filter is searched.  Some examples:
 
 <dl>
-<dt>--filter="7z:7z x -so %" -W</dt>
-                                <dd>search 7zip files as one piece; specify option <tt>-W</tt> to permit binaries in the archive</dd>
 <dt>--filter="pdf:pdftotext % -"</dt>
                                 <dd>search PDF files, like <code>ug+</code></dd>
 <dt>--filter="doc:antiword %"</dt>
