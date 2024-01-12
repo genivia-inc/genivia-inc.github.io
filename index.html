@@ -293,7 +293,7 @@ sudo make install # install as desired
 <dt>ug -3 <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt>, but up to 3 levels, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
 <dt>ug --save-config --ignore-files --no-tree</dt>
-                                <dd>save a .ugrep configuration file that obeys <a href="#constraints">.gitignore file exclusions</a> in recursive searches and turns <a href="#pretty">directory tree output</a> off</dd>
+                                <dd>save a .ugrep configuration file that lets <tt>ug</tt> obey <a href="#constraints">.gitignore rules</a> in recursive searches and turns <a href="#pretty">directory tree output</a> off</dd>
 <dt>ug -%% -j -w -Q</dt>
                                 <dd>recursively <a href="#Google">Google search files</a> (option <tt>-%%</tt>) with <a href="#modes">smart ignore case</a> (option <tt>-j</tt>) regex patterns matching <a href="#modes">words</a> (option <tt>-w</tt>) in the interactive query <a href="#TUI">TUI</a> (option <tt>-Q</tt>)</dd>
 </dl>
@@ -463,12 +463,13 @@ sudo make install # install as desired
 <h3>Exclusions and inclusions</h3>
 
 <dl>
+<!--<dt>-@</dt>                     <dd>search all files except hidden; cancel previous restrictions, but restrictions specified after this option are still applied, e.g. <tt>-@I</tt> searches all non-binary files</dd>-->
+<dt>-.</dt>                     <dd>include hidden files in searches; normally, hidden files are excluded from searching</dd>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
 <dt>-p</dt>                     <dd>never follow symlinks, even when specified on the command line</dd>
 <dt>-r</dt>                     <dd>search recursively without following symlinks</dd>
 <dt>-rS</dt>                    <dd>search recursively following symlinks to files, but not to directories (option <tt>-S</tt>)</dd>
 <dt>-R</dt>                     <dd>search recursively following symlinks to files and directories</dd>
-<dt>-.</dt>                     <dd>include hidden files in searches; normally, hidden files are excluded from searching</dd>
 <dt>-tc,cpp</dt>                <dd>only search C and C++ source code files, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> with filename extension globs to search <tt>.hpp</tt> and <tt>.cpp</tt> files</dd>
 <dt>-g"*.hpp,*.cpp"</dt>        <dd>only search <tt>.hpp</tt> and <tt>.cpp</tt> files with the specified glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
@@ -481,7 +482,7 @@ sudo make install # install as desired
 <dt>-m2,9 -u</dt>               <dd>only search files with at least two matches and output up to and including 9 matches</dd>
 <dt>-3</dt>                     <dd>recursively search up to three directory levels deep, i.e. <tt><i>one/</i></tt>, <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
 <dt>-2-3</dt>                   <dd>only recursively search sub-directories at two to three levels deep, i.e. <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
-<dt>--ignore-files</dt>         <dd>obey .gitignore file exclusions in recursive searches</dd>
+<dt>--ignore-files</dt>         <dd>obey .gitignore rules in recursive searches</dd>
 <dt>--exclude-fs=<i>PATH</i></dt>
                                 <dd>do not search the file system associated with <tt><i>PATH</i></tt> (a mounted directory or mount point)</dd>
 <dt>--include-fs=.</dt>         <dd>only search the file system associated with <tt>.</tt> (here the working directory is the mount point <tt><i>PATH</i></tt>)</dd>
@@ -494,8 +495,8 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<li>to disable searching binary files by default, add <tt>ignore-binary</tt> to your ~/.ugrep file
-<li>to obey .gitignore file exclusions in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file
+<li>to let <tt>ug</tt> ignore binary files by default, add <tt>ignore-binary</tt> to your ~/.ugrep file
+<li>to let <tt>ug</tt> obey .gitignore rules in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file
 </ol>
 
 <a name="formatting">&nbsp;</a>
@@ -1047,7 +1048,7 @@ sudo make install # install as desired
 <ol>
 <li><tt>ugrep-indexer</tt> option <tt>-v</tt> reports progress; to create a log, redirect <tt>ugrep-indexer</tt> output to a log file
 <li><tt>ugrep-indexer</tt> option <tt>-S</tt> follows symlinks to files, never follows symlinks to directories
-<li><tt>ugrep-indexer</tt> option <tt>--ignore-files</tt> obeys gitignore files
+<li><tt>ugrep-indexer</tt> option <tt>--ignore-files</tt> obeys .gitignore rules
 <li><tt>ugrep-indexer</tt> options <tt>-z --zmax=2</tt> index nested archives and tarballs
 <li><tt>ug</tt> option <tt>--index</tt> works with all other search options, except for options <tt>-P</tt>, <tt>-Z</tt>, <tt>-v</tt> and <tt>--filter</tt>
 <li><tt>ug</tt> option <tt>--stats</tt> reports index-based search details, including false positives; false positives are reduced with higher indexing accuracy and/or by using more specific search patterns
