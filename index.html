@@ -353,9 +353,10 @@ sudo make install # install as desired
 <h3>Pattern matching modes</h3>
 
 <dl>
-<dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code>
+<dt>-F</dt>                     <dd>search for matching strings, not regex patterns, like GNU <code>fgrep</code> or <code>grep -F</code>
 <dt>-G</dt>                     <dd>BRE pattern syntax, like GNU <code>grep</code> or <code>grep -G</code>
 <dt>-P</dt>                     <dd>Perl regex pattern search with PCRE, see also <a href="#regex"><tt>ug --help regex</tt></a></dd>
+<dt>-Z</dt>                     <dd><a href="#fuzzy">fuzzy search</a> with the default ERE pattern syntax</dd>
 <dt>-U</dt>                     <dd>non-Unicode ASCII/binary search like GNU grep; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point</dd>
 <dt>-Y</dt>                     <dd>empty-matching patterns such as <tt>x*y*z*</tt> match all lines like GNU grep, instead of returning useful matches</dd>
 <dt>-i</dt>                     <dd>ignore case in matching patterns</dd>
@@ -526,7 +527,7 @@ sudo make install # install as desired
 <dt>-T</dt>                     <dd>tabulate line and column numbers to add spacing</dd>
 <dt>--color</dt>                <dd>colorize the output when displayed on a terminal (default)</dd>
 <dt>--colors=<i>COLORS</i></dt> <dd>specify a color pallette <tt><i>COLORS</i></tt>, see also <a href="#colors"><tt>ug --help colors</tt></a></dd>
-<dt>--hyperlink=+</dt>          <dd>embeds hyperlinks in the output when sent to a terminal, with linked line/column numbers when <tt>=+</tt> is specified</dd>
+<dt>--hyperlink=+</dt>          <dd>embed hyperlinks in the output when sent to a terminal, with linked line/column numbers when <tt>=+</tt> is specified</dd>
 <dt>--pager</dt>                <dd>output to a pager, default is <tt>more</tt> or <tt>less</tt></dd>
 <dt>--pager=<i>COMMAND</i></dt> <dd>output to <tt><i>COMMAND</i></tt> as a pager</dd>
 <dt>--tag</dt>                  <dd>output matches as <tt>___<i>match</i>___</tt> instead of colorizing them, where <tt>--tag=<i>TAG,TAG</i></tt> outputs <tt><i>TAGmatchTAG</i></tt></dd>
@@ -651,7 +652,7 @@ sudo make install # install as desired
 
 <ol>
 <li>(<tt>-P</tt>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
-<li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax (shown)
+<li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax of ugrep (as shown)
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
 <li>(negated) character classes such as <tt>\s</tt> and <tt>[^abc-e]</tt> do not match a newline <tt>\n</tt>
 <li>explicitly specify a <tt>\n</tt> or a <tt>\R</tt> in a pattern such as <tt>"go[\s\n]up"</tt> to match multiple lines as a single match
@@ -1047,10 +1048,10 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<li><tt>ugrep-indexer</tt> option <tt>-v</tt> reports progress; to create a log, redirect <tt>ugrep-indexer</tt> output to a log file
-<li><tt>ugrep-indexer</tt> option <tt>-S</tt> follows symlinks to files, never follows symlinks to directories
+<li><tt>ugrep-indexer</tt> option <tt>-v</tt> reports progress; to create a log, redirect <tt>ugrep-indexer -v</tt> output to a log file
+<li><tt>ugrep-indexer</tt> option <tt>-S</tt> follows symlinks to files; indexing never follows symlinks to directories
 <li><tt>ugrep-indexer</tt> option <tt>--ignore-files</tt> obeys .gitignore rules
-<li><tt>ugrep-indexer</tt> options <tt>-z --zmax=2</tt> index nested archives and tarballs
+<li><tt>ugrep-indexer</tt> options <tt>-z --zmax=2</tt> indexes nested archives and tarballs (two levels)
 <li><tt>ug</tt> option <tt>--index</tt> works with all other search options, except for options <tt>-P</tt>, <tt>-Z</tt>, <tt>-v</tt> and <tt>--filter</tt>
 <li><tt>ug</tt> option <tt>--stats</tt> reports index-based search details, including false positives; false positives are reduced with higher indexing accuracy and/or by using more specific search patterns
 </ol>
@@ -1105,7 +1106,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Fri Jan 5, 2024</small>
+<p><small>Last updated: Fri Jan 19, 2024</small>
 
 <hr>
 
