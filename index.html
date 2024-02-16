@@ -223,7 +223,7 @@
 <h1>The ugrep file pattern searcher</h1>
 
 <p align=center>a more powerful, ultra fast, user-friendly, compatible grep
-<p align=center><a target="_blank" href="https://github.com/Genivia/ugrep/releases">ugrep release 4.5.2</a>
+<p align=center><a target="_blank" href="https://github.com/Genivia/ugrep/releases">ugrep release 5.0</a>
 
 <div>
 <div>
@@ -412,7 +412,7 @@ sudo make install # install as desired
 <li>quote strings in a pattern with <tt>"</tt> to match literally
 <li>group patterns with <tt>( )</tt> parentheses
 <li>the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used, when spaced apart, for example <tt>-% "foo AND NOT (bar OR baz)"</tt>
-<li>the default search mode is <tt>--lines</tt> to match lines; option <tt>--files</tt> switches the search mode to find files<!-- (also <tt>-%%</tt> specifies both options <tt>--files -%</tt> since 4.3.2) -->
+<li>the default search mode is <tt>--lines</tt> to match lines; option <tt>--files</tt> switches the search mode to find files
 </ol>
 
 <a name="fuzzy">&nbsp;</a>
@@ -465,7 +465,7 @@ sudo make install # install as desired
 <h3>Exclusions and inclusions</h3>
 
 <dl>
-<!--<dt>-@</dt>                     <dd>search all files except hidden; cancel previous restrictions, but restrictions specified after this option are still applied, e.g. <tt>-@I</tt> searches all non-binary files</dd>-->
+<dt>-@</dt>                     <dd>search all files except hidden: cancel previous restrictions; restrictions specified after this option are still applied, e.g. <tt>-@I</tt> searches all non-binary files</dd>
 <dt>-.</dt>                     <dd>include hidden files in searches; normally, hidden files are excluded from searching</dd>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
 <dt>-p</dt>                     <dd>never follow symlinks, even when specified on the command line</dd>
@@ -487,6 +487,8 @@ sudo make install # install as desired
 <dt>--ignore-files</dt>         <dd>obey .gitignore rules in recursive searches</dd>
 <dt>--exclude-fs=<i>PATH</i></dt>
                                 <dd>do not search the file system associated with <tt><i>PATH</i></tt> (a mounted directory or mount point)</dd>
+<dt>--exclude-fs</dt>
+                                <dd>only descend into the file systems associated with the specified file and directory search targets, exclude all other</dt>
 <dt>--include-fs=.</dt>         <dd>only search the file system associated with <tt>.</tt> (<tt>.</tt> is the <tt><i>PATH</i></tt>), i.e. ignores all mounted and special devices</dd>
 <dt>--exclude-from=<i>FILE</i></dt>
                                 <dd>do not search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
