@@ -660,6 +660,7 @@ sudo make install # install as desired
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
 <li>(negated) character classes such as <tt>\s</tt> and <tt>[^abc-e]</tt> do not match a newline <tt>\n</tt>
 <li>explicitly specify a <tt>\n</tt> or a <tt>\R</tt> in a pattern such as <tt>"go[\s\n]up"</tt> to match multiple lines as a single match
+<li>specify option <tt>-P</tt> to match Unicode instead of ASCII word boundaries <tt>\b</tt>, <tt>\B</tt>, <tt>\&lt;</tt> and <tt>\&gt;</tt> (Unicode word boundary matching will likely become the default in a future update)
 </ol>
 
 <a name="globs">&nbsp;</a>
