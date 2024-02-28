@@ -399,7 +399,7 @@ sudo make install # install as desired
 <dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> (<tt>bar OR baz</tt>) anywhere on the same line</dd>
 <dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
 <dt>-% "foo -bar -baz"</dt>     <dd>same as above (normalized form)</dd>
-<dt>-% 'foo "-bar"'</dt>        <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>-bar</tt>, where <tt>"-bar"</tt> is quoted to match literally "as is"</dd>
+<dt>-% 'foo "-bar baz"'</dt>    <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>-bar baz</tt>, where <tt>"-bar baz"</tt> is quoted to match literally "as is"</dd>
 <dt>-%% "foo bar"</dt>          <dd>find files matching both patterns <tt>foo</tt> and <tt>bar</tt> anywhere in the same file (<tt>-%%</tt> is the same as <tt>--bool --files</tt>)</dd>
 <dt>-%% "foo -bar"</dt>         <dd>find files matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file (<tt>-%%</tt> is the same as <tt>--bool --files</tt>)</dd>
 </dl>
