@@ -394,25 +394,27 @@ sudo make install # install as desired
 <h3>Googling files</h3>
 
 <dl>
-<dt>-% "foo bar"</dt>           <dd>search files for lines matching both regex patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
-<dt>-F -% "*foo* bar?"</dt>     <dd>search files for lines matching both fixed (option <tt>-F</tt>) strings <tt>*foo*</tt> and <tt>bar?</tt> anywhere on the same line</dd>
-<dt>-% "foo -bar"</dt>          <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
-<dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> (<tt>bar OR baz</tt>) anywhere on the same line</dd>
-<dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
-<dt>-% "foo -bar -baz"</dt>     <dd>same as above (normalized form)</dd>
-<dt>-% 'foo "-bar baz"'</dt>    <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>-bar baz</tt>, where <tt>"-bar baz"</tt> is quoted to match literally "as is"</dd>
+<dt>-% "foo bar"</dt>           <dd>search files for lines matching both regex patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the ame line</dd>
 <dt>-%% "foo bar"</dt>          <dd>find files matching both patterns <tt>foo</tt> and <tt>bar</tt> anywhere in the same file (<tt>-%%</tt> is the same as <tt>--bool --files</tt>)</dd>
+<dt>-% "foo -bar"</dt>          <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
 <dt>-%% "foo -bar"</dt>         <dd>find files matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file (<tt>-%%</tt> is the same as <tt>--bool --files</tt>)</dd>
+<dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> anywhere on the same line</dd>
+<dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
+<dt>-% "foo AND NOT (bar OR baz)"</dt>
+                                <dd>same as above, this time using AND-OR-NOT operators</dd>
+<dt>-% "foo -bar -baz"</dt>     <dd>same as above, in normalized form (ugrep's internal CNF)</dd>
+<dt>-% 'foo "-bar baz"'</dt>    <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>-bar baz</tt>, where <tt>"-bar baz"</tt> is quoted to match literally "as is"</dd>
+<dt>-F -% "*foo* bar?"</dt>     <dd>search files for lines matching both fixed (option <tt>-F</tt>) strings <tt>*foo*</tt> and <tt>bar?</tt> anywhere on the same line</dd>
 </dl>
 
 <ol>
 <li>option <tt>-%</tt> can be combined with any <a href="#modes">pattern matching modes</a> <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
+<li>operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when properly spaced
 <li>white space is a logical <tt>AND</tt> (lowest precedence)
 <li>a <tt>|</tt> is a logical <tt>OR</tt> (taking higher precedence than <tt>AND</tt>)
 <li>white space followed by a <tt>-</tt> is a logical <tt>NOT</tt> (taking highest precedence)
-<li>quote strings in a pattern with <tt>"</tt> to match literally
+<li>quote strings in a pattern with <tt>"</tt> to match literally "as is"
 <li>group patterns with <tt>( )</tt> parentheses
-<li>the logical operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used, when spaced apart, for example <tt>-% "foo AND NOT (bar OR baz)"</tt>
 <li>the default search mode is <tt>--lines</tt> to match lines; option <tt>--files</tt> switches the search mode to find files
 </ol>
 
@@ -1113,7 +1115,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Fri Jan 19, 2024</small>
+<p><small>Last updated: Fri Mar 1, 2024</small>
 
 <hr>
 
