@@ -300,15 +300,15 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<li>the regex pattern syntax is the standard <a href="#regex">POSIX ERE</a> by default, same as GNU <code>egrep</code>, but also adds syntax to support Unicode by default
-<li>to replace grep: <tt>alias grep='ug -G'; alias egrep='ug -E'; alias fgrep='ug -F'</tt> or copy/symlink <code>ugrep</code> to <code>grep</code>, <code>egrep</code> and <code>fgrep</code>; it emulates according to these names
-<li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match, for example the pattern <tt>"foo.*\n.*\n.*baz"</tt> matches a line with <tt>foo</tt>, then a second line followed by a third line with <tt>baz</tt>
+<li>the regex syntax is the standard <a href="#regex">POSIX ERE</a>, same as <code>egrep</code>, but supporting Unicode
+<li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match; some examples: the pattern <tt>"foo.*\n.*\n.*baz"</tt> matches a line with <tt>foo</tt>, a second line and a third line with <tt>baz</tt>, the pattern <tt>"foo(.*\n)*?.*bar"</tt> lazily matches one or more lines from <tt>foo</tt> to <tt>bar</tt>
 <li>quote <tt><i>"PATTERN"</i></tt> or <tt><i>'PATTERN'</i></tt> to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
 <li><i>Windows Command Prompt</i> does not parse <tt>'</tt> to quote patterns; you must use <tt>"</tt> instead
 <li><i>Windows PowerShell</i> does not parse <tt>""</tt> (empty pattern); you must specify <tt>--match</tt> instead
 <li>an empty pattern <tt>""</tt> matches every line, same as option <tt>--match</tt>
 <li>multiple <tt><i>FILE</i></tt> and <tt><i>DIR</i></tt> pathname arguments may be specified as search targets; if none are provided, the working directory is recursively searched
 <li>standard input is searched if standard input is not a terminal, such as a pipe redirect
+<li>to replace grep: <tt>alias grep='ug -G'; alias egrep='ug -E'; alias fgrep='ug -F'</tt> or copy/symlink <code>ugrep</code> to <code>grep</code>, <code>egrep</code> and <code>fgrep</code>; it emulates according to these names
 </ol>
 
 <a name="options">&nbsp;</a>
