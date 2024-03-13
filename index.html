@@ -321,11 +321,13 @@ sudo make install # install as desired
 
 <dl>
 <dt>-l</dt>                     <dd>list matching files</dd>
+<dt>-l -m5,</dt>                <dd>list files that have at least 5 matching lines (<tt>-m5,</tt> with comma is <tt>--min-count=5</tt>)</dd>
+<dt>-l --max-files=3</dt>       <dd>list only the first 3 matching files</dd>
 <dt>-L</dt>                     <dd>list non-matching files</dd>
 <dt>-c</dt>                     <dd>count matching lines in files</dd>
 <dt>-cv</dt>                    <dd>count non-matching lines in files; option <tt>-v</tt> inverts pattern matching</dd>
 <dt>-cu</dt>                    <dd>count all pattern matches by ungrouping multiple matches from lines (option <tt>-u</tt>)</dd>
-<dt>-cm1,</dt>                  <dd>count matching lines in files, but skip files with zero matches (include the comma in <tt>-m1,</tt>)</dd>
+<dt>-cm1,</dt>                  <dd>count matching lines in files, but skip files with zero matches (<tt>-m1,</tt> with comma is <tt>--min-count=1</tt>)</dd>
 </dl>
 
 <ol>
