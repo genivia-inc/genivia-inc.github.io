@@ -490,6 +490,7 @@ sudo make install # install as desired
 <dt>-m2,9 -u</dt>               <dd>only search files with at least two matches and output up to and including 9 matches</dd>
 <dt>-3</dt>                     <dd>recursively search up to three directory levels deep, i.e. <tt><i>one/</i></tt>, <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
 <dt>-2-3</dt>                   <dd>only recursively search sub-directories at two to three levels deep, i.e. <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
+<dt>--max-files=3</dt>          <dd>only return matches for the first three matching files (in the current <tt>--sort</tt> order)</dd>
 <dt>--ignore-files</dt>         <dd>obey .gitignore rules in recursive searches</dd>
 <dt>--exclude-fs=<i>PATH</i></dt>
                                 <dd>do not search the file system associated with <tt><i>PATH</i></tt> (a mounted directory or mount point)</dd>
@@ -1117,7 +1118,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Tue Mar 12, 2024</small>
+<p><small>Last updated: Sun Mar 17, 2024</small>
 
 <hr>
 
