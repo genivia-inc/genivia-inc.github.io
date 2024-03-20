@@ -683,13 +683,13 @@ sudo make install # install as desired
 <tr><td><tt>[!abc-e]</tt></td><td>matches one character not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>/</tt></td></tr>
 <tr><td><tt>/       </tt></td><td>when used at the start of a glob, matches the working directory</td></tr>
 <tr><td><tt>**/     </tt></td><td>matches zero or more directories</td></tr>
-<tr><td><tt>/**     </tt></td><td>when at the end of a glob, matches everything after the <tt>/</tt></td></tr>
+<tr><td><tt>/**     </tt></td><td>when at the end of a glob, matches all paths after the <tt>/</tt></td></tr>
 <tr><td><tt>\?      </tt></td><td>matches a <tt>?</tt> or any other character specified after the backslash</td></tr>
 </table>
 
 <ol>
-<li>when a glob pattern is used with a command-line option such as <tt>-g"*.cpp"</tt>, you must quote the glob <tt>"*.cpp"</tt> to prevent the shell from expanding the glob
-<li>a glob pattern starting with a <tt>^</tt> or a <tt>!</tt> inverts the matching: instead of matching a filename or directory name, the directory or file is ignored and excluded from the search
+<li>to prevent the shell from expanding globs, you must quote globs like <tt>"*.cpp"</tt> in command-line options such as <tt>-g"*.cpp"</tt>,  
+<li>a glob pattern starting with a <tt>^</tt> or a <tt>!</tt> inverts matching: instead of matching a filename or directory name, the directory or file is ignored and excluded from the search
 <li>when a glob pattern contains a <tt>/</tt>, the full pathname is matched, otherwise, the basename of a file or directory is matched in recursive searches
 <li>when a glob pattern starts with a <tt>/</tt>, the glob matches files and directories from the working directory path, not recursively
 <li>when a glob pattern ends with a <tt>/</tt>, the glob matches directories, not files
