@@ -321,7 +321,7 @@ sudo make install # install as desired
 
 <dl>
 <dt>-l</dt>                     <dd>list matching files</dd>
-<dt>-l -m5,</dt>                <dd>list files that have at least 5 matching lines (<tt>-m5,</tt> with comma is <tt>--min-count=5</tt>)</dd>
+<dt>-l -m5,</dt>                <dd>list files that have at least 5 matching lines (<tt>-m5,</tt> with the comma is the same as <tt>--min-count=5</tt>)</dd>
 <dt>-l --max-files=3</dt>       <dd>list only the first 3 matching files</dd>
 <dt>-L</dt>                     <dd>list non-matching files, same as <tt>-lv</tt> i.e. option <tt>-v</tt> inverts matching</dd>
 <dt>-c</dt>                     <dd>count matching lines in files</dd>
@@ -485,7 +485,7 @@ sudo make install # install as desired
 <dt>-g"^*.txt,^bak/"</dt>       <dd>do not search <tt>.txt</tt> files and <tt>bak</tt> directories with the specified negated glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>--iglob="^*.txt,^bak/"</dt> <dd>same as above, but with case-insensitive glob matching (option <tt>--glob-ignore-case</tt> applies to all globs)</dd>
 <dt>-K10,99</dt>                <dd>only search files from line 10 up to and including line 99</dd>
-<dt>-m1</dt>                    <dd>output only the first matching line</dd>
+<dt>-m1</dt>                    <dd>output only the first matching line (same as <tt>--max-count=1</tt>)</dd>
 <dt>-m2,9</dt>                  <dd>only search files with at least two matching lines and output up to and including 9 matching lines</dd>
 <dt>-m2,9 -u</dt>               <dd>only search files with at least two matches and output up to and including 9 matches</dd>
 <dt>-3</dt>                     <dd>recursively search up to three directory levels deep, i.e. <tt><i>one/</i></tt>, <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
