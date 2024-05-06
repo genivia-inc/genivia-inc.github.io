@@ -224,7 +224,7 @@
 <h1>The ugrep file pattern searcher</h1>
 
 <p align=center>a more powerful, ultra fast, user-friendly, compatible grep (that is also completely free!)
-<p align=center><a target="_blank" href="https://github.com/Genivia/ugrep/releases">ugrep release 5.1</a>
+<p align=center><a target="_blank" href="https://github.com/Genivia/ugrep/releases">ugrep release 6.0</a>
 
 <div>
 <div>
@@ -254,8 +254,8 @@ sudo make install # install as desired
 </ul>
 <p align=center>how fast is ugrep?
 <ul>
-<li><a target="_blank" href="https://github.com/Genivia/ugrep-benchmarks">Benchmarks</a>: ugrep is one of the fastest grep
-<li>New <a href="#index">file indexer</a> to speed up cold FS search
+<li><a target="_blank" href="https://github.com/Genivia/ugrep-benchmarks">Benchmarks</a>: ugrep is fast(er)
+<li>New <a href="#index">file indexer</a> speeds up cold FS search
 </ul>
 </div>
 <div class="img-with-text">
@@ -1043,7 +1043,7 @@ sudo make install # install as desired
 <a name="index">&nbsp;</a>
 <h2>Indexing</h2>
 
-<p>The new <a target="_blank" href="https://github.com/Genivia/ugrep-indexer"><tt>ugrep-indexer</tt></a> tool indexes a directory tree to accelerate cold searching.  File searching is generally slow when a file system on a drive is not cached in memory, i.e. when most files are "cold".  Indexing accelerates recursive searching by performing a quick check on precomputed indexes to only search those files that may match.
+<p>The <tt>ugrep-indexer</tt> command indexes a directory tree to accelerate cold searching.  File searching is generally slow when a file system on a drive is not cached in memory, i.e. when most files are "cold".  Indexing accelerates recursive searching by performing a quick check on precomputed indexes to only search those files that may match.
 
 <p>Indexed-based search with ugrep is safe and never skips new or updated files that may now match.  If any files and directories are added or changed after indexing, then ugrep will search these additions and changes made to the file system by comparing file and directory time stamps to the indexing time stamp.  When many files were added or changed, then you may want to re-index to bring the indexes up to date.  Re-indexing is incremental, it will not take as much time as the initial indexing process.
 
