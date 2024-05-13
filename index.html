@@ -420,13 +420,14 @@ sudo make install # install as desired
 <ol>
 <p>Usage tips:</p>
 <li>option <tt>-%</tt> (<tt>--bool</tt>) can be combined with any <a href="#modes">pattern matching modes</a> <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
-<li>white space is a logical <tt>AND</tt> (lowest precedence)
-<li>a <tt>|</tt> is a logical <tt>OR</tt> (taking higher precedence than <tt>AND</tt>)
+<li>the default search mode is <tt>--lines</tt> with option <tt>-%</tt> to match lines
+<li>option <tt>--files</tt> or <tt>-%%</tt> matches across entire files, like how a search engine returns results
+<li>white space in a pattern is a logical <tt>AND</tt> (lowest precedence)
+<li>a <tt>|</tt> in a pattern is a logical <tt>OR</tt> (taking higher precedence than <tt>AND</tt>)
 <li>white space followed by a <tt>-</tt> is a logical <tt>NOT</tt> (taking highest precedence)
 <li>operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when properly spaced
 <li>quote strings in a pattern with <tt>"</tt> to match literally "as is"
 <li>group patterns with <tt>( )</tt> parentheses
-<li>the default search mode is <tt>--lines</tt> to match lines; option <tt>--files</tt> switches the search mode to find files
 </ol>
 
 <a name="fuzzy">&nbsp;</a>
