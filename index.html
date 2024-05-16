@@ -564,6 +564,7 @@ sudo make install # install as desired
 <dt>--separator=<i>SEP</i></dt> <dd>specify <tt><i>SEP</i></tt> to separate line and column numbers from the match</dd>
 <dt>--group-separator=<i>SEP</i></dt>
                                 <dd>specify <tt><i>SEP</i></tt> to separate context for options <tt>-ABC</tt></dd>
+<dt>--width</dt>                <dd>truncate lines to the terminal window width; <tt>--width=40</tt> truncates to 40 characters</dd>
 </dl>
 
 <ol>
@@ -1083,9 +1084,10 @@ sudo make install # install as desired
 
 <ol>
 <p>Usage tips:</p>
+<li><tt>ugrep-indexer</tt> reads a .ugrep-indexer configuration file when present in your home directory with long options (without the <tt>--</tt>) to set your indexing preferences
 <li><tt>ugrep-indexer</tt> option <tt>-v</tt> reports progress; to create a log, redirect <tt>ugrep-indexer -v</tt> output to a log file
 <li><tt>ugrep-indexer</tt> option <tt>-S</tt> follows symlinks to files; indexing never follows symlinks to directories
-<li><tt>ugrep-indexer</tt> option <tt>--ignore-files</tt> obeys .gitignore rules
+<li><tt>ugrep-indexer</tt> option <tt>-X</tt> or <tt>--ignore-files</tt> obeys .gitignore rules
 <li><tt>ugrep-indexer</tt> options <tt>-z --zmax=2</tt> indexes nested archives and tarballs (two levels)
 <li><tt>ug</tt> option <tt>--index</tt> works with all other search options, except for options <tt>-P</tt>, <tt>-Z</tt>, <tt>-v</tt> and <tt>--filter</tt>
 <li><tt>ug</tt> option <tt>--stats</tt> reports index-based search details, including false positives; false positives are reduced with higher indexing accuracy and/or by using more specific search patterns
@@ -1141,7 +1143,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Sun May 12, 2024</small>
+<p><small>Last updated: Wed May 15, 2024</small>
 
 <hr>
 
