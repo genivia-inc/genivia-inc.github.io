@@ -287,6 +287,10 @@ sudo make install # install as desired
                                 <dd>recursively <a href="#Google">Google search files</a> (option <tt>-%%</tt>) with <a href="#modes">smart ignore case</a> (option <tt>-j</tt>) regex patterns matching <a href="#modes">words</a> (option <tt>-w</tt>) in the interactive query <a href="#TUI">TUI</a> (option <tt>-Q</tt>)</dd>
 <dt>ug <i>PATTERN</i></dt>
                                 <dd>recursively search for files matching <tt><i>PATTERN</i></tt></dd>
+<dt>ug -z <i>PATTERN</i></dt>
+                                <dd>recursively search for files, <a href="#zip">archives and compressed files</a> matching <tt><i>PATTERN</i></tt></dd>
+<dt>ug -z -tc,cpp -Z PATTERN</dt>
+                                <dd>recursively search for files, <a href="#zip">archives and compressed files</a> for C and C++ source <a href="#types">file types</a> that <a href="#fuzzy">fuzzy match</a> <tt>PATTERN</tt>, </dd>
 <dt>ug <i>PATTERN</i> <i>FILE</i></dt>
                                 <dd>search lines in <tt><i>FILE</i></tt> matching <tt><i>PATTERN</i></tt></dd>
 <dt>ug <i>PATTERN</i> <i>DIR</i></dt>
@@ -462,7 +466,7 @@ sudo make install # install as desired
 <dt>-z</dt>                     <dd>also search zip/7z/tar/pax/cpio archives, tarballs and gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli compressed files</dd>
 <dt>-z --zmax=2</dt>            <dd>also search archives, tarballs and compressed files stored within archives (max 2 levels)</dd>
 <dt>-z -I --zmax=2</dt>         <dd>same as above, but ignore binary files and also those in (nested) archives and compressed files</dd>
-<dt>-z -tc,cpp</dt>             <dd>search C and C++ source code files and also those in archives, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
+<dt>-z -tc,cpp</dt>             <dd>search C and C++ source files and also those in archives, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-z -g"*.txt,*.md"</dt>      <dd>search files matching the globs <tt>*.txt</tt> and <tt>*.md</tt> and also those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>-z -g"^bak/"</dt>           <dd>exclude all <tt>bak</tt> directories from the search and skip those in archives, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 </dl>
@@ -497,7 +501,7 @@ sudo make install # install as desired
 <dt>-r</dt>                     <dd>search recursively without following symlinks</dd>
 <dt>-rS</dt>                    <dd>search recursively following symlinks to files, but not to directories (option <tt>-S</tt>)</dd>
 <dt>-R</dt>                     <dd>search recursively following symlinks to files and directories</dd>
-<dt>-tc,cpp</dt>                <dd>only search C and C++ source code files, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
+<dt>-tc,cpp</dt>                <dd>only search C and C++ source files, see also <a href="#types"><tt>ug -tlist</tt></a> for a list of file types</dd>
 <dt>-Ohpp,cpp</dt>              <dd>shorthand for <tt>-g"*.hpp,*.cpp"</tt> with filename extension globs to search <tt>.hpp</tt> and <tt>.cpp</tt> files</dd>
 <dt>-g"*.hpp,*.cpp"</dt>        <dd>only search <tt>.hpp</tt> and <tt>.cpp</tt> files with the specified glob patterns, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>-g"src/"</dt>               <dd>only recursively search <tt>src</tt> directories with the specified glob pattern ending in a <tt>/</tt> for directories, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
