@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="description" content="The ugrep file pattern searcher -- a more powerful, ultra fast, user-friendly, compatible grep replacement"/>
-  <meta name="keywords" content="ugrep manual, regex, agrep, ack, grep, ripgrep, silver searcher, grep compatible, grep alternative, grep replacement, file search, file indexing, Google search files, fuzzy search, zip search, tar search, tarball search, gzip search"/>
+  <meta name="keywords" content="ugrep manual, regex, agrep, ack, grep, ripgrep, silver searcher, grep compatible, grep alternative, grep replacement, Unicode pattern matching, file search, file indexing, Google search files, fuzzy search, zip search, tar search, tarball search, gzip search"/>
   <meta name="author" content="Robert A. van Engelen, Genivia Inc">
   <title>The ugrep file pattern searcher</title>
     <style>
@@ -262,7 +262,7 @@ sudo make install # install as desired
 </div>
 <div class="img-with-text">
 <img src="ug.png" alt="ugrep screenshot with TUI"/>
-<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a>, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.
+<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a>, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.  Supports <a href="#regex">Unicode extended regex pattern syntax</a> and multi-line pattern matching by default.
 </div>
 </div>
 
@@ -311,7 +311,7 @@ sudo make install # install as desired
 
 <ol>
 <p>Usage tips:</p>
-<li>the <a href="#regex">regex pattern syntax is standard POSIX ERE</a>, same as <code>egrep</code>, but supporting Unicode
+<li>the <a href="#regex">regex pattern syntax is standard POSIX ERE</a>, same as <code>egrep</code>, but supporting Unicode by default
 <li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match; some examples: the pattern <tt>"foo.*\n.*\n.*baz"</tt> matches a line with <tt>foo</tt>, a second line and a third line with <tt>baz</tt>, the pattern <tt>"foo(.*\n)*?.*bar"</tt> lazily matches one or more lines from <tt>foo</tt> to <tt>bar</tt>
 <li>quote <tt><i>"PATTERN"</i></tt> or <tt><i>'PATTERN'</i></tt> to prevent globbing of the pattern by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
 <li><i>Windows Command Prompt</i> does not parse <tt>'</tt> to quote patterns; you must use <tt>"</tt> instead
@@ -690,6 +690,7 @@ sudo make install # install as desired
 </center>
 
 <ol>
+<li>the regex pattern syntax is standard POSIX ERE, same as <code>egrep</code>, but supporting Unicode by default
 <li>(<tt>-P</tt>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
 <li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax of ugrep (as shown)
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
