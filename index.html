@@ -262,7 +262,7 @@ sudo make install # install as desired
 </div>
 <div class="img-with-text">
 <img src="ug.png" alt="ugrep screenshot with TUI"/>
-<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a>, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.  Supports <a href="#regex">Unicode extended regex pattern syntax</a> and multi-line pattern matching by default.
+<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a>, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.  Supports <a href="#regex">Unicode extended regex pattern syntax</a> and multi-line pattern matching by default and does not require specialized command-line options.
 </div>
 </div>
 
@@ -690,9 +690,8 @@ sudo make install # install as desired
 </center>
 
 <ol>
-<li>the regex pattern syntax is standard POSIX ERE, same as <code>egrep</code>, but supporting Unicode by default
-<li>(<tt>-P</tt>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
-<li>ERE (Extended Regular Expression) syntax is the default regex pattern syntax of ugrep (as shown)
+<li>(<tt>-P</tt>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions) supporting Unicode patterns
+<li>ERE (Extended Regular Expression) syntax is the default (shown in the table) supporting Unicode patterns
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
 <li>(negated) character classes such as <tt>\s</tt> and <tt>[^abc-e]</tt> do not match a newline <tt>\n</tt>
 <li>explicitly specify a <tt>\n</tt> or a <tt>\R</tt> in a pattern such as <tt>"go[\s\n]up"</tt> to match multiple lines as a single match
