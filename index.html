@@ -257,7 +257,7 @@ sudo make install # install as desired
 <p align=center>how fast is ugrep?
 <ul>
 <li><a target="_blank" href="https://github.com/Genivia/ugrep-benchmarks">Benchmarks</a>: ugrep is fast(er)
-<li>New <a href="#index">file indexer</a> speeds up cold FS search
+<li><a href="#index">file indexer</a> speeds up cold FS search
 </ul>
 </div>
 <div class="img-with-text">
@@ -696,7 +696,65 @@ sudo make install # install as desired
 <li>(negated) character classes such as <tt>\s</tt> and <tt>[^abc-e]</tt> do not match a newline <tt>\n</tt>
 <li>explicitly specify a <tt>\n</tt> or a <tt>\R</tt> in a pattern such as <tt>"go[\s\n]up"</tt> to match multiple lines as a single match
 <li>specify option <tt>-P</tt> to match Unicode instead of ASCII word boundaries <tt>\b</tt>, <tt>\B</tt>, <tt>\&lt;</tt> and <tt>\&gt;</tt> (Unicode word boundary matching will likely become the default in a future update)
+<li>for <tt>\p{<i>Class</i>}</tt> (match one character in <tt><i>Class</i></tt>) and for <tt>\P{<i>Class</i>}</tt> (match one character not in <tt><i>Class</i></tt>) a Unicode <tt><i>Class</i></tt> is one of:
 </ol>
+
+<center>
+<div>
+<table>
+<tr><td><tt>Space</tt></td><td>a whitespace and <tt>\n</tt></td></tr>
+<tr><td><tt>Unicode</tt></td><td>any Unicode character</td></tr>
+<tr><td><tt>ASCII</tt></td><td>any ASCII character</td></tr>
+<tr><td><tt>Non_ASCII_Unicode</tt></td><td>any non-ASCII Unicode character</td></tr>
+<tr><td><tt>L&amp;</tt></td><td>a <tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt></tr>
+<tr><td><tt>Letter</tt> or <tt>L</tt></td><td>a <tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt> or <tt>Lm</tt> or <tt>Lo</tt></tr>
+<tr><td><tt>Mark</tt> or <tt>M</tt></td><td>a <tt>Mn</tt> or <tt>Mc</tt> or <tt>Me</tt></td></tr>
+<tr><td><tt>Separator</tt> or <tt>Z</tt></td><td>a <tt>Zs</tt> or <tt>Zl</tt> or <tt>Zp</tt></td></tr>
+<tr><td><tt>Symbol</tt> or <tt>S</tt></td><td>a <tt>Sm</tt> or <tt>Sc</tt> or <tt>Sk</tt> or <tt>So</tt></td></tr>
+<tr><td><tt>Number</tt> or <tt>N</tt></td><td>a <tt>Nd</tt> or <tt>Nl</tt> or <tt>No</tt></td></tr>
+<tr><td><tt>Punctuation</tt> or <tt>P</tt></td><td>a <tt>Pd</tt> or <tt>Ps</tt> or <tt>Pe</tt> or <tt>Pi</tt> or <tt>Pf</tt> or <tt>Pc</tt> or <tt>Po</tt></td></tr>
+<tr><td><tt>Other</tt> or <tt>C</tt></td><td>a <tt>Cc</tt> or <tt>Cf</tt></td></tr>
+<tr><td><tt>Lowercase_Letter</tt> or <tt>Ll</tt></td><td>a lower case letter</td></tr>
+<tr><td><tt>Uppercase_Letter</tt> or <tt>Lu</tt></td><td>an upper case letter </td></tr>
+<tr><td><tt>Titlecase_Letter</tt> or <tt>Lt</tt></td><td>a title case letter</td></tr>
+<tr><td><tt>Modifier_Letter</tt> or <tt>Lm</tt></td><td>a modifier letter</td></tr>
+<tr><td><tt>Other_Letter</tt> or <tt>Lo</tt></td><td>an "other" letter </td></tr>
+<tr><td><tt>Non_Spacing_Mark</tt> or <tt>Mn</tt></td><td>a nonspacing mark</td></tr>
+<tr><td><tt>Spacing_Combining_Mark</tt> or <tt>Mc</tt></td><td>a spacing mark</td></tr>
+<tr><td><tt>Enclosing_Mark</tt> or <tt>Me</tt></td><td>an enclosing mark </td></tr>
+<tr><td><tt>Space_Separator</tt> or <tt>Zs</tt></td><td>a space separator</td></tr>
+<tr><td><tt>Line_Separator</tt> or <tt>Zl</tt></td><td>a line separator</td></tr>
+<tr><td><tt>Paragraph_Separator</tt> or <tt>Zp</tt></td><td>a paragraph separator</td></tr>
+<tr><td><tt>Math_Symbol</tt> or <tt>Sm</tt></td><td>a math symbol</td></tr>
+<tr><td><tt>Currency_Symbol</tt> or <tt>Sc</tt></td><td>a currency symbol</td></tr>
+<tr><td><tt>Modifier_Symbol</tt> or <tt>Sk</tt></td><td>a modifier symbol</td></tr>
+<tr><td><tt>Other_Symbol</tt> or <tt>So</tt></td><td>an "other" symbol</td></tr>
+<tr><td><tt>Decimal_Digit_Number</tt> or <tt>Nd</tt></td><td>a decimal number</td></tr>
+<tr><td><tt>Letter_Number</tt> or <tt>Nl</tt></td><td>a letter number</td></tr>
+<tr><td><tt>Other_Number</tt> or <tt>No</tt></td><td>an "other" number</td></tr>
+<tr><td><tt>Dash_Punctuation</tt> or <tt>Pd</tt></td><td>a dash punctuation</td></tr>
+<tr><td><tt>Open_Punctuation</tt> or <tt>Ps</tt></td><td>an open punctuation</td></tr>
+<tr><td><tt>Close_Punctuation</tt> or <tt>Pe</tt></td><td>a close punctuation</td></tr>
+<tr><td><tt>Initial_Punctuation</tt> or <tt>Pi</tt></td><td>an initial punctuation</td></tr>
+<tr><td><tt>Final_Punctuation</tt> or <tt>Pf</tt></td><td>a final punctuation</td></tr>
+<tr><td><tt>Connector_Punctuation</tt> or <tt>Pc</tt></td><td>a connector puntuation</td></tr>
+<tr><td><tt>Other_Punctuation</tt> or <tt>Po</tt></td><td>an "other" punctuation</td></tr>
+<tr><td><tt>Control</tt> or <tt>Cc</tt></td><td>a control character</td></tr>
+<tr><td><tt>Format</tt> or <tt>Cf</tt></td><td>a format character</td></tr>
+<tr><td><tt>UnicodeIdentifierStart</tt></td><td>a start of identifier character</td></tr>
+<tr><td><tt>UnicodeIdentifierPart</tt></td><td>a identifier character (non-start part)</td></tr>
+<tr><td><tt>IdentifierIgnorable</tt></td><td>an ignorable identifier character</td></tr>
+<tr><td><tt>JavaIdentifierStart</tt></td><td>a start of Java identifier character</td></tr>
+<tr><td><tt>JavaIdentifierPart</tt></td><td>a Java identifier character (non-start part)</td></tr>
+<tr><td><tt>CsIdentifierStart</tt></td><td>a start of C# identifier character</td></tr>
+<tr><td><tt>CsIdentifierPart</tt></td><td>a C# identifier character (non-start part)</td></tr>
+<tr><td><tt>PythonIdentifierStart</tt></td><td>a start of Python identifier character</td></tr>
+<tr><td><tt>PythonIdentifierPart</tt></td><td>a Python identifier character (non-start part)</td></tr>
+<tr><td><tt>Is<i>Block</i></tt></td><td>a character in the specified <tt><i>Block</i></tt></td></tr>
+<tr><td><tt><i>Language</i></tt></td><td>a character in the specified <tt><i>Language</i></tt></td></tr>
+</table>
+</div>
+</center>
 
 <a name="globs">&nbsp;</a>
 <h2>Globs</h2>
@@ -1150,7 +1208,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Tue May 21, 2024</small>
+<p><small>Last updated: Sat May 25, 2024</small>
 
 <hr>
 
