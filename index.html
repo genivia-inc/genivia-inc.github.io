@@ -702,12 +702,13 @@ sudo make install # install as desired
 <center>
 <div>
 <table>
-<tr><td><tt>Space</tt></td><td>a whitespace and <tt>\n</tt></td></tr>
-<tr><td><tt>Unicode</tt></td><td>any Unicode character</td></tr>
 <tr><td><tt>ASCII</tt></td><td>any ASCII character</td></tr>
-<tr><td><tt>Non_ASCII_Unicode</tt></td><td>any non-ASCII Unicode character</td></tr>
-<tr><td><tt>L&amp;</tt></td><td>a <tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt></tr>
-<tr><td><tt>Letter</tt> or <tt>L</tt></td><td>a <tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt> or <tt>Lm</tt> or <tt>Lo</tt></tr>
+<tr><td><tt>Unicode</tt></td><td>any Unicode character (same as <tt>\X</tt>)</td></tr>
+<tr><td><tt>Non_ASCII_Unicode</tt></td><td>any non-ASCII Unicode character</td></td></tr>
+<tr><td><tt>Space</tt></td><td>a whitespace and <tt>\n</tt> (same as <tt>[\s\n]</tt>)</td></tr>
+<tr><td><tt>Word</tt></tt></td><td>a <tt>L</tt> or <tt>Nd</tt> or <tt>Pc</tt> (same as <tt>\w</tt>)</td></tr>
+<tr><td><tt>L&amp;</tt></td><td>a <tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt></td></tr>
+<tr><td><tt>Letter</tt> or <tt>L</tt></td><td>a <tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt> or <tt>Lm</tt> or <tt>Lo</tt></td></tr>
 <tr><td><tt>Mark</tt> or <tt>M</tt></td><td>a <tt>Mn</tt> or <tt>Mc</tt> or <tt>Me</tt></td></tr>
 <tr><td><tt>Separator</tt> or <tt>Z</tt></td><td>a <tt>Zs</tt> or <tt>Zl</tt> or <tt>Zp</tt></td></tr>
 <tr><td><tt>Symbol</tt> or <tt>S</tt></td><td>a <tt>Sm</tt> or <tt>Sc</tt> or <tt>Sk</tt> or <tt>So</tt></td></tr>
