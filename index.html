@@ -742,15 +742,15 @@ sudo make install # install as desired
 <tr><td><tt>Po</tt> or <tt>Other_Punctuation</tt></td><td>any other punctuation</td></tr>
 <tr><td><tt>Cc</tt> or <tt>Control</tt></td><td>a control character</td></tr>
 <tr><td><tt>Cf</tt> or <tt>Format</tt></td><td>a format character</td></tr>
-<tr><td><tt>UnicodeIdentifierStart</tt></td><td>a start of identifier character</td></tr>
-<tr><td><tt>UnicodeIdentifierPart</tt></td><td>a identifier character (non-start part)</td></tr>
-<tr><td><tt>IdentifierIgnorable</tt></td><td>an ignorable identifier character</td></tr>
-<tr><td><tt>JavaIdentifierStart</tt></td><td>a start of Java identifier character</td></tr>
-<tr><td><tt>JavaIdentifierPart</tt></td><td>a Java identifier character (non-start part)</td></tr>
-<tr><td><tt>CsIdentifierStart</tt></td><td>a start of C# identifier character</td></tr>
-<tr><td><tt>CsIdentifierPart</tt></td><td>a C# identifier character (non-start part)</td></tr>
+<tr><td><tt>UnicodeIdentifierStart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt></td></tr>
+<tr><td><tt>UnicodeIdentifierPart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt> or <tt>IdentifierIgnorable</tt></td></tr>
+<tr><td><tt>IdentifierIgnorable</tt></td><td>U+0000~0008,000E~001B,007F,0080~009F</td></tr>
+<tr><td><tt>JavaIdentifierStart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Sc</tt> or <tt>Pc</tt></td></tr>
+<tr><td><tt>JavaIdentifierPart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Sc</tt> or <tt>Pc</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt></td></td></tr>
+<tr><td><tt>CsIdentifierStart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Pc</tt> or '<tt>@</tt>'</td></tr>
+<tr><td><tt>CsIdentifierPart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Pc</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt></td></tr>
 <tr><td><tt>PythonIdentifierStart</tt></td><td>a start of Python identifier character</td></tr>
-<tr><td><tt>PythonIdentifierPart</tt></td><td>a Python identifier character (non-start part)</td></tr>
+<tr><td><tt>PythonIdentifierPart</tt></td><td>a Python identifier character</td></tr>
 <tr><td><tt>Is<i>Block</i></tt></td><td>a character in the specified <tt><i>Block</i></tt></td></tr>
 <tr><td><tt><i>Language</i></tt></td><td>a character in the specified <tt><i>Language</i></tt></td></tr>
 </table>
