@@ -373,7 +373,7 @@ sudo make install # install as desired
 <dt>-G</dt>                     <dd>BRE pattern syntax, like GNU <code>grep</code> or <code>grep -G</code>
 <dt>-P</dt>                     <dd>Perl regex pattern search with PCRE, see also <a href="#regex"><tt>ug --help regex</tt></a></dd>
 <dt>-Z</dt>                     <dd><a href="#fuzzy">fuzzy search</a> with the default ERE pattern syntax</dd>
-<dt>-U</dt>                     <dd>non-Unicode ASCII/binary search like GNU grep; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point</dd>
+<dt>-U</dt>                     <dd>non-Unicode ASCII/binary search; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point</dd>
 <dt>-Y</dt>                     <dd>empty-matching patterns such as <tt>x*y*z*</tt> match all lines like GNU grep, instead of returning useful matches</dd>
 <dt>-i</dt>                     <dd>ignore case in matching patterns</dd>
 <dt>-j</dt>                     <dd>smart ignore case, enables <tt>-i</tt> when patterns are specified in lower case</dd>
@@ -636,29 +636,33 @@ sudo make install # install as desired
 <table>
 <tr><td><tt>[abc-e]         </tt></td><td>one character <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</td></tr>
 <tr><td><tt>[^abc-e]        </tt></td><td>one char not <tt>a</tt>,<tt>b</tt>,<tt>c</tt>,<tt>d</tt>,<tt>e</tt>,<tt>\n</tt></td></tr>
-<tr><td><tt>[[:alnum:]]     </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt></td></tr>
-<tr><td><tt>[[:alpha:]]     </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt></td></tr>
+<tr><td><tt>[[:alnum:]]     </tt></td><td>a letter or decimal digit</td></tr>
+<tr><td><tt>[[:alpha:]]     </tt></td><td>a lower or uppercase letter</td></tr>
 <tr><td><tt>[[:ascii:]]     </tt></td><td>ASCII char <tt>\x00</tt>-<tt>\x7f</tt></td></tr>
-<tr><td><tt>[[:blank:]]     </tt></td><td>space or tab</td></tr>
-<tr><td><tt>[[:cntrl:]]     </tt></td><td>control characters</td></tr>
-<tr><td><tt>[[:digit:]]     </tt></td><td><tt>0</tt>-<tt>9</tt></td></tr>
-<tr><td><tt>[[:graph:]]     </tt></td><td>visible characters</td></tr>
-<tr><td><tt>[[:lower:]]     </tt></td><td><tt>a</tt>-<tt>z</tt></td></tr>
-<tr><td><tt>[[:print:]]     </tt></td><td>visible chars and space</td></tr>
-<tr><td><tt>[[:punct:]]     </tt></td><td>punctuation characters</td></tr>
-<tr><td><tt>[[:space:]]     </tt></td><td>space,<tt>\t,<tt>\v,<tt>\f,<tt>\r</td></tr>
-<tr><td><tt>[[:upper:]]     </tt></td><td><tt>A</tt>-<tt>Z</tt></td></tr>
-<tr><td><tt>[[:word:]]      </tt></td><td><tt>a</tt>-<tt>z</tt>,<tt>A</tt>-<tt>Z</tt>,<tt>0</tt>-<tt>9</tt>,<tt>_</tt></td></tr>
-<tr><td><tt>[[:xdigit:]]    </tt></td><td><tt>0</tt>-<tt>9</tt>,<tt>a</tt>-<tt>f</tt>,<tt>A</tt>-<tt>F</tt></td></tr>
+<tr><td><tt>[[:blank:]]     </tt></td><td>a space or a tab</td></tr>
+<tr><td><tt>[[:cntrl:]]     </tt></td><td>a control character</td></tr>
+<tr><td><tt>[[:digit:]]     </tt></td><td>a decimal digit</td></tr>
+<tr><td><tt>[[:graph:]]     </tt></td><td>a visible character</td></tr>
+<tr><td><tt>[[:lower:]]     </tt></td><td>a lowercase letter</td></tr>
+<tr><td><tt>[[:print:]]     </tt></td><td>a visible char or space</td></tr>
+<tr><td><tt>[[:punct:]]     </tt></td><td>a punctuation character</td></tr>
+<tr><td><tt>[[:space:]]     </tt></td><td>a space,<tt>\t</tt>,<tt>\v</tt>,<tt>\f</tt>,<tt>\r</tt></td></tr>
+<tr><td><tt>[[:upper:]]     </tt></td><td>an uppercase letter</td></tr>
+<tr><td><tt>[[:word:]]      </tt></td><td>a word-like character</td></tr>
+<tr><td><tt>[[:xdigit:]]    </tt></td><td>a hexadecimal digit</td></tr>
 <tr><td><tt>\p{<i>Class</i>}</tt></td><td>one character in <tt><i>Class</i></tt></td></tr>
 <tr><td><tt>\P{<i>Class</i>}</tt></td><td>one char not in <tt><i>Class</i></tt></td></tr>
-<tr><td><tt>\d              </tt></td><td>a digit</td></tr>
-<tr><td><tt>\D              </tt></td><td>a non-digit</td></tr>
-<tr><td><tt>\h              </tt></td><td>a space or tab</td></tr>
-<tr><td><tt>\H              </tt></td><td>not a space or tab</td></tr>
+<tr><td><tt>\d              </tt></td><td>a decimal digit</td></tr>
+<tr><td><tt>\D              </tt></td><td>a non-digit character</td></tr>
+<tr><td><tt>\h              </tt></td><td>a space or a tab</td></tr>
+<tr><td><tt>\H              </tt></td><td>not a space or a tab</td></tr>
+<tr><td><tt>\l              </tt></td><td>a lowercase letter</td></tr>
+<tr><td><tt>\L              </tt></td><td>a non-lowercase character</td></tr>
 <tr><td><tt>\s              </tt></td><td>a whitespace except <tt>\n</tt></td></tr>
 <tr><td><tt>\S              </tt></td><td>a non-whitespace</td></tr>
-<tr><td><tt>\w              </tt></td><td>a word character</td></tr>
+<tr><td><tt>\u              </tt></td><td>an uppercase letter</td></tr>
+<tr><td><tt>\U              </tt></td><td>a non-uppercase character</td></tr>
+<tr><td><tt>\w              </tt></td><td>a word-like character</td></tr>
 <tr><td><tt>\W              </tt></td><td>a non-word character</td></tr>
 </table>
 </div>
@@ -691,12 +695,14 @@ sudo make install # install as desired
 </center>
 
 <ol>
-<li>(<tt>-P</tt>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions) supporting Unicode patterns
-<li>ERE (Extended Regular Expression) syntax is the default (shown in the table) supporting Unicode patterns
+<li>(<tt>-P</tt>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
+<li>ERE (Extended Regular Expression) syntax is the default in ugrep (shown in the table), same as <tt>egrep</tt>
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
-<li>(negated) character classes such as <tt>\s</tt> and <tt>[^abc-e]</tt> do not match a newline <tt>\n</tt>
+<li>option <tt>-U</tt> disables Unicode in regex patterns; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point
+<li>character classes such as <tt>\s</tt> and negated classes such as <tt>[^abc-e]</tt> never match a newline <tt>\n</tt> which is implicitly removed for grep compatibility
 <li>explicitly specify a <tt>\n</tt> or a <tt>\R</tt> in a pattern such as <tt>"go[\s\n]up"</tt> to match multiple lines as a single match
-<li>specify option <tt>-P</tt> to match Unicode instead of ASCII word boundaries <tt>\b</tt>, <tt>\B</tt>, <tt>\&lt;</tt> and <tt>\&gt;</tt> (Unicode word boundary matching will likely become the default in a future update)
+<li>mutiple classes are combined in a single bracket list, such as <tt>[.[:xdigit:]\s]</tt> to combine <tt>.</tt> wtih hexadecimal digits and space
+<li>subtract classes in a bracket list with <tt>[\w--[\d]]</tt> or intersect classes in a bracket list with <tt>[\w&amp;&amp;[\d]]</tt> which is just <tt>\d</tt>
 <li>for <tt>\p{<i>Class</i>}</tt> (match one character in <tt><i>Class</i></tt>) and for <tt>\P{<i>Class</i>}</tt> (match one character not in <tt><i>Class</i></tt>) a Unicode <tt><i>Class</i></tt> is one of:
 </ol>
 
@@ -704,20 +710,22 @@ sudo make install # install as desired
 <div>
 <table>
 <tr><td><tt>ASCII</tt></td><td>any ASCII character</td></tr>
-<tr><td><tt>Unicode</tt></td><td>any Unicode character (same as <tt>\X</tt>)</td></tr>
+<tr><td><tt>Unicode</tt></td><td>any Unicode character except <tt>\n</tt></td></tr>
 <tr><td><tt>Non_ASCII_Unicode</tt></td><td>any non-ASCII Unicode character</td></td></tr>
-<tr><td><tt>Space</tt></td><td>a whitespace and <tt>\n</tt> (same as <tt>[\s\n]</tt>)</td></tr>
-<tr><td><tt>Word</tt></tt></td><td>a <tt>L</tt> or <tt>Nd</tt> or <tt>Pc</tt> (same as <tt>\w</tt>)</td></tr>
-<tr><td><tt>L&amp;</tt></td><td>a <tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt></td></tr>
-<tr><td><tt>L</tt> or <tt>Letter</tt></td><td>a <tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt> or <tt>Lm</tt> or <tt>Lo</tt></td></tr>
-<tr><td><tt>M</tt> or <tt>Mark</tt></td><td>a <tt>Mn</tt> or <tt>Mc</tt> or <tt>Me</tt></td></tr>
-<tr><td><tt>Z</tt> or <tt>Separator</tt></td><td>a <tt>Zs</tt> or <tt>Zl</tt> or <tt>Zp</tt></td></tr>
-<tr><td><tt>S</tt> or <tt>Symbol</tt></td><td>a <tt>Sm</tt> or <tt>Sc</tt> or <tt>Sk</tt> or <tt>So</tt></td></tr>
-<tr><td><tt>N</tt> or <tt>Number</tt></td><td>a <tt>Nd</tt> or <tt>Nl</tt> or <tt>No</tt></td></tr>
-<tr><td><tt>P</tt> or <tt>Punctuation</tt></td><td>a <tt>Pd</tt> or <tt>Ps</tt> or <tt>Pe</tt> or <tt>Pi</tt> or <tt>Pf</tt> or <tt>Pc</tt> or <tt>Po</tt></td></tr>
-<tr><td><tt>C</tt> or <tt>Other</tt></td><td>a <tt>Cc</tt> or <tt>Cf</tt></td></tr>
-<tr><td><tt>Ll</tt> or <tt>Lowercase_Letter</tt></td><td>a lower case letter</td></tr>
-<tr><td><tt>Lu</tt> or <tt>Uppercase_Letter</tt></td><td>an upper case letter </td></tr>
+<tr><td><tt>Alpha</tt></td><td><tt>Ll</tt> or <tt>Lu</tt>, same as <tt>[[:alpha:]]</tt></td></tr>
+<tr><td><tt>Alnum</tt></td><td><tt>Ll</tt> or <tt>Lu</tt> or <tt>Nd</tt>, same as <tt>[[:alnum:]]</tt></td></tr>
+<tr><td><tt>Space</tt></td><td><tt>Zs</tt> or <tt>\t</tt>,<tt>\v</tt>,<tt>\f</tt>,<tt>\r</tt> whitespace, same as <tt>\s</tt> or <tt>[[:space:]]</tt></td></tr>
+<tr><td><tt>Word</tt></tt></td><td><tt>L</tt> or <tt>Nd</tt> or <tt>Pc</tt>, same as <tt>\w</tt> or <tt>[[:word:]]</tt></td></tr>
+<tr><td><tt>L&amp;</tt></td><td><tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt></td></tr>
+<tr><td><tt>L</tt> or <tt>Letter</tt></td><td><tt>Ll</tt> or <tt>Lu</tt> or <tt>Lt</tt> or <tt>Lm</tt> or <tt>Lo</tt></td></tr>
+<tr><td><tt>M</tt> or <tt>Mark</tt></td><td><tt>Mn</tt> or <tt>Mc</tt> or <tt>Me</tt></td></tr>
+<tr><td><tt>Z</tt> or <tt>Separator</tt></td><td><tt>Zs</tt> or <tt>Zl</tt> or <tt>Zp</tt></td></tr>
+<tr><td><tt>S</tt> or <tt>Symbol</tt></td><td><tt>Sm</tt> or <tt>Sc</tt> or <tt>Sk</tt> or <tt>So</tt></td></tr>
+<tr><td><tt>N</tt> or <tt>Number</tt></td><td><tt>Nd</tt> or <tt>Nl</tt> or <tt>No</tt></td></tr>
+<tr><td><tt>P</tt> or <tt>Punctuation</tt></td><td><tt>Pd</tt> or <tt>Ps</tt> or <tt>Pe</tt> or <tt>Pi</tt> or <tt>Pf</tt> or <tt>Pc</tt> or <tt>Po</tt>, same as <tt>[[:punct:]]</tt></td></tr>
+<tr><td><tt>C</tt> or <tt>Other</tt></td><td><tt>Cc</tt> or <tt>Cf</tt>, same as <tt>[[:cntrl:]]</tt></td></tr>
+<tr><td><tt>Ll</tt> or <tt>Lower</tt> or <tt>Lowercase_Letter</tt></td><td>a lower case letter, same as <tt>\l</tt> or <tt>[[:lower:]]</tt></td></tr>
+<tr><td><tt>Lu</tt> or <tt>Upper</tt> or <tt>Uppercase_Letter</tt></td><td>an upper case letter, same as <tt>\u</tt> or <tt>[[:upper:]]</tt></td></tr>
 <tr><td><tt>Lt</tt> or <tt>Titlecase_Letter</tt></td><td>a title case letter</td></tr>
 <tr><td><tt>Lm</tt> or <tt>Modifier_Letter</tt></td><td>a modifier letter</td></tr>
 <tr><td><tt>Lo</tt> or <tt>Other_Letter</tt></td><td>any other letter </td></tr>
@@ -731,7 +739,7 @@ sudo make install # install as desired
 <tr><td><tt>Sc</tt> or <tt>Currency_Symbol</tt></td><td>a currency symbol</td></tr>
 <tr><td><tt>Sk</tt> or <tt>Modifier_Symbol</tt></td><td>a modifier symbol</td></tr>
 <tr><td><tt>So</tt> or <tt>Other_Symbol</tt></td><td>any other symbol</td></tr>
-<tr><td><tt>Nd</tt> or <tt>Decimal_Digit_Number</tt></td><td>a decimal number</td></tr>
+<tr><td><tt>Nd</tt> or <tt>Decimal_Digit_Number</tt></td><td>a decimal number, same as <tt>\d</tt> or <tt>[[:digit:]]</tt></td></tr>
 <tr><td><tt>Nl</tt> or <tt>Letter_Number</tt></td><td>a letter number</td></tr>
 <tr><td><tt>No</tt> or <tt>Other_Number</tt></td><td>any other number</td></tr>
 <tr><td><tt>Pd</tt> or <tt>Dash_Punctuation</tt></td><td>a dash punctuation</td></tr>
@@ -743,16 +751,16 @@ sudo make install # install as desired
 <tr><td><tt>Po</tt> or <tt>Other_Punctuation</tt></td><td>any other punctuation</td></tr>
 <tr><td><tt>Cc</tt> or <tt>Control</tt></td><td>a control character</td></tr>
 <tr><td><tt>Cf</tt> or <tt>Format</tt></td><td>a format character</td></tr>
-<tr><td><tt>UnicodeIdentifierStart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt></td></tr>
-<tr><td><tt>UnicodeIdentifierPart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt> or <tt>IdentifierIgnorable</tt></td></tr>
+<tr><td><tt>UnicodeIdentifierStart</tt></td><td><tt>L</tt> or <tt>Nl</tt></td></tr>
+<tr><td><tt>UnicodeIdentifierPart</tt></td><td><tt>L</tt> or <tt>Nl</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt> or <tt>IdentifierIgnorable</tt></td></tr>
 <tr><td><tt>IdentifierIgnorable</tt></td><td>U+0000~0008,000E~001B,007F,0080~009F</td></tr>
-<tr><td><tt>JavaIdentifierStart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Sc</tt> or <tt>Pc</tt></td></tr>
-<tr><td><tt>JavaIdentifierPart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Sc</tt> or <tt>Pc</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt></td></td></tr>
-<tr><td><tt>CsIdentifierStart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Pc</tt> or '<tt>@</tt>'</td></tr>
-<tr><td><tt>CsIdentifierPart</tt></td><td>a <tt>L</tt> or <tt>Nl</tt> or <tt>Pc</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt></td></tr>
+<tr><td><tt>JavaIdentifierStart</tt></td><td><tt>L</tt> or <tt>Nl</tt> or <tt>Sc</tt> or <tt>Pc</tt></td></tr>
+<tr><td><tt>JavaIdentifierPart</tt></td><td><tt>L</tt> or <tt>Nl</tt> or <tt>Sc</tt> or <tt>Pc</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt></td></td></tr>
+<tr><td><tt>CsIdentifierStart</tt></td><td><tt>L</tt> or <tt>Nl</tt> or <tt>Pc</tt> or '<tt>@</tt>'</td></tr>
+<tr><td><tt>CsIdentifierPart</tt></td><td><tt>L</tt> or <tt>Nl</tt> or <tt>Pc</tt> or <tt>Mn</tt> or <tt>Mc</tt> or <tt>Nd</tt> or <tt>Cf</tt></td></tr>
 <tr><td><tt>PythonIdentifierStart</tt></td><td>a start of Python identifier character</td></tr>
 <tr><td><tt>PythonIdentifierPart</tt></td><td>a Python identifier character</td></tr>
-<tr><td><tt>Is<i>Block</i></tt></td><td>a character in the specified <tt><i>Block</i></tt></td></tr>
+<tr><td><tt>Is<i>Block</i></tt></td><td>a character in the specified Unicode <tt><i>Block</i></tt></td></tr>
 <tr><td><tt><i>Language</i></tt></td><td>a character in the specified <tt><i>Language</i></tt></td></tr>
 </table>
 </div>
@@ -1210,7 +1218,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Sat May 25, 2024</small>
+<p><small>Last updated: Mon June 3, 2024</small>
 
 <hr>
 
