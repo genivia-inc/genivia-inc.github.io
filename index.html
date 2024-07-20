@@ -305,8 +305,8 @@ sudo make install # install as desired
                                 <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files and directories</dd>
 <dt>ug -3 <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt>, but up to 3 levels, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
-<dt>ug <i>PATTERN</i> -O pem --filter="pem:openssl x509 -passin pass: -text -in %</dt>
-                                <dd><a href="#constraints">recursively find files with suffix</a> <tt>.pem</tt>, then use <tt>openssl</tt> as a <a href="#filter">filter</a> to search the certificate data</dt>
+<dt>ug <i>PATTERN</i> -Opem --filter="pem:openssl x509 -passin pass: -text -in %</dt>
+                                <dd><a href="#constraints">recursively find files with suffix</a> <tt>.pem</tt> (option <tt>-O</tt>), then use <tt>openssl</tt> as a <a href="#filter">filter</a> to search the certificate data</dt>
 <dt>ug --save-config --ignore-files --ignore-binary --decompress</dt>
                                 <dd>save a .ugrep configuration file that lets <tt>ug</tt> obey <a href="#constraints">.gitignore rules</a> in recursive searches, <a href="#constraints">ignore binary files</a> (<tt>-I</tt>) in searches and always <a href="#zip">search archives and compressed files</a> (<tt>-z</tt>)</dd>
 <dt>ug --help regex</dt>
@@ -487,7 +487,7 @@ sudo make install # install as desired
 
 <dl>
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
-<dt>-W</dt>                     <dd>hexdump the binary matches, keeping text matches as is</dd>
+<dt>-W</dt>                     <dd>hexdump binary matches, while keeping text matches as text</dd>
 <dt>-X</dt>                     <dd>hexdump all matches</dd>
 <dt>-UX</dt>                    <dd>hexdump with 8-bit binary patterns instead of Unicode character-based patterns (option <tt>-U</tt>)</dd>
 <dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns and output a <tt>*</tt> for hex lines that are identical to the previous line (<tt>a</tt>)</dd>
