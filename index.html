@@ -305,6 +305,8 @@ sudo make install # install as desired
                                 <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt>, including symlinks to files and directories</dd>
 <dt>ug -3 <i>PATTERN</i> <i>DIR</i></dt>
                                 <dd><a href="#constraints">recursively search</a> files in <tt><i>DIR</i></tt> matching <tt><i>PATTERN</i></tt> as <tt>-r</tt>, but up to 3 levels, i.e. <tt><i>DIR/</i></tt>, <tt><i>DIR/one/</i></tt>, and <tt><i>DIR/one/two/</i></tt></dd>
+<dt>ug <i>PATTERN</i> --filter="pem:openssl x509 -passin pass: -text -in %</dt>
+                                <dd>recursively search certificates using <tt>openssl</tt> as a <a href="#filter">filter</a></dt>
 <dt>ug --save-config --ignore-files --ignore-binary --decompress</dt>
                                 <dd>save a .ugrep configuration file that lets <tt>ug</tt> obey <a href="#constraints">.gitignore rules</a> in recursive searches, <a href="#constraints">ignore binary files</a> (<tt>-I</tt>) in searches and always <a href="#zip">search archives and compressed files</a> (<tt>-z</tt>)</dd>
 <dt>ug --help regex</dt>
@@ -937,8 +939,8 @@ sudo make install # install as desired
                                 <dd>search image metadata, like <code>ug+</code></dd>
 <dt>--filter="odt,doc,docx,rtf,xls,xlsx,ppt,pptx:soffice --headless --cat %"</dt>
                                 <dd>search documents, spreadsheets and presentations (this is slow)</dd>
-<dt>--filter="pem:openssl x509 -text,cer,crt,der:openssl x509 -text -inform der"</dt>
-                                <dd>search certificates</dd>
+<dt>--filter="pem:openssl x509 -passin pass: -text -in %,cer,crt,der:openssl x509 -passin pass: -text -inform der -in %"</dt>
+                                <dd>search <tt>.pem</tt>, <tt>.cer</tt>, <tt>.crt</tt> and <tt>.der</tt> certificates</dd>
 <dt>--filter="jis:iconv -f SHIFT-JIS -t UTF-8"</dt>
                                 <dd>search <tt>.jis</tt> files encoded in Shift-JIS format converted to UTF-8</dd>
 <dt>--filter="o,a,so:nm -gU %"</dt>
@@ -1221,7 +1223,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Sat June 22, 2024</small>
+<p><small>Last updated: Sat July 20, 2024</small>
 
 <hr>
 
