@@ -225,7 +225,7 @@
 <h1>The ugrep file pattern searcher</h1>
 
 <p align=center>a more powerful, ultra fast, user-friendly, compatible grep (that is also completely free!)
-<p align=center><a class="github-button" href="https://github.com/Genivia/ugrep/releases" data-icon="octicon-cloud-download" aria-label="ugrep on GitHub">ugrep release 6.3</a> <a class="github-button" href="https://github.com/Genivia/ugrep" data-count-href="/Genivia/ugrep/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star Genivia/ugrep on GitHub">Star</a>
+<p align=center><a class="github-button" href="https://github.com/Genivia/ugrep/releases" data-icon="octicon-cloud-download" aria-label="ugrep on GitHub">ugrep release 6.4</a> <a class="github-button" href="https://github.com/Genivia/ugrep" data-count-href="/Genivia/ugrep/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star Genivia/ugrep on GitHub">Star</a>
 
 <div>
 <div>
@@ -264,7 +264,7 @@ sudo make install # install as desired
 </div>
 <div class="img-with-text">
 <img src="ug.png" alt="ugrep screenshot with TUI"/>
-<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a>, search and <a href="#binary">hexdump binary</a>, search PDF, doc, docx, and much more.  Supports <a href="#regex">Unicode extended regex pattern syntax</a> and multi-line pattern matching by default and does not require specialized command-line options.
+<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a>, search and <a href="#binary">hexdump</a> binary files, search documents such as PDF, doc, docx, and output in JSON, XML, CSV or your own <a href="#format">customized format</a>.  Supports <a href="#regex">Unicode extended regex pattern syntax</a> and multi-line pattern matching without requiring special command-line options.
 </div>
 </div>
 
@@ -432,9 +432,9 @@ sudo make install # install as desired
 
 <ol>
 <p>Usage tips:</p>
-<li>option <tt>-%</tt> (<tt>--bool</tt>) can be combined with any <a href="#modes">pattern matching modes</a> <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
-<li>the default search mode is <tt>--lines</tt> with option <tt>-%</tt> to match lines
-<li>option <tt>--files</tt> or <tt>-%%</tt> matches across entire files, like how a search engine returns results
+<li>option <tt>-%</tt> (or <tt>--bool</tt>) can be combined with any <a href="#modes">pattern matching modes</a> <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
+<li>the default search mode is <tt>--lines</tt> for option <tt>-%</tt> to match lines
+<li>option <tt>-%%</tt> (or <tt>--bool --files</tt>) matches across entire files, like how a search engine returns results
 <li>white space in a pattern is a logical <tt>AND</tt> (lowest precedence)
 <li>a <tt>|</tt> in a pattern is a logical <tt>OR</tt> (taking higher precedence than <tt>AND</tt>)
 <li>white space followed by a <tt>-</tt> is a logical <tt>NOT</tt> (taking highest precedence)
@@ -591,7 +591,7 @@ sudo make install # install as desired
 
 <dl>
 <dt>--help <i>WHAT</i></dt>     <dd>display help on <tt><i>WHAT</i></tt> you are looking for</dd>
-<dt>--help count</dt>           <dd>display help on option <tt>-c</tt> (<tt>--count</tt>) and <tt>-m [MIN,][MAX]</tt> (<tt>--min-count=MIN</tt>, <tt>--max-count=MAX</tt>)</dd>
+<dt>--help count</dt>           <dd>display help on option <tt>-c</tt> (or <tt>--count</tt>) and <tt>-m [MIN,][MAX]</tt> (or <tt>--min-count=MIN</tt>, <tt>--max-count=MAX</tt>)</dd>
 <dt>--help regex</dt>           <dd>display help with details on regex patterns</dd>
 <dt>--help globs</dt>           <dd>display help with details on glob patterns, e.g. for option <tt>-g</tt></dd>
 </dl>
@@ -682,17 +682,17 @@ sudo make install # install as desired
 <tr><td><tt>\B         </tt></td><td>non-word boundary</td></tr>
 <tr><td><tt>\&lt;      </tt></td><td>start of word boundary</td></tr>
 <tr><td><tt>\&gt;      </tt></td><td>end of word boundary</td></tr>
-<tr><td><tt>(?=...)    </tt></td><td>lookahead (<tt>-P</tt>)</td></tr>
-<tr><td><tt>(?!...)    </tt></td><td>negative lookahead (<tt>-P</tt>)</td></tr>
-<tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind (<tt>-P</tt>)</td></tr>
-<tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind (<tt>-P</tt>)</td></tr>
-<tr><td><tt>(...)                 </tt></td><td>capturing group (<tt>-P</tt>)</td></tr>
+<tr><td><tt>(?=...)    </tt></td><td>lookahead (<b><tt>-P</tt></b>)</td></tr>
+<tr><td><tt>(?!...)    </tt></td><td>negative lookahead (<b><tt>-P</tt></b>)</td></tr>
+<tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind (<b><tt>-P</tt></b>)</td></tr>
+<tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind (<b><tt>-P</tt></b>)</td></tr>
+<tr><td><tt>(...)                 </tt></td><td>capturing group (<b><tt>-P</tt></b>)</td></tr>
 <tr><td><tt>(...)                 </tt></td><td>non-capturing group</td></tr>
 <tr><td><tt>(?:...)               </tt></td><td>non-capturing group</td></tr>
-<tr><td><tt>(?&lt;<i>X</i>&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (<tt>-P</tt>)</td></tr>
-<tr><td><tt>\1                    </tt></td><td>matches group 1 (<tt>-P</tt>)</td></tr>
-<tr><td><tt>\g{10}                </tt></td><td>matches group 10 (<tt>-P</tt>)</td></tr>
-<tr><td><tt>\g{<i>X</i>}          </tt></td><td>matches group name <i>X</i> (<tt>-P</tt>)</td></tr>
+<tr><td><tt>(?&lt;<i>X</i>&gt;...)</tt></td><td>capturing, named <tt><i>X</i></tt> (<b><tt>-P</tt></b>)</td></tr>
+<tr><td><tt>\1                    </tt></td><td>matches group 1 (<b><tt>-P</tt></b>)</td></tr>
+<tr><td><tt>\g{10}                </tt></td><td>matches group 10 (<b><tt>-P</tt></b>)</td></tr>
+<tr><td><tt>\g{<i>X</i>}          </tt></td><td>matches group name <i>X</i> (<b><tt>-P</tt></b>)</td></tr>
 <tr><td><tt>(?#...)               </tt></td><td>comments <tt>...</tt> are ignored</td></tr>
 </table>
 </div>
@@ -700,7 +700,7 @@ sudo make install # install as desired
 </center>
 
 <ol>
-<li>(<tt>-P</tt>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
+<li>(<b><tt>-P</tt></b>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions)
 <li>ERE (Extended Regular Expression) syntax is the default in ugrep (shown in the table), same as <tt>egrep</tt>
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> replaces <tt>|</tt> with <tt>\|</tt>, <tt>+</tt> with <tt>\+</tt>, <tt>?</tt> with <tt>\?</tt>, <tt>( )</tt> with <tt>\( \)</tt>, and <tt>{ }</tt> with <tt>\{ \}</tt>
 <li>option <tt>-U</tt> disables Unicode in regex patterns; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point
@@ -926,7 +926,7 @@ sudo make install # install as desired
 <a name="filter">&nbsp;</a>
 <h2>Filters</h2>
 
-<p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified <tt>command</tt> may be included.  The special option <tt>%</tt> is expanded into the pathname of the file to search.  Filters are applied first when the filename extension matches one of the specified filters, then the output of the filter is searched.  Some examples:
+<p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified <tt>command</tt> may be included.  The special command parameter <tt>%</tt> is expanded into the pathname of the file to filter.  Filters are applied first when the filename extension matches one of the specified filters, then the output of the filter is searched.  A <tt>*</tt> matches any extension.  Some examples:
 
 <dl>
 <dt>--filter="pdf:pdftotext % -"</dt>
@@ -945,6 +945,7 @@ sudo make install # install as desired
                                 <dd>search <tt>.jis</tt> files encoded in Shift-JIS format converted to UTF-8</dd>
 <dt>--filter="o,a,so:nm -gU %"</dt>
                                 <dd>search object files and libraries for defined symbols</dd>
+<dt>--filter="*:file %"</dt>    <dd>search the file type info of every file using the <tt>file</tt> utility</dd>
 </dl>
 
 <ol>
@@ -1030,86 +1031,121 @@ sudo make install # install as desired
 <tr><td><tt>--replace=<i>"FORMAT"</i>     </tt></td><td>replace matches in the output with the specified formatted string</td></tr>
 </table>
 
-<p>where <tt><i>FORMAT</i></tt> may contain any text and the following format fields:
+<p>where <tt><i>FORMAT</i></tt> may contain any text and the following format fields with a short description of the corresponding output:
 
+<center>
+
+<div class="wide">
 <table align=center>
-<tr><td><tt>%F                   </tt></td><td>if option <tt>-H</tt> is used: the file pathname and separator</td></tr>
-<tr><td><tt>%[TEXT]F             </tt></td><td>if option <tt>-H</tt> is used: <tt>TEXT</tt>, the file pathname and separator</td></tr>
-<tr><td><tt>%f                   </tt></td><td>the file pathname</td></tr>
-<tr><td><tt>%a                   </tt></td><td>the file basename without directory path</td></tr>
-<tr><td><tt>%p                   </tt></td><td>the directory path to the file</td></tr>
-<tr><td><tt>%z                   </tt></td><td>the pathname in a (compressed) archive, without <tt>{</tt> and <tt>}</tt></td></tr>
-<tr><td><tt>%H                   </tt></td><td>if option <tt>-H</tt> is used: the quoted pathname and separator, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
-<tr><td><tt>%[TEXT]H             </tt></td><td>if option <tt>-H</tt> is used: <tt>TEXT</tt>, the quoted pathname and separator, \" and \\ replace " and \</td></tr>
-<tr><td><tt>%h                   </tt></td><td>the quoted file pathname, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
-<tr><td><tt>%N                   </tt></td><td>if option <tt>-n</tt> is used: the line number and separator</td></tr>
-<tr><td><tt>%[TEXT]N             </tt></td><td>if option <tt>-n</tt> is used: <tt>TEXT</tt>, the line number and separator</td></tr>
-<tr><td><tt>%n                   </tt></td><td>the line number of the match</td></tr>
-<tr><td><tt>%K                   </tt></td><td>if option <tt>-k</tt> is used: the column number and separator</td></tr>
-<tr><td><tt>%[TEXT]K             </tt></td><td>if option <tt>-k</tt> is used: <tt>TEXT</tt>, the column number and separator</td></tr>
-<tr><td><tt>%k                   </tt></td><td>the column number of the match</td></tr>
-<tr><td><tt>%B                   </tt></td><td>if option <tt>-b</tt> is used: the byte offset and separator</td></tr>
-<tr><td><tt>%[TEXT]B             </tt></td><td>if option <tt>-b</tt> is used: <tt>TEXT</tt>, the byte offset and separator</td></tr>
-<tr><td><tt>%b                   </tt></td><td>the byte offset of the match</td></tr>
-<tr><td><tt>%T                   </tt></td><td>if option <tt>-T</tt> is used: <tt>TEXT</tt> and a tab character</td></tr>
-<tr><td><tt>%[TEXT]T             </tt></td><td>if option <tt>-T</tt> is used: <tt>TEXT</tt> and a tab character</td></tr>
-<tr><td><tt>%t                   </tt></td><td>a tab character</td></tr>
-<tr><td><tt>%[SEP]$              </tt></td><td>set field separator to <tt>SEP</tt> for the rest of the format fields</td></tr>
-<tr><td><tt>%[TEXT]&lt;          </tt></td><td>if the first match: <tt>TEXT</tt></td></tr>
-<tr><td><tt>%[TEXT]&gt;          </tt></td><td>if not the first match: <tt>TEXT</tt></td></tr>
-<tr><td><tt>%,                   </tt></td><td>if not the first match: a comma, same as <tt>%[,]&lt;</tt></td></tr>
-<tr><td><tt>%:                   </tt></td><td>if not the first match: a colon, same as <tt>%[:]&gt;</tt></td></tr>
-<tr><td><tt>%;                   </tt></td><td>if not the first match: a semicolon, same as <tt>%[;]&gt;</tt></td></tr>
-<tr><td><tt>%|                   </tt></td><td>if not the first match: a vertical bar, same as <tt>%[|]&gt;</tt></td></tr>
-<tr><td><tt>%S                   </tt></td><td>if not the first match: separator, see also <tt>%[SEP]$</tt></td></tr>
-<tr><td><tt>%[TEXT]S             </tt></td><td>if not the first match: <tt>TEXT</tt> and separator, see also <tt>%[SEP]$</tt></td></tr>
-<tr><td><tt>%s                   </tt></td><td>the separator, see also <tt>%[TEXT]S</tt> and <tt>%[SEP]$</tt></td></tr>
-<tr><td><tt>%~                   </tt></td><td>a newline character</td></tr>
-<tr><td><tt>%+                   </tt></td><td>if option <tt>--heading</tt> is used: <tt>%F</tt> and a newline character, suppress all <tt>%F</tt> and <tt>%H</tt> afterward</td></tr>
-<tr><td><tt>%m                   </tt></td><td>the number of matches, sequential (or number of matching files with <tt>--format-end</tt>)</td></tr>
-<tr><td><tt>%M                   </tt></td><td>the number of matching lines (or number of matching files with <tt>--format-end</tt>)</td></tr>
-<tr><td><tt>%O                   </tt></td><td>the matching line is output as is (a raw string of bytes)</td></tr>
-<tr><td><tt>%o                   </tt></td><td>the match is output as is (a raw string of bytes)</td></tr>
-<tr><td><tt>%Q                   </tt></td><td>the matching line as a quoted string, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
-<tr><td><tt>%q                   </tt></td><td>the match as a quoted string, <tt>\"</tt> and <tt>\\</tt> replace <tt>"</tt> and <tt>\</tt></td></tr>
-<tr><td><tt>%C                   </tt></td><td>the matching line formatted as a quoted C/C++ string</td></tr>
-<tr><td><tt>%c                   </tt></td><td>the match formatted as a quoted C/C++ string</td></tr>
-<tr><td><tt>%J                   </tt></td><td>the matching line formatted as a quoted JSON string</td></tr>
-<tr><td><tt>%j                   </tt></td><td>the match formatted as a quoted JSON string</td></tr>
-<tr><td><tt>%V                   </tt></td><td>the matching line formatted as a quoted CSV string</td></tr>
-<tr><td><tt>%v                   </tt></td><td>the match formatted as a quoted CSV string</td></tr>
-<tr><td><tt>%X                   </tt></td><td>the matching line formatted as XML character data</td></tr>
-<tr><td><tt>%x                   </tt></td><td>the match formatted as XML character data</td></tr>
-<tr><td><tt>%w                   </tt></td><td>the width of the match, counting (wide) characters</td></tr>
-<tr><td><tt>%d                   </tt></td><td>the size of the match, counting bytes</td></tr>
-<tr><td><tt>%e                   </tt></td><td>the ending byte offset of the match</td></tr>
-<tr><td><tt>%Z                   </tt></td><td>the edit distance cost of an approximate match with option <tt>-Z</tt></td></tr>
-<tr><td><tt>%u                   </tt></td><td>select unique lines only unless option <tt>-u</tt> is used</td></tr>
-<tr><td><tt>%1 %2 ... %9         </tt></td><td>the first regex group capture of the match, and so on up to group <tt>%9</tt>, requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM]#              </tt></td><td>the regex group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM]b              </tt></td><td>the byte offset of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM]e              </tt></td><td>the ending byte offset of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM]d              </tt></td><td>the byte length of the group capture <tt>NUM</tt>; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]#    </tt></td><td>the first group capture <tt>NUM</tt> in the list that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]b    </tt></td><td>the byte offset of the first group capture <tt>NUM</tt> in the list that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]e    </tt></td><td>the ending byte offset of the first group capture <tt>NUM</tt> in the list that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NUM1|NUM2|...]d    </tt></td><td>the byte length of the first group capture <tt>NUM</tt> in the list that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%[NAME]#             </tt></td><td>the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME]b             </tt></td><td>the byte offset of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME]e             </tt></td><td>the ending byte offset of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME]d             </tt></td><td>the byte length of the <tt>NAME</tt>d group capture; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME1|NAME2|...]#  </tt></td><td>the first <tt>NAME</tt>d group capture in the list that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME1|NAME2|...]b  </tt></td><td>the byte offset of the first <tt>NAME</tt>d group capture in the list that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME1|NAME2|...]e  </tt></td><td>the ending byte offset of the first <tt>NAME</tt>d group capture in the list that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%[NAME1|NAME2|...]d  </tt></td><td>the byte length of the first <tt>NAME</tt>d group capture in the list that matched; requires option <tt>-P</tt> and capturing pattern <tt>(?&lt;NAME&gt;PATTERN)</tt></td></tr>
-<tr><td><tt>%G                   </tt></td><td>all group capture indices/names of the match</td></tr>
-<tr><td><tt>%[TEXT1|TEXT2|...]G  </tt></td><td>all <tt>TEXT</tt> indexed by group capture indices that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%g                   </tt></td><td>the group capture index of the match or 1</td></tr>
-<tr><td><tt>%[TEXT1|TEXT2|...]g  </tt></td><td>the <tt>TEXT</tt> indexed by the first group capture index that matched; requires option <tt>-P</tt></td></tr>
-<tr><td><tt>%%                   </tt></td><td>the percentage sign</td></tr>
+<tr><td><tt>%%</tt>                   </td><td><tt>%</tt></td></tr>
+<tr><td><tt>%~</tt>                   </td><td>newline (LF or CRLF)</td></tr>
+<tr><td><tt>%a</tt>                   </td><td>basename of matching file</td></tr>
+<tr><td><tt>%A</tt>                   </td><td>byte range in hex of a match</td></tr>
+<tr><td><tt>%b</tt>                   </td><td>byte offset of a match</td></tr>
+<tr><td><tt>%B</tt> <tt>%[...]B</tt>  </td><td>text <tt>...</tt> + byte offset, if <tt>-b</tt></td></tr>
+<tr><td><tt>%c</tt>                   </td><td>matching pattern as C/C++</td></tr>
+<tr><td><tt>%C</tt>                   </td><td>matching line as C/C++</td></tr>
+<tr><td><tt>%d</tt>                   </td><td>byte size of a match</td></tr>
+<tr><td><tt>%e</tt>                   </td><td>end offset of a match</td></tr>
+<tr><td><tt>%f</tt>                   </td><td>pathname of matching file</td></tr>
+<tr><td><tt>%F</tt> <tt>%[...]F</tt>  </td><td>text <tt>...</tt> + pathname, if <tt>-H</tt></td></tr>
+<tr><td><tt>%+</tt>                   </td><td><tt>%F</tt> as heading/break, if <tt>-+</tt></td></tr>
+<tr><td><tt>%h</tt>                   </td><td>quoted "pathname"</td></tr>
+<tr><td><tt>%H</tt> <tt>%[...]H</tt>  </td><td>text <tt>...</tt> + "pathname", if <tt>-H</tt></td></tr>
+<tr><td><tt>%j</tt>                   </td><td>matching pattern as JSON</td></tr>
+<tr><td><tt>%J</tt>                   </td><td>matching line as JSON</td></tr>
+<tr><td><tt>%k</tt>                   </td><td>column number of a match</td></tr>
+<tr><td><tt>%K</tt> <tt>%[...]K</tt>  </td><td>text <tt>...</tt> + column number, if <tt>-k</tt></td></tr>
+<tr><td><tt>%l</tt>                   </td><td>last line number of a match</td></tr>
+<tr><td><tt>%L</tt>                   </td><td>number of lines of a match</td></tr>
+<tr><td><tt>%m</tt>                   </td><td>number of matches</td></tr>
+<tr><td><tt>%M</tt>                   </td><td>number of matching lines</td></tr>
+<tr><td><tt>%n</tt>                   </td><td>line number of a match</td></tr>
+<tr><td><tt>%N</tt> <tt>%[...]N</tt>  </td><td>text <tt>...</tt> + line number, if <tt>-n</tt></td></tr>
+<tr><td><tt>%o</tt>                   </td><td>matching pattern, also <tt>%0</tt></td></tr>
+<tr><td><tt>%O</tt>                   </td><td>matching line</td></tr>
+<tr><td><tt>%p</tt>                   </td><td>path to matching file</td></tr>
+<tr><td><tt>%q</tt>                   </td><td>quoted matching pattern</td></tr>
+<tr><td><tt>%Q</tt>                   </td><td>quoted matching line</td></tr>
+<tr><td><tt>%R</tt>                   </td><td>newline, if <tt>--break</tt></td></tr>
+<tr><td><tt>%s</tt>                   </td><td>separator (<tt>:</tt> by default)</td></tr>
+<tr><td><tt>%S</tt> <tt>%[...]S</tt>  </td><td>text <tt>...</tt> + separator, if <tt>%m</tt> &gt; 1</td></tr>
+<tr><td><tt>%t</tt>                   </td><td>tab</td></tr>
+<tr><td><tt>%T</tt> <tt>%[...]T</tt>  </td><td>text <tt>...</tt> + tab, if <tt>-T</tt></td></tr>
+<tr><td><tt>%u</tt>                   </td><td>unique lines, unless <tt>-u</tt></td></tr>
+<tr><td><tt>%[hhhh]U</tt>             </td><td>U+hhhh Unicode code point</td></tr>
+<tr><td><tt>%v</tt>                   </td><td>matching pattern as CSV</td></tr>
+<tr><td><tt>%V</tt>                   </td><td>matching line as CSV</td></tr>
+<tr><td><tt>%w</tt>                   </td><td>match width in wide chars</td></tr>
+<tr><td><tt>%x</tt>                   </td><td>matching pattern as XML</td></tr>
+<tr><td><tt>%X</tt>                   </td><td>matching line as XML</td></tr>
+<tr><td><tt>%y</tt>                   </td><td>matching pattern as hex</td></tr>
+<tr><td><tt>%Y</tt>                   </td><td>matching line as hex</td></tr>
+<tr><td><tt>%z</tt>                   </td><td>path in archive</td></tr>
+<tr><td><tt>%Z</tt>                   </td><td>edit distance cost, if <tt>-Z</tt></td></tr>
+</table>
+</div>
+
+<div>
+<table align=center>
+<tr><td><tt>%[...]&lt;</tt>     </td><td>text <tt>...</tt> if <tt>%m</tt> = 1</td></tr>
+<tr><td><tt>%[...]&gt;</tt>     </td><td>text <tt>...</tt> if <tt>%m</tt> &gt; 1</td></tr>
+<tr><td><tt>%,</tt>          </td><td><tt>,</tt> if <tt>%m</tt> &gt; 1, same as <tt>%[,]&gt;</tt></td></tr>
+<tr><td><tt>%:</tt>          </td><td><tt>:</tt> if <tt>%m</tt> &gt; 1, same as <tt>%[:]&gt;</tt></td></tr>
+<tr><td><tt>%;</tt>          </td><td><tt>;</tt> if <tt>%m</tt> &gt; 1, same as <tt>%[;]&gt;</tt></td></tr>
+<tr><td><tt>%|</tt>          </td><td><tt>|</tt> if <tt>%m</tt> &gt; 1, same as <tt>%[|]&gt;</tt></td></tr>
+<tr><td><tt>%[...]$</tt>     </td><td>assign text <tt>...</tt> to separator</td></tr>
+<tr><td><tt>%[ms]=...%=</tt> </td><td>color of <tt>ms</tt> <tt>...</tt> color off</td></tr>
 </table>
 
+&nbsp;<br>
+&nbsp;<br>
+
+<table align=center>
+<tr><th colspan=2>fields that require option <tt>-P</tt> for captures</th></tr>
+<tr><td><tt>%1</tt> <tt>%2</tt> <tt>%3</tt> ... <tt>%9</tt>  </td><td>group capture
+<tr><td><tt>%[n]#</tt>       </td><td>nth group capture</td></tr>
+<tr><td><tt>%[n]b</tt>       </td><td>nth capture byte offset</td></tr>
+<tr><td><tt>%[n]d</tt>       </td><td>nth capture byte size</td></tr>
+<tr><td><tt>%[n]e</tt>       </td><td>nth capture end offset</td></tr>
+<tr><td><tt>%[n]j</tt>       </td><td>nth capture as JSON</td></tr>
+<tr><td><tt>%[n]q</tt>       </td><td>nth capture quoted</td></tr>
+<tr><td><tt>%[n]x</tt>       </td><td>nth capture as XML</td></tr>
+<tr><td><tt>%[n]y</tt>       </td><td>nth capture as hex</td></tr>
+<tr><td><tt>%[n]v</tt>       </td><td>nth capture as CSV</td></tr>
+<tr><td><tt>%[name]#</tt>    </td><td>named group capture</td></tr>
+<tr><td><tt>%[name]b</tt>    </td><td>named capture byte offset</td></tr>
+<tr><td><tt>%[name]d</tt>    </td><td>named capture byte size</td></tr>
+<tr><td><tt>%[name]e</tt>    </td><td>named capture end offset</td></tr>
+<tr><td><tt>%[name]j</tt>    </td><td>named capture as JSON</td></tr>
+<tr><td><tt>%[name]q</tt>    </td><td>named capture quoted</td></tr>
+<tr><td><tt>%[name]x</tt>    </td><td>named capture as XML</td></tr>
+<tr><td><tt>%[name]y</tt>    </td><td>named capture as hex</td></tr>
+<tr><td><tt>%[name]v</tt>    </td><td>named capture as CSV</td></tr>
+<tr><td><tt>%[n|...]#</tt>   </td><td>capture n,... that matched</td></tr>
+<tr><td><tt>%[n|...]b</tt>   </td><td>capture n,... byte offset</td></tr>
+<tr><td><tt>%[n|...]d</tt>   </td><td>capture n,... byte size</td></tr>
+<tr><td><tt>%[n|...]e</tt>   </td><td>capture n,... end offset</td></tr>
+<tr><td><tt>%[n|...]j</tt>   </td><td>capture n,... as JSON</td></tr>
+<tr><td><tt>%[n|...]q</tt>   </td><td>capture n,... quoted</td></tr>
+<tr><td><tt>%[n|...]x</tt>   </td><td>capture n,... as XML</td></tr>
+<tr><td><tt>%[n|...]y</tt>   </td><td>capture n,... as hex</td></tr>
+<tr><td><tt>%[n|...]v</tt>   </td><td>capture n,... as CSV</td></tr>
+<tr><td><tt>%g</tt>          </td><td>capture number or name</td></tr>
+<tr><td><tt>%G</tt>          </td><td>all capture numbers/names</td></tr>
+<tr><td><tt>%[t|...]g</tt>   </td><td>text <tt>t</tt>,... indexed by capture</td></tr>
+<tr><td><tt>%[t|...]G</tt>   </td><td>all <tt>t</tt>,... indexed by captures</td></tr>
+</table>
+</div>
+
+</center>
+
 <ol>
+<li>option <tt>-o</tt> changes the output of the <tt>%O</tt> and <tt>%Q</tt> fields to output the match only
+<li>options <tt>-c</tt>, <tt>-l</tt> and <tt>-o</tt> change the output of <tt>%C</tt>, <tt>%J</tt>, <tt>%X</tt> and <tt>%Y</tt> accordingly
+<li>numeric fields such as <tt>%n</tt> are padded with spaces when <tt>%{width}n</tt> is specified for <tt>width</tt> &gt; 0
+<li>matching line fields such as <tt>%O</tt> are cut to width when <tt>%{width}O</tt> is specified or when <tt>%{-width}O</tt> is specified to cut from the end of the line
+<li>character context on a matching line before or after a match is output when <tt>%{-width}o</tt> or <tt>%{+width}o</tt> is specified for match fields such as <tt>%o</tt>, where <tt>%{width}o</tt> without a <tt>+/-</tt> sign cuts the match to the specified width
 <li>output for <tt>--csv</tt> is internally produced with
 <pre style="font-size:0.7rem">
 --format-open='%+'
@@ -1131,7 +1167,7 @@ sudo make install # install as desired
 --format-close='  &lt;/file&gt;%~'
 --format-end='&lt;/grep&gt;%~'
 </pre>
-<li>to output replaced matches in a file while keeping the rest of the file unchanged, use option <tt>--replace=<i>"FORMAT"</i></tt> and <tt>-y</tt> (<tt>--any-line</tt> or <tt>--passthru</tt>)
+<li>to output replaced matches in a file while keeping the rest of the file unchanged, use option <tt>--replace=<i>"FORMAT"</i></tt> and <tt>-y</tt> (or <tt>--any-line</tt> or <tt>--passthru</tt>)
 <li>to replace matches with corresponding text substitutions, you can use <tt>-P "(PATTERN1)|(PATTERN2)|...|(PATTERNn)"</tt> <tt>--replace="%[TEXT1|TEXT2|...|TEXTn]g"</tt> for example <tt>-P -iw "(one)|(two)|(three)" --replace="%[ūnum|duo|tria]g"</tt>
 </ol>
 
