@@ -990,7 +990,7 @@ sudo make install # install as desired
 <tr><td><tt>qb=</tt></td><td>TUI regex braces</td></tr>
 </table>
 
-<p>Multiple <a target="_blank" href="https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters">SGR codes</a> may be specified for a single parameter when separated by a semicolon, for example <tt>--colors="mt=1;31"</tt> specifies bright red.  For quick and easy color specification, the corresponding single-letter color names may be used in place of numeric SGR codes and semicolons are not required to separate color names, for example <tt>--colors=mt=hr</tt> specifies bright red.  Color letters and numeric codes may be mixed.  The following SGR codes have corresponding letter designations:
+<p>Multiple <a target="_blank" href="https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters">SGR codes</a> may be specified for a single parameter when separated by a semicolon, for example <tt>--colors="mt=1;31"</tt> specifies bright red.  For quick and easy color specification, the corresponding single-letter color names may be used in place of numeric SGR codes and semicolons are not required to separate color names, for example <tt>--colors=mt=hr</tt> specifies bright red.  Color letters and numeric codes may be mixed.  The following SGR codes have corresponding letter designations:</p>
 
 <table align=center>
 <tr><td>0   </td><td><tt>n</tt></td><td>normal font and color     </td><td>2   </td><td><tt>f </tt></td><td>faint (not widely supported)</td></tr>
@@ -1020,18 +1020,7 @@ sudo make install # install as desired
 <a name="format">&nbsp;</a>
 <h2>Custom output formatting</h2>
 
-<p>Formatted output and match replacement puts you in full control of the output.  In fact, CSV (<tt>--csv</tt>), JSON (<tt>--json</tt>) and XML (<tt>--xml</tt>) are all produced this way.
-
-<table align=center>
-<tr><td><tt>--format-begin=<i>"FORMAT"</i></tt></td><td>format string for beginning the search</td></tr>
-<tr><td><tt>--format-open=<i>"FORMAT"</i> </tt></td><td>format string for opening a file when a match was found</td></tr>
-<tr><td><tt>--format=<i>"FORMAT"</i>      </tt></td><td>format string for each match in a file</td></tr>
-<tr><td><tt>--format-close=<i>"FORMAT"</i></tt></td><td>format string for closing a file when a match was found</td></tr>
-<tr><td><tt>--format-end=<i>"FORMAT"</i>  </tt></td><td>format string for ending the search</td></tr>
-<tr><td><tt>--replace=<i>"FORMAT"</i>     </tt></td><td>replace matches in the output with the specified formatted string</td></tr>
-</table>
-
-<p>where <tt><i>FORMAT</i></tt> may contain any text and the following format fields with a short description of the corresponding output:
+<p>Formatted output and match replacement puts you in full control of the output.  In fact, CSV (<tt>--csv</tt>), JSON (<tt>--json</tt>) and XML (<tt>--xml</tt>) are all produced this way.  To produce custom output, specify option <tt>--format=<i>"FORMAT"</i></tt> with text and the following format fields:
 
 <center>
 
@@ -1143,9 +1132,25 @@ sudo make install # install as desired
 <ol>
 <li>option <tt>-o</tt> changes the output of the <tt>%O</tt> and <tt>%Q</tt> fields to output the match only
 <li>options <tt>-c</tt>, <tt>-l</tt> and <tt>-o</tt> change the output of <tt>%C</tt>, <tt>%J</tt>, <tt>%X</tt> and <tt>%Y</tt> accordingly
-<li>numeric fields such as <tt>%n</tt> are padded with spaces when <tt>%{width}n</tt> is specified for <tt>width</tt> &gt; 0
+<li>numeric fields such as <tt>%n</tt> are left-padded with spaces when <tt>%{width}n</tt> is specified for <tt>width</tt> &gt; 0
 <li>matching line fields such as <tt>%O</tt> are cut to width when <tt>%{width}O</tt> is specified or when <tt>%{-width}O</tt> is specified to cut from the end of the line
 <li>character context on a matching line before or after a match is output when <tt>%{-width}o</tt> or <tt>%{+width}o</tt> is specified for match fields such as <tt>%o</tt>, where <tt>%{width}o</tt> without a <tt>+/-</tt> sign cuts the match to the specified width
+</ol>
+
+<p>Table of all options that accept format fields:</p>
+
+<center>
+<table align=center>
+<tr><td><tt>--format-begin=<i>"FORMAT"</i></tt></td><td>format for beginning the search</td></tr>
+<tr><td><tt>--format-open=<i>"FORMAT"</i> </tt></td><td>format for opening a file when a match was found</td></tr>
+<tr><td><tt>--format=<i>"FORMAT"</i>      </tt></td><td>format for each match in a file</td></tr>
+<tr><td><tt>--format-close=<i>"FORMAT"</i></tt></td><td>format for closing a file when a match was found</td></tr>
+<tr><td><tt>--format-end=<i>"FORMAT"</i>  </tt></td><td>format for ending the search</td></tr>
+<tr><td><tt>--replace=<i>"FORMAT"</i>     </tt></td><td>replace matches in the output with the specified format</td></tr>
+</table>
+</center>
+
+<ol>
 <li>output for <tt>--csv</tt> is internally produced with
 <pre style="font-size:0.7rem">
 --format-open='%+'
@@ -1259,7 +1264,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Fri Aug 9, 2024</small>
+<p><small>Last updated: thu Aug 15, 2024</small>
 
 <hr>
 
