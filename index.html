@@ -225,7 +225,7 @@
 <h1>The ugrep file pattern searcher</h1>
 
 <p align=center>a more powerful, ultra fast, user-friendly, compatible grep (that is also completely free!)
-<p align=center><a class="github-button" href="https://github.com/Genivia/ugrep/releases" data-icon="octicon-cloud-download" aria-label="ugrep on GitHub">ugrep release 6.4</a> <a class="github-button" href="https://github.com/Genivia/ugrep" data-count-href="/Genivia/ugrep/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star Genivia/ugrep on GitHub">Star</a>
+<p align=center><a class="github-button" href="https://github.com/Genivia/ugrep/releases" data-icon="octicon-cloud-download" aria-label="ugrep on GitHub">ugrep release 6.5</a> <a class="github-button" href="https://github.com/Genivia/ugrep" data-count-href="/Genivia/ugrep/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star Genivia/ugrep on GitHub">Star</a>
 
 <div>
 <div>
@@ -1138,8 +1138,9 @@ sudo make install # install as desired
 </center>
 
 <ol>
+<li>options <tt>-X</tt> and <tt>-W</tt> change the <tt>%o</tt> and <tt>%O</tt> fields to output hex and hex/text.
 <li>option <tt>-o</tt> changes the <tt>%O</tt> and <tt>%Q</tt> fields to output the match only
-<li>options <tt>-c</tt>, <tt>-l</tt> and <tt>-o</tt> change the output of <tt>%C</tt>, <tt>%J</tt>, <tt>%X</tt> and <tt>%Y</tt> accordingly
+<li>options <tt>-c</tt>, <tt>-l</tt> and <tt>-o</tt> change the output of <tt>%C</tt>, <tt>%J</tt>, <tt>%V</tt>, <tt>%X</tt> and <tt>%Y</tt> accordingly
 <li>numeric fields such as <tt>%n</tt> are left-padded with spaces when <tt>%{width}n</tt> is specified for <tt>width</tt> &gt; 0
 <li>matching line fields such as <tt>%O</tt> are cut to width when <tt>%{width}O</tt> is specified or when <tt>%{-width}O</tt> is specified to cut from the end of the line
 <li>character context on a matching line before or after a match is output when <tt>%{-width}o</tt> or <tt>%{+width}o</tt> is specified for match fields such as <tt>%o</tt>, where <tt>%{width}o</tt> without a <tt>+/-</tt> sign cuts the match to the specified width
