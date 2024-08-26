@@ -613,7 +613,6 @@ sudo make install # install as desired
 <tr><td><tt>a      </tt></td><td>the character <tt>a</tt></td></tr>
 <tr><td><tt>ab     </tt></td><td>the string <tt>ab</tt></td></tr>
 <tr><td><tt>a|b    </tt></td><td><tt>a</tt> or <tt>b</tt></td></tr>
-<tr><td><tt>a(b|c) </tt></td><td><tt>ab</tt> or <tt>ac</tt></td></tr>
 <tr><td><tt>a*     </tt></td><td>zero or more <tt>a</tt>'s</td></tr>
 <tr><td><tt>a+     </tt></td><td>one or more <tt>a</tt>'s</td></tr>
 <tr><td><tt>a?     </tt></td><td>zero or one <tt>a</tt></td></tr>
@@ -626,6 +625,7 @@ sudo make install # install as desired
 <tr><td><tt>a{3}?  </tt></td><td>3 <tt>a</tt>'s lazily</td></tr>
 <tr><td><tt>a{3,}? </tt></td><td>3 or more <tt>a</tt>'s lazily</td></tr>
 <tr><td><tt>a{3,7}?</tt></td><td>3 to 7 <tt>a</tt>'s lazily</td></tr>
+<tr><td><tt>a(b|cd?)       </tt></td><td><tt>ab</tt> or <tt>ac</tt> or <tt>acd</tt></td></tr>
 <tr><td><tt>\.             </tt></td><td>escapes <tt>.</tt> to match <tt>.</tt></td></tr>
 <tr><td><tt>\Q...\E        </tt></td><td>the literal string <tt>...</tt></td></tr>
 <tr><td><tt>\f             </tt></td><td>form feed</td></tr>
