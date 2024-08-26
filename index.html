@@ -607,6 +607,7 @@ sudo make install # install as desired
 <tr><td><tt>a      </tt></td><td>the character <tt>a</tt></td></tr>
 <tr><td><tt>ab     </tt></td><td>the string <tt>ab</tt></td></tr>
 <tr><td><tt>a|b    </tt></td><td><tt>a</tt> or <tt>b</tt></td></tr>
+<tr><td><tt>a(b|c) </tt></td><td><tt>ab</tt> or <tt>ac</tt></td></tr>
 <tr><td><tt>a*     </tt></td><td>zero or more <tt>a</tt>'s</td></tr>
 <tr><td><tt>a+     </tt></td><td>one or more <tt>a</tt>'s</td></tr>
 <tr><td><tt>a?     </tt></td><td>zero or one <tt>a</tt></td></tr>
@@ -683,7 +684,7 @@ sudo make install # install as desired
 <tr><td><tt>\&lt;      </tt></td><td>start of word boundary</td></tr>
 <tr><td><tt>\&gt;      </tt></td><td>end of word boundary</td></tr>
 <tr><td><tt>(?#...)    </tt></td><td>comments <tt>...</tt> are ignored</td></tr>
-<tr><td><tt>(...)      </tt></td><td>non-capturing group</td></tr>
+<tr><td><tt>(...)      </tt></td><td>group</td></tr>
 </table>
 
 &nbsp;<br>
@@ -691,12 +692,12 @@ sudo make install # install as desired
 
 <table>
 <tr><th colspan=2>patterns that require option <tt>-P</tt></th></tr>
+<tr><td><tt>(...)      </tt></td><td>capturing group</td></tr>
+<tr><td><tt>(?:...)    </tt></td><td>non-capturing group</td></tr>
 <tr><td><tt>(?=...)    </tt></td><td>lookahead</td></tr>
 <tr><td><tt>(?!...)    </tt></td><td>negative lookahead</td></tr>
 <tr><td><tt>(?&lt;=...)</tt></td><td>lookbehind</td></tr>
 <tr><td><tt>(?&lt;!...)</tt></td><td>negative lookbehind</td></tr>
-<tr><td><tt>(...)                 </tt></td><td>capturing group</td></tr>
-<tr><td><tt>(?:...)               </tt></td><td>non-capturing group</td></tr>
 <tr><td><tt>(?&lt;<i>X</i>&gt;...)</tt></td><td>capturing group name <tt><i>X</i></tt></td></tr>
 <tr><td><tt>\3                    </tt></td><td>matches group 3</td></tr>
 <tr><td><tt>\g{10}                </tt></td><td>matches group 10</td></tr>
