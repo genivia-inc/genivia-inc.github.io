@@ -495,13 +495,19 @@ sudo make install # install as desired
 <dt>-I</dt>                     <dd>ignore binary files and exclude them from searches</dd>
 <dt>-W</dt>                     <dd>hexdump binary matches, while keeping text matches as text</dd>
 <dt>-X</dt>                     <dd>hexdump all matches</dd>
-<dt>-UX</dt>                    <dd>hexdump with 8-bit binary patterns instead of Unicode character-based patterns (option <tt>-U</tt>)</dd>
+<dt>-U --hexdump</dt>           <dd>hexdump 8-bit binary regex pattern matches instead of Unicode character-based patterns (option <tt>-U</tt>)</dd>
 <dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns and output a <tt>*</tt> for hex lines that are identical to the previous line (<tt>a</tt>)</dd>
 <dt>--hexdump=4ch</dt>          <dd>hexdump in 4 columns, no character column (<tt>c</tt>), no hex spacing (<tt>h</tt>)</dd>
-<dt>--hexdump=4aC3</dt>         <dd>hexdump in 4 columns with 3 hex lines of context before and after (<tt>C3</tt> or <tt>B3A3</tt>)</dd>
-<dt>--hexdump=4aC3 -u -b</dt>   <dd>same as above, but ungroup matches (option <tt>-u</tt>) and output the byte position of each match (option <tt>-b</tt>)</dd>
+<dt>--hexdump=4C3</dt>          <dd>hexdump in 4 columns with 3 hex lines of context before and after (<tt>C3</tt> or <tt>B3A3</tt>)</dd>
+<dt>--hexdump=4C3 -u -b</dt>    <dd>same as above, but ungroup matches (option <tt>-u</tt>) and output the byte position of each match (option <tt>-b</tt>)</dd>
 <dt>-Dread</dt>                 <dd>also read special devices to search them; danger: can get stuck on a non-responsive device!</dd>
 </dl>
+
+<ol>
+<p>Usage tips:</p>
+<li>option <tt>-U</tt> disables Unicode in regex patterns; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point
+<li>option <tt>--hexdump</tt> takes optional argument <tt>[1-8][a][bch][A[NUM]][B[NUM]][C[NUM]]</tt> to output 1, 2, 3 or up to 8 columns of hexadecimal octets (default is 2), <tt>a</tt> outputs a <tt>*</tt> for all hex lines that are identical to the previous hex line, <tt>b</tt> removes all space breaks, <tt>c</tt> removes the character column, <tt>h</tt> removes hex spacing, <tt>A</tt> includes up to <tt>NUM</tt> hex lines after a match, <tt>B</tt> includes up to <tt>NUM</tt> hex lines before a match and <tt>C</tt> includes up to <tt>NUM</tt> hex lines before and after a match.
+</ol>
 
 <a name="constraints">&nbsp;</a>
 <h3>Exclusions and inclusions</h3>
