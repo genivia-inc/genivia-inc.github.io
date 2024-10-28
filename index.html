@@ -499,6 +499,7 @@ sudo make install # install as desired
 <dt>--hexdump=4a</dt>           <dd>hexdump in 4 columns and output a <tt>*</tt> for hex lines that are identical to the previous line (<tt>a</tt>)</dd>
 <dt>--hexdump=4ch</dt>          <dd>hexdump in 4 columns, no character column (<tt>c</tt>), no hex spacing (<tt>h</tt>)</dd>
 <dt>--hexdump=4aC3</dt>         <dd>hexdump in 4 columns with 3 hex lines of context before and after (<tt>C3</tt> or <tt>B3A3</tt>)</dd>
+<dt>--hexdump=4aC3 -u -b</dt>   <dd>same as above, but ungroup matches (option <tt>-u</tt>) and output the byte position of each match (option <tt>-b</tt>)</dd>
 <dt>-Dread</dt>                 <dd>also read special devices to search them; danger: can get stuck on a non-responsive device!</dd>
 </dl>
 
