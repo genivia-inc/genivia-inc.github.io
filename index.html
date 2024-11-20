@@ -948,7 +948,7 @@ sudo make install # install as desired
 <a name="filter">&nbsp;</a>
 <h2>Filters</h2>
 
-<p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  Options to the specified <tt>command</tt> may be included.  The special command parameter <tt>%</tt> is expanded into the pathname of the file to filter.  Filters are applied when the filename extension matches one of the specified filters, then the output of the filter is searched.  A wildcard <tt>*</tt> matches any extension.  Some examples:
+<p>A filter utility is associated with one or more filename extensions using the syntax <tt>--filter="ext1,ext2,ext3:command"</tt>.  When a filename extension matches a specified filter filename extension <tt>ext</tt>, then the filter command is executed on the file and the command output is searched instead of the file.  Arguments to the specified <tt>command</tt> may be included and seperated by space.  The special command argument <tt>%</tt> is expanded into the pathname of the file.  A command should read the file given by the expanded pathname argument or read the file that is opened as standard input to the command.  A wildcard <tt>*</tt> matches any extension that is not matched by any of the <tt>ext</tt> specified (matching is case sensitive).  Some examples:
 
 <dl>
 <dt>--filter="pdf:pdftotext % -"</dt>
@@ -971,8 +971,9 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<li><tt>--filter</tt> is not available in Windows <tt>ugrep.exe</tt></li>
-<li>a filter utility should be a command or a script that produces standard output (to search)
+<li>this option is not yet available for the Windows version of ugrep until ugrep 7.1 is released
+<!-- <li>the command and its arguments may be quoted (<tt>"</tt>) to include space, comma and <tt>%</tt> -->
+<li>a filter utility should be a command that produces standard output (to search)
 <li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>"LABEL:MAGIC"</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>
 <li>UTF-8, UTF-16 and UTF-32 input is automatically searched and does not require a filter
 <li>the Shift-JIS conversion in the example is a special case, option <tt>--encoding=</tt> supports the arguments
@@ -1292,7 +1293,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Sun Nov 10, 2024</small>
+<p><small>Last updated: Wed Nov 20, 2024</small>
 
 <hr>
 
