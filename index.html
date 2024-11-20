@@ -412,10 +412,12 @@ sudo make install # install as desired
 <li><em>ALT-key</em> in MacOS terminal is <em>OPTION-key</em> when "Use Option as Meta key" is enabled in Terminal Preferences/Profiles/Keyboard
 <li>navigate to directories and files with <em>Tab</em>, then <em>SHIFT-Tab</em> to go back and restore previous options and patterns (if changed)
 <li>use the cursor keys, <em>PgUp</em>, <em>PgDn</em> and the scroll wheel to scroll the search results
-<li><em>CTRL-S</em> jumps to the next directory or file in the results, <em>CTRL-W</em> jumps back
-<li><em>CTRL-T</em> toggles the split screen file viewer; option <tt>--split</tt> starts the TUI with the split screen
-<li><em>CTRL-Y</em> displays a file in a pager, a specific pager or editor is specified with option <tt>--view=PAGER</tt>
-<li><em>CTRL-Z</em> displays help and the active search options that can be toggled on/off with <em>ALT-key</em> or just <em>key</em>
+<li><em>ALT-G</em> glob editor to match filenames and directories (globs ending in <tt>/</tt>) or exclude them with <tt>!</tt> for example <tt>!tmp/</tt>
+<li><em>CTRL-S</em> jumps to the next context match, the next matching file or the next directory in the list, <em>CTRL-W</em> jumps back
+<li><em>CTRL-T</em> or <em>F5</em> toggles the split screen file viewer; option <tt>--split</tt> starts the TUI with the split screen
+<li><em>CTRL-X</em> or <em>F3</em> sets a bookmark and <em>CTRL-R</em> or <em>F4</em> restores it
+<li><em>CTRL-Y</em> or <em>F2</em> displays a file in a pager, a specific pager or editor is specified with option <tt>--view=PAGER</tt>
+<li><em>CTRL-Z</em> or <em>F1</em> displays help and the active search options that can be toggled on/off with <em>ALT-key</em> or just <em>key</em>
 <li><em>ENTER</em> enters output selection mode to select lines to output when exiting the TUI (selections are kept until TUI exits or until a new search is performed)
 </ol>
 
