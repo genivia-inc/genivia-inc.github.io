@@ -225,7 +225,7 @@
 <h1>The ugrep file pattern searcher</h1>
 
 <p align=center>a more powerful, ultra fast, user-friendly, compatible grep (that is also completely free!)
-<p align=center><a class="github-button" href="https://github.com/Genivia/ugrep/releases" data-icon="octicon-cloud-download" aria-label="ugrep on GitHub">ugrep release 7.0</a> <a class="github-button" href="https://github.com/Genivia/ugrep" data-count-href="/Genivia/ugrep/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star Genivia/ugrep on GitHub">Star</a>
+<p align=center><a class="github-button" href="https://github.com/Genivia/ugrep/releases" data-icon="octicon-cloud-download" aria-label="ugrep on GitHub">ugrep release 7.1</a> <a class="github-button" href="https://github.com/Genivia/ugrep" data-count-href="/Genivia/ugrep/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star Genivia/ugrep on GitHub">Star</a>
 
 <div>
 <div>
@@ -723,7 +723,6 @@ sudo make install # install as desired
 </center>
 
 <ol>
-<!-- <li>(<b><tt>-P</tt></b>): this pattern requires option <tt>-P</tt> for PCRE (Perl regular expressions) -->
 <li>ERE (Extended Regular Expression) syntax is the default in ugrep (shown in the table), like GNU <code>egrep</code> or <code>grep -E</code>
 <li>ERE syntax is also used with option <tt>-P</tt> for PCRE (Perl regular expressions), adding lookaround and group capture patterns
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> requires the <tt>\</tt>-escaped syntax <tt>\|</tt> for <tt>|</tt>, <tt>\+</tt> for <tt>+</tt>, <tt>\?</tt> for <tt>?</tt>, <tt>\( \)</tt> for <tt>( )</tt>, and <tt>\{ \}</tt> for <tt>{ }</tt>
@@ -974,7 +973,7 @@ sudo make install # install as desired
 
 <ol>
 <li>this option is not yet available for the Windows version of ugrep until ugrep 7.1 is released
-<!-- <li>the command and its arguments may be quoted (<tt>"</tt>) to include space, comma and <tt>%</tt> -->
+<li>the command and its arguments may be quoted (<tt>"</tt>) to include space, comma and <tt>%</tt> (ugrep v7.1)
 <li>a filter utility should be a command that produces standard output (to search)
 <li>instead of a filename extension alone, it is also possible to specify a file's "magic bytes" regex pattern with <tt>--filter-magic-label=<i>"LABEL:MAGIC"</i></tt> to associate the <tt><i>MAGIC</i></tt> regex pattern when found at the start of a file with a <tt><i>LABEL</i></tt> to be used as a filename extension in a <tt>--filter="<i>LABEL</i>:command"</tt>
 <li>UTF-8, UTF-16 and UTF-32 input is automatically searched and does not require a filter
@@ -1295,7 +1294,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Wed Nov 20, 2024</small>
+<p><small>Last updated: Fri Nov 22, 2024</small>
 
 <hr>
 
