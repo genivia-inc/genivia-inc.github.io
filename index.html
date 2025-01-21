@@ -335,7 +335,7 @@ sudo make install # install as desired
 <a name="options">&nbsp;</a>
 <h2>Options</h2>
 
-<p>Ugrep is compatible with GNU grep and supports GNU grep command-line options.  But ugrep also offers new options and features.  In general, command-line options can be mixed and specified in any order.  Long options <tt>--<i>OPTION</i></tt> may start with <tt>--no-<i>OPTION</i></tt> to disable them.  All short options have long alternatives.  This page shows short options for the most part.  Specify <tt>--stats</tt> to output a final summary search report of options, patterns, and search statistics.
+<p>Ugrep is compatible with GNU grep and supports GNU grep command-line options.  But ugrep also offers many new options and features.  In general, command-line options can be mixed and specified in any order.  Long options <tt>--<i>OPTION</i></tt> may start with <tt>--no-<i>OPTION</i></tt> to disable them.  All short options have long alternatives.  This page shows short options for the most part.  Specify <tt>--stats</tt> to output a final summary search report of options, patterns, and search statistics.
 
 <a name="list">&nbsp;</a>
 <h3>List matching files</h3>
@@ -383,7 +383,7 @@ sudo make install # install as desired
 <dt>-P</dt>                     <dd>Perl regex pattern search with PCRE, see also <a href="#regex"><tt>ug --help regex</tt></a></dd>
 <dt>-Z</dt>                     <dd><a href="#fuzzy">fuzzy search</a> with the default ERE pattern syntax</dd>
 <dt>-U</dt>                     <dd>non-Unicode ASCII/binary search; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point</dd>
-<dt>-Y</dt>                     <dd>empty-matching patterns such as <tt>x*y*z*</tt> match all lines like GNU grep, instead of returning useful matches</dd>
+<dt>-Y</dt>                     <dd>empty-matching patterns such as <tt>x*y*z*</tt> match all lines like GNU/BSD grep, instead of returning useful matches</dd>
 <dt>-i</dt>                     <dd>ignore case in matching patterns</dd>
 <dt>-j</dt>                     <dd>smart ignore case, enables <tt>-i</tt> when patterns are specified in lower case</dd>
 <dt>-w</dt>                     <dd>patterns must match as words and not be part of words</dd>
@@ -410,6 +410,7 @@ sudo make install # install as desired
 <li>additional options, files and directories can be specified on the command line to start the TUI search
 <li><em>ALT-key</em> toggles the option letter corresponding to the key press, for example <em>ALT-L</em> lists matching files (option <tt>-l</tt>) and <em>SHIFT-ALT-C</em> shows context (option <tt>-C3</tt>)
 <li><em>ALT-key</em> in MacOS terminal is <em>OPTION-key</em> when "Use Option as Meta key" is enabled in Terminal Preferences/Profiles/Keyboard
+<li><em>ALT-key</em> in xterm may not work unless <tt>xterm*metaSendsEscape: true</tt> is added to ~/.Xdefaults
 <li>navigate to directories and files with <em>Tab</em>, then <em>SHIFT-Tab</em> to go back and restore previous options and patterns (if changed)
 <li>use the cursor keys, <em>PgUp</em>, <em>PgDn</em> and the scroll wheel to scroll the search results
 <li><em>ALT-G</em> glob editor to match filenames and directories (globs ending in <tt>/</tt>) or exclude them with <tt>!</tt> for example <tt>!tmp/</tt>
@@ -727,7 +728,7 @@ sudo make install # install as desired
 <li>ERE syntax is also used with option <tt>-P</tt> for PCRE (Perl regular expressions), adding lookaround and group capture patterns
 <li>BRE (Basic Regular Expression) syntax with option <tt>-G</tt> requires the <tt>\</tt>-escaped syntax <tt>\|</tt> for <tt>|</tt>, <tt>\+</tt> for <tt>+</tt>, <tt>\?</tt> for <tt>?</tt>, <tt>\( \)</tt> for <tt>( )</tt>, and <tt>\{ \}</tt> for <tt>{ }</tt>
 <li>option <tt>-U</tt> disables Unicode in regex patterns and speeds up searching; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point
-<li>character classes such as <tt>\s</tt> and negated classes such as <tt>[^abc-e]</tt> never match a newline <tt>\n</tt> which is implicitly removed for grep compatibility
+<li>character classes such as <tt>\s</tt> and negated classes such as <tt>[^abc-e]</tt> never match a newline <tt>\n</tt> which is implicitly removed for GNU grep compatibility
 <li>explicitly specify a <tt>\n</tt> or a <tt>\R</tt> in a pattern such as <tt>"go[\s\n]up"</tt> to match multiple lines as a single match
 <li>mutiple classes are combined in a single bracket list, such as <tt>[.[:xdigit:]\s]</tt> to combine <tt>.</tt> wtih hexadecimal digits and space
 <li>subtract classes in a bracket list with <tt>[\w--[\d]]</tt> or intersect classes in a bracket list with <tt>[\w&amp;&amp;[\d]]</tt> which is just <tt>\d</tt>
