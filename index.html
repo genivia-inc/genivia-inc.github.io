@@ -225,7 +225,7 @@
 <h1>The ugrep file pattern searcher</h1>
 
 <p align=center>a more powerful, ultra fast, user-friendly, compatible grep (that is also completely free!)
-<p align=center><a class="github-button" href="https://github.com/Genivia/ugrep/releases" data-icon="octicon-cloud-download" aria-label="ugrep on GitHub">ugrep release 7.1</a> <a class="github-button" href="https://github.com/Genivia/ugrep" data-count-href="/Genivia/ugrep/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star Genivia/ugrep on GitHub">Star</a>
+<p align=center><a class="github-button" href="https://github.com/Genivia/ugrep/releases" data-icon="octicon-cloud-download" aria-label="ugrep on GitHub">ugrep release 7.2</a> <a class="github-button" href="https://github.com/Genivia/ugrep" data-count-href="/Genivia/ugrep/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star Genivia/ugrep on GitHub">Star</a>
 
 <div>
 <div>
@@ -329,7 +329,8 @@ sudo make install # install as desired
 <li>an empty pattern <tt>""</tt> matches every line, same as option <tt>--match</tt>
 <li>multiple <tt><i>FILE</i></tt> and <tt><i>DIR</i></tt> pathname arguments may be specified as search targets; if none are provided, the working directory is recursively searched
 <li>standard input is searched if standard input is not a terminal, such as a pipe redirect
-<li>to replace grep: <tt>alias grep='ug -G'; alias egrep='ug -E'; alias fgrep='ug -F'</tt> or copy/symlink <code>ugrep</code> to <code>grep</code>, <code>egrep</code> and <code>fgrep</code>; it emulates according to these names
+<li>to replace GNU/BSD grep with an alias of ugrep for the command-line: <tt>alias grep='ug -G'; alias egrep='ug -E'; alias fgrep='ug -F'; alias zgrep='ug -zG'; alias zegrep='ug -zE'; alias zfgrep='ug -zF'</tt>
+<li>to replace GNU/BSD grep binaries for scripting: copy or symlink <code>ugrep</code> to <code>grep</code>, <code>egrep</code>, <code>fgrep</code>, <code>zgrep</code>, <code>zegrap</code>, <code>zfgrep</code> to a directory on your PATH; ugrep automatically emulates these grep executables according to these names; <i><u>important: copy <code>ugrep</code> instead of symlink when using bash as a shell!</u></i>
 </ol>
 
 <a name="options">&nbsp;</a>
@@ -472,6 +473,7 @@ sudo make install # install as desired
 <p>Usage tips:</p>
 <li>the first character or characters that make up a pattern always match; to approximately match the first character(s), replace it with a <tt>.</tt> or <tt>.?</tt>
 <li>no whitespace may be given between <tt>-Z</tt> and its argument
+<li>when <code>ugrep</code> is installed as replacement binaries for GNU/BSD <code>grep</code>, <code>egrep</code> <code>fgrep</code>, <code>zgrep</code>, <code>zegrep</code> or <code>zfgrep</code>, option <tt>-Z</tt> is automatically reassigned to <tt>--null</tt> for GNU/BSD grep compatibility; use <tt>grep --fuzzy</tt> instead for fuzzy search
 </ol>
 
 <a name="zip">&nbsp;</a>
@@ -489,6 +491,7 @@ sudo make install # install as desired
 <ol>
 <p>Usage tips:</p>
 <li>to let <tt>ug</tt> always search archives and compressed files, add <tt>decompress</tt> to your ~/.ugrep file
+<li>when <code>ugrep</code> is installed as replacement binaries for GNU/BSD <code>grep</code>, <code>egrep</code> <code>fgrep</code>, <code>zgrep</code>, <code>zegrep</code> or <code>zfgrep</code>, option <tt>-z</tt> is automatically reassigned to <tt>--null-data</tt> for GNU/BSD grep compatibility; use <code>zgrep</code>, <code>zegrep</code>,  <code>zfgrep</code> instead
 </ol>
 
 <a name="binary">&nbsp;</a>
@@ -1295,7 +1298,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Thu Jan 9, 2025</small>
+<p><small>Last updated: Thu Jan 23, 2025</small>
 
 <hr>
 
