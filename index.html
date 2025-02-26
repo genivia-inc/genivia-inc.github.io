@@ -490,7 +490,7 @@ sudo make install # install as desired
 
 <ol>
 <p>Usage tips:</p>
-<li>when option <tt>-g</tt>, <tt>-O</tt>, <tt>-M</tt>, or <tt>-t</tt> is specified, searches archives for files that match the specified globs, file extensions, file signature magic bytes, or file types, respectively; as a side-effect, these options restrict the selection of compressed files and archives searched to only those files with filename extensions that match known compression and archive types (for example, <tt>.jar</tt> is not searched unless <tt>-Ojar</tt> is specifies also)
+<li>when option <tt>-g</tt>, <tt>-O</tt>, <tt>-M</tt>, or <tt>-t</tt> is specified, searches archives for files that match the specified globs, file extensions, file signature magic bytes, or file types, respectively; as a side-effect, these options restrict the selection of compressed files and archives searched to only those files with filename extensions that match known compression and archive types (for example, <tt>.jar</tt> is a non-standard zip file extension and not searched unless <tt>-Ojar</tt> is specifies also)
 <li>to let <code>ug</code> always search archives and compressed files, add <tt>decompress</tt> to your ~/.ugrep file
 <li>when <code>ugrep</code> is installed as replacement binaries for GNU/BSD <code>grep</code>, <code>egrep</code> <code>fgrep</code>, <code>zgrep</code>, <code>zegrep</code> or <code>zfgrep</code>, option <tt>-z</tt> is automatically reassigned to <tt>--null-data</tt> for GNU/BSD grep compatibility; use <code>zgrep</code>, <code>zegrep</code>,  <code>zfgrep</code> instead
 </ol>
