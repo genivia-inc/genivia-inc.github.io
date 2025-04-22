@@ -392,7 +392,7 @@ sudo make install # install as desired
 <dt>-v</dt>                     <dd>invert pattern matching; output lines that do not match</dd>
 <dt>-e <i>PATTERN</i></dt>      <dd>explicitly specify <tt><i>PATTERN</i></tt>; <tt>-e</tt> is used to specify multiple patterns and when specifying a pattern after the <tt><i>FILE</i></tt> argument</dd>
 <dt>-N <i>PATTERN</i></dt>      <dd>do not match <tt><i>PATTERN</i></tt> when combined with <tt>-e</tt>; for example <tt>-e "[0-9]+" -N "0+"</tt> matches nonzero numbers</dd>
-<dt>-f <i>FILE</i></dt>         <dd>read (additional) patterns from <tt><i>FILE</i></tt></dd>
+<dt>-f <i>FILE</i></dt>         <dd>read additional patterns from <tt><i>FILE</i></tt></dd>
 <dt>-f cpp/names</dt>           <dd>if <tt>cpp/names</tt> is not a local file, then read built-in C++ name-matching patterns (installed in <tt>/.../share/ugrep/patterns/cpp/names</tt>)</dd>
 </dl>
 
@@ -541,21 +541,23 @@ sudo make install # install as desired
 <dt>-2-3</dt>                   <dd>only recursively search sub-directories at two to three levels deep, i.e. <tt><i>one/two/</i></tt>, and <tt><i>one/two/three/</i></tt></dd>
 <dt>--max-files=3</dt>          <dd>only return matches for the first three matching files (in the current <tt>--sort</tt> order)</dd>
 <dt>--ignore-files</dt>         <dd>obey .gitignore rules in recursive searches</dd>
-<dt>--exclude-fs=<i>PATH</i></dt>
-                                <dd>do not search the file system associated with <tt><i>PATH</i></tt> (a mounted directory or mount point)</dd>
-<dt>--exclude-fs</dt>
-                                <dd>only descend into the file systems associated with the specified file and directory search targets, exclude all other</dt>
-<dt>--include-fs=.</dt>         <dd>only search the file system associated with <tt>.</tt> (<tt>.</tt> is the <tt><i>PATH</i></tt>), i.e. ignores all mounted and special devices</dd>
+<dt>--from=<i>FILE</i></dt>     <dd>read additional pathnames of files to search from <tt><i>FILE</i></tt></dd>
 <dt>--exclude-from=<i>FILE</i></dt>
                                 <dd>do not search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>--include-from=<i>FILE</i></dt>
                                 <dd>only search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>--filter=<i>"COMMANDS"</i></dt>
                                 <dd>filter files first before searching them by executing a utility on a file based on its type, see also <a href="#filter"><tt>ug --help filter</tt></a></dd>
+<dt>--exclude-fs=<i>PATH</i></dt>
+                                <dd>do not search the file system associated with <tt><i>PATH</i></tt> (a mounted directory or mount point)</dd>
+<dt>--exclude-fs</dt>
+                                <dd>only descend into the file systems associated with the specified file and directory search targets, exclude all other</dt>
+<dt>--include-fs=.</dt>         <dd>only search the file system associated with <tt>.</tt> (<tt>.</tt> is the <tt><i>PATH</i></tt>), i.e. ignores all mounted and special devices</dd>
 </dl>
 
 <ol>
 <p>Usage tips:</p>
+<li>a <tt>-</tt> (dash) for a <tt><i>FILE</i></tt> argument of an option, such as <tt>--from=-</tt>, reads from standard input
 <li>to let <tt>ug</tt> ignore binary files by default, add <tt>ignore-binary</tt> to your ~/.ugrep file
 <li>to let <tt>ug</tt> obey .gitignore rules in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file
 </ol>
@@ -1299,7 +1301,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Mon Mar 3, 2025</small>
+<p><small>Last updated: Mon April 21, 2025</small>
 
 <hr>
 
