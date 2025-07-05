@@ -5,7 +5,7 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <meta charset="utf-8"/>
   <meta name="description" content="The ugrep file pattern searcher -- a user-friendly, faster, more capable grep replacement"/>
-  <meta name="keywords" content="ugrep manual, regex, agrep, ack, grep, ripgrep, silver searcher, grep compatible, grep alternative, grep replacement, Unicode pattern matching, file search, file indexing, Google search files, fuzzy search, zip search, tar search, tarball search, gzip search"/>
+  <meta name="keywords" content="ugrep manual, regex, agrep, ack, grep, ripgrep, silver searcher, grep compatible, grep alternative, grep replacement, Unicode pattern matching, file search, file indexing, Boolean logic patterns to Google search files, fuzzy search, zip search, tar search, tarball search, gzip search"/>
   <meta name="author" content="Robert A. van Engelen, Genivia Inc">
   <title>The ugrep file pattern searcher</title>
     <style>
@@ -257,15 +257,16 @@ cd ugrep
 sudo make install # install as desired
 </pre>
 </ul>
-<p align=center>how fast is ugrep?
+<p align=center>But is it fast?</p>
 <ul>
-<li><a target="_blank" href="https://github.com/Genivia/ugrep-benchmarks">Benchmarks</a>: ugrep is faster
-<li><a href="#index">file indexer</a> speeds up cold FS search
+<li><a target="_blank" href="https://github.com/Genivia/ugrep-benchmarks">benchmarks</a>: ugrep is faster
+<li><a href="#index">file indexer</a>: speed up cold FS search
 </ul>
 </div>
 <div class="img-with-text">
 <img src="ug.png" alt="ugrep screenshot with TUI"/>
-<p>Search with a <a href="#TUI">TUI</a> (shown) or from the command line with grep-compatible options.  You can also <a href="#Google">Google search</a> (shown) and <a href="#fuzzy">fuzzy search</a> your files.  Search (nested) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a> gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli, search and <a href="#binary">hexdump</a> binary files, search documents such as PDF, doc, docx, and output in JSON, XML, CSV or your own <a href="#format">customized format</a>.  Supports <a href="#regex">Unicode extended regex pattern syntax</a> and multi-line pattern matching without requiring special command-line options.
+<p align=center>Why use ugrep?
+<p>Search files faster from the command line with grep-compatible <a href="#options">extended options</a> or use the built-in <a href="#TUI">TUI</a> (shown).  <a href="#Google">Google search files</a> with logic patterns (shown), <a href="#fuzzy">fuzzy search</a>, search (nested!) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a> gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli, search and <a href="#binary">hexdump</a> binary files, search documents such as PDF, doc, docx, output in JSON, XML, CSV or your own <a href="#format">customized format</a>.  Supports <a href="#regex">Unicode extended regex pattern syntax</a>, PCRE regex, and multi-line pattern matching without requiring any special command-line options.
 </div>
 </div>
 
@@ -287,7 +288,7 @@ sudo make install # install as desired
 <dt>ug -Q</dt>
                                 <dd>start the interactive query <a href="#TUI">TUI</a> then enter patterns to recursively search for matching files, press <em>F1</em> or <em>CTRL-Z</em> for help and options, press <em>ALT-L</em> to <a href="#list">list matching files</a> (option <tt>-l</tt>)</dd>
 <dt>ug -%% -jwQ</dt>
-                                <dd>recursively <a href="#Google">Google search files</a> (option <tt>-%%</tt>) with <a href="#modes">smart ignore case</a> (option <tt>-j</tt>) regex patterns matching <a href="#modes">words</a> (option <tt>-w</tt>) in the interactive query <a href="#TUI">TUI</a> (option <tt>-Q</tt>)</dd>
+                                <dd>recursively <a href="#Google">Google search files</a> with AND/OR/NOT patterns (option <tt>-%%</tt>) with <a href="#modes">smart ignore case</a> (option <tt>-j</tt>) regex patterns matching <a href="#modes">words</a> (option <tt>-w</tt>) in the interactive query <a href="#TUI">TUI</a> (option <tt>-Q</tt>)</dd>
 <dt>ug <i>PATTERN</i></dt>
                                 <dd>recursively search for files matching <tt><i>PATTERN</i></tt>; a recursive search is performed when no search targets are specified</dd>
 <dt>ug <i>PATTERN</i> <i>FILE</i></dt>
@@ -321,9 +322,9 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
-<li>the <a href="#regex">regex pattern syntax is standard POSIX ERE</a>, same as <code>egrep</code>, but supporting Unicode by default
-<li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match; some examples: the pattern <tt>"foo.*\n.*\n.*baz"</tt> matches a line with <tt>foo</tt>, a second line and a third line with <tt>baz</tt>, the pattern <tt>"foo(.*\n)*?.*bar"</tt> lazily matches one or more lines from <tt>foo</tt> to <tt>bar</tt>
+<p>Also...</p>
+<li>the <a href="#regex">regex pattern syntax is standard POSIX ERE</a>, same as <code>egrep</code>, but supporting full Unicode matching by default
+<li>patterns match Unicode and may include newline breaks <tt>\n</tt> and <tt>\R</tt> to match multiple lines as a single match; for example the pattern <tt>"foo.*\n.*\n.*baz"</tt> matches a line with <tt>foo</tt>, a second line and a third line with <tt>baz</tt>, the pattern <tt>"foo(.*\n)*?.*bar"</tt> lazily matches one or more lines from <tt>foo</tt> to <tt>bar</tt>
 <li>quote <tt><i>"PATTERN"</i></tt> or <tt><i>'PATTERN'</i></tt> to prevent globbing by the shell that may expand <tt>*</tt>, <tt>?</tt> and <tt>[a-z]</tt> into pathnames
 <li><i>Windows Command Prompt</i> does not parse <tt>'</tt> to quote patterns; you must use <tt>"</tt> instead
 <li><i>Windows PowerShell</i> does not parse <tt>""</tt> (empty pattern); you must specify <tt>--match</tt> instead
@@ -354,7 +355,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
 <li>if you never want <tt>-c</tt> to output zero match counts, then add <tt>min-count=1</tt> to your ~/.ugrep file (outputing zero match counts is a GNU grep behavior)
 <li>to disable directory tree-based listings, specify <tt>--no-tree</tt> or permanently add <tt>no-tree</tt> to your ~/.ugrep file
 <li>listings are sorted by name; to sort by date/time or by size, specify <tt>--sort=changed</tt> or <tt>--sort=size</tt>
@@ -408,8 +409,8 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
-<li>additional options, files and directories can be specified on the command line to start the TUI search
+<p>Also...</p>
+<li>options, files and directories are taken from the command line to start the TUI search
 <li><em>ALT-key</em> toggles the option letter corresponding to the key press, for example <em>ALT-L</em> lists matching files (option <tt>-l</tt>) and <em>SHIFT-ALT-C</em> shows context (option <tt>-C3</tt>)
 <li><em>ALT-key</em> in MacOS terminal is <em>OPTION-key</em> when "Use Option as Meta key" is enabled in Terminal Preferences/Profiles/Keyboard
 <li><em>ALT-key</em> in xterm may not work unless <tt>xterm*metaSendsEscape: true</tt> is added to ~/.Xdefaults
@@ -425,33 +426,34 @@ sudo make install # install as desired
 </ol>
 
 <a name="Google">&nbsp;</a>
-<h3>Googling files</h3>
+<h3>Googling files with logic patterns</h3>
 
 <dl>
-<dt>-% "foo bar"</dt>           <dd>search files for lines matching both regex patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
-<dt>-%% "foo bar"</dt>          <dd>find files matching both patterns <tt>foo</tt> and <tt>bar</tt> anywhere in the same file (<tt>-%%</tt> is the same as <tt>--bool --files</tt>)</dd>
-<dt>-% "foo -bar"</dt>          <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
-<dt>-%% "foo -bar"</dt>         <dd>find files matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file (<tt>-%%</tt> is the same as <tt>--bool --files</tt>)</dd>
-<dt>-% "foo bar|baz"</dt>       <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> anywhere on the same line</dd>
-<dt>-% "foo -(bar|baz)"</dt>    <dd>search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
+<dt>-% "foo bar"</dt>           <dd>space is <tt>AND</tt>: search files for lines matching both regex patterns <tt>foo</tt> and <tt>bar</tt> anywhere on the same line</dd>
+<dt>-%% "foo bar"</dt>          <dd>space is <tt>AND</tt>: find files matching both patterns <tt>foo</tt> and <tt>bar</tt> anywhere in the same file (<tt>-%%</tt> is the same as <tt>--bool --files</tt>)</dd>
+<dt>-% "foo -bar"</dt>          <dd>space-dash is <tt>AND</tt> <tt>NOT</tt>: search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere on the same line</dd>
+<dt>-%% "foo -bar"</dt>         <dd>space-dash is <tt>AND</tt> <tt>NOT</tt>: find files matching pattern <tt>foo</tt> that do not match <tt>bar</tt> anywhere in the same file (<tt>-%%</tt> is the same as <tt>--bool --files</tt>)</dd>
+<dt>-% "foo bar|baz"</dt>       <dd>space is <tt>AND</tt>, <tt>|</tt> is <tt>OR</tt>: search files for lines matching both patterns <tt>foo</tt> and <tt>bar|baz</tt> anywhere on the same line</dd>
+<dt>-% "foo -(bar|baz)"</dt>    <dd>space-dash is <tt>AND</tt> <tt>NOT</tt>, <tt>|</tt> is <tt>OR</tt>: search files for lines matching pattern <tt>foo</tt> that do not match <tt>bar|baz</tt> anywhere on the same line</dd>
 <dt>-% "foo AND NOT (bar OR baz)"</dt>
-                                <dd>same as above, this time using AND-OR-NOT operators</dd>
-<dt>-% "foo -bar -baz"</dt>     <dd>same as above, in normalized form (ugrep's internal CNF)</dd>
+                                <dd>same as above, this time using <tt>AND</tt> <tt>OR</tt> <tt>NOT</tt> operators</dd>
+<dt>-% "foo -bar -baz"</dt>     <dd>same as above, in normalized conjungctive normal form (ugrep internally normalizes logic to CNF)</dd>
 <dt>-% 'foo "-bar baz"'</dt>    <dd>search files for lines matching both patterns <tt>foo</tt> and <tt>-bar baz</tt>, where <tt>"-bar baz"</tt> is quoted to match literally "as is"</dd>
 <dt>-F -% "*foo* bar?"</dt>     <dd>search files for lines matching both fixed (option <tt>-F</tt>) strings <tt>*foo*</tt> and <tt>bar?</tt> anywhere on the same line</dd>
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
+<li>white space in a pattern is a logical <tt>AND</tt> (lowest precedence)
+<li>a <tt>|</tt> in a pattern is a logical <tt>OR</tt> (taking higher precedence than <tt>AND</tt>)
+<li>a <tt>-</tt> in a pattern with spacing is a logical <tt>NOT</tt> (taking highest precedence)
+<li>the keywords <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when properly spaced
+<li>quote strings in a pattern with <tt>"</tt> to match literally "as is"
+<li>group patterns with <tt>( )</tt> parentheses
 <li>option <tt>-%</tt> (or <tt>--bool</tt>) can be combined with any <a href="#modes">pattern matching modes</a> <tt>-F</tt>, <tt>-G</tt>, <tt>-P</tt>, <tt>-Z</tt> and other options
 <li>the default search mode is <tt>--lines</tt> for option <tt>-%</tt> to match lines
 <li>option <tt>-%%</tt> (or <tt>--bool --files</tt>) matches across entire files, like how a search engine returns results
-<li>white space in a pattern is a logical <tt>AND</tt> (lowest precedence)
-<li>a <tt>|</tt> in a pattern is a logical <tt>OR</tt> (taking higher precedence than <tt>AND</tt>)
-<li>white space followed by a <tt>-</tt> is a logical <tt>NOT</tt> (taking highest precedence)
-<li>operators <tt>AND</tt>, <tt>OR</tt> and <tt>NOT</tt> may also be used when properly spaced
-<li>quote strings in a pattern with <tt>"</tt> to match literally "as is"
-<li>group patterns with <tt>( )</tt> parentheses
+<li>option <tt>--stats</tt> reports the normalized pattern logic to search files
 </ol>
 
 <a name="fuzzy">&nbsp;</a>
@@ -471,7 +473,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
 <li>the first character or characters that make up a pattern always match; to approximately match the first character(s), replace it with a <tt>.</tt> or <tt>.?</tt>
 <li>no whitespace may be given between <tt>-Z</tt> and its argument
 <li>when <code>ugrep</code> is installed as replacement binaries for GNU/BSD <code>grep</code>, <code>egrep</code> <code>fgrep</code>, <code>zgrep</code>, <code>zegrep</code> or <code>zfgrep</code>, option <tt>-Z</tt> is automatically reassigned to <tt>--null</tt> for GNU/BSD grep compatibility; use <tt>grep --fuzzy</tt> instead for fuzzy search
@@ -490,7 +492,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
 <li>when option <tt>-g</tt>, <tt>-O</tt>, <tt>-M</tt>, or <tt>-t</tt> is specified, searches archives for files that match the specified globs, file extensions, file signature magic bytes, or file types, respectively; as a side-effect, these options restrict the selection of compressed files and archives searched to only those files with filename extensions that match known compression and archive types (for example, <tt>.jar</tt> is a non-standard zip file extension and not searched unless <tt>-Ojar</tt> is specifies also)
 <li>to let <code>ug</code> always search archives and compressed files, add <tt>decompress</tt> to your ~/.ugrep file
 <li>when <code>ugrep</code> is installed as replacement binaries for GNU/BSD <code>grep</code>, <code>egrep</code> <code>fgrep</code>, <code>zgrep</code>, <code>zegrep</code> or <code>zfgrep</code>, option <tt>-z</tt> is automatically reassigned to <tt>--null-data</tt> for GNU/BSD grep compatibility; use <code>zgrep</code>, <code>zegrep</code>,  <code>zfgrep</code> instead
@@ -512,7 +514,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
 <li>option <tt>-U</tt> disables Unicode in regex patterns; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point
 <li>option <tt>--hexdump</tt> takes optional argument <tt>[1-8][a][bch][A[NUM]][B[NUM]][C[NUM]]</tt> to output 1, 2, 3 or up to 8 columns of hexadecimal octets (default is 2), <tt>a</tt> outputs a <tt>*</tt> for all hex lines that are identical to the previous hex line, <tt>b</tt> removes all space breaks, <tt>c</tt> removes the character column, <tt>h</tt> removes hex spacing, <tt>A</tt> includes up to <tt>NUM</tt> hex lines after a match, <tt>B</tt> includes up to <tt>NUM</tt> hex lines before a match and <tt>C</tt> includes up to <tt>NUM</tt> hex lines before and after a match.
 </ol>
@@ -557,7 +559,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
 <li>a <tt>-</tt> (dash) for a <tt><i>FILE</i></tt> argument of an option, such as <tt>--from=-</tt>, reads from standard input
 <li>to let <tt>ug</tt> ignore binary files by default, add <tt>ignore-binary</tt> to your ~/.ugrep file
 <li>to let <tt>ug</tt> obey .gitignore rules in recursive searches by default, add <tt>ignore-files</tt> to your ~/.ugrep file
@@ -575,7 +577,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
 <li>formatting can be combined with other options, such as <tt>-n</tt> to include line numbers
 <li>see <a href="#format">custom output formatting</a> for a list of format fields to specify in a <tt>--format=<i>"FORMAT"</i></tt> argument
 </ol>
@@ -604,7 +606,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
 <li><code>ug</code> enables <tt>--pretty</tt> and <tt>--sort</tt> by default
 <li><code>ugrep</code> only enables <tt>--color</tt> by default
 </ol>
@@ -1242,7 +1244,7 @@ sudo make install # install as desired
 </dl>
 
 <ol>
-<p>Usage tips:</p>
+<p>Also...</p>
 <li><tt>ugrep-indexer</tt> reads a .ugrep-indexer configuration file when present in the working directory or in your home directory, which should list the names of long options (without the <tt>--</tt>) to set your preferences
 <li><tt>ugrep-indexer</tt> option <tt>-v</tt> reports progress; to create a log, redirect <tt>ugrep-indexer -v</tt> output to a log file
 <li><tt>ugrep-indexer</tt> option <tt>-S</tt> follows symlinks to files; indexing never follows symlinks to directories
@@ -1302,7 +1304,7 @@ sudo make install # install as desired
 
 <p><small>See also: <a target="_blank" href="https://www.gnu.org/software/grep/">gnu grep</a>, <a taget="_blank" href="https://man.freebsd.org/cgi/man.cgi?grep(1)">bsd grep</a>, <a target="_blank" href="https://git-scm.com/docs/git-grep">git grep</a>, <a target="_blank" href="https://man7.org/linux/man-pages/man1/pcregrep.1.html">pcre grep</a>, <a href="https://www.usenix.org/legacy/publications/library/proceedings/wu.pdf">agrep</a>, <a target="_blank" href="https://beyondgrep.com">ack</a>, <a target="_blank" href="https://geoff.greer.fm/ag/">ag</a>, <a target="_blank" href="https://docs.rs/crate/ripgrep/0.2.7">rg</a>, <a target="_blank" href="https://sift-tool.org">sift</a></small>
 
-<p><small>Last updated: Mon June 30, 2025</small>
+<p><small>Last updated: Fri July 4, 2025</small>
 
 <hr>
 
