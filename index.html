@@ -266,7 +266,7 @@ sudo make install # install as desired
 <div class="img-with-text">
 <img src="ug.png" alt="ugrep screenshot with TUI"/>
 <p align=center>Why use ugrep?
-<p>Search faster with <a href="#options">enhanced grep command options</a> and with the built-in <a href="#TUI">TUI</a> (shown).  <a href="#Google">Google search files</a> with logic patterns (shown), <a href="#fuzzy">fuzzy search</a>, search (nested!) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a> gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli, search and <a href="#binary">hexdump</a> binary files, search documents such as PDF, doc, docx, output in JSON, XML, CSV or your own <a href="#format">customized format</a>.  Supports <a href="#regex">Unicode extended regex pattern syntax</a>, PCRE regex, and multi-line pattern matching without requiring any special command-line options.
+<p>Search faster with <a href="#options">enhanced grep command options</a> and with the built-in <a href="#TUI">TUI</a> (shown).  <a href="#Google">Google search files</a> with logic patterns (shown), <a href="#fuzzy">fuzzy search</a>, search (nested!) zip/7z/tar/pax/cpio <a href="#zip">archives, tarballs and compressed files</a> gz/Z/bz/bz2/lzma/xz/lz4/zstd/brotli, search and <a href="#binary">hexdump binary files</a>, search documents such as PDF, doc, docx, output in JSON, XML, CSV or your own <a href="#format">customized format</a>.  Supports <a href="#regex">Unicode extended regex pattern syntax</a>, PCRE regex, and multi-line pattern matching without requiring any special command-line options.
 </div>
 </div>
 
@@ -515,8 +515,8 @@ sudo make install # install as desired
 
 <ol>
 <p>Also...</p>
-<li>option <tt>-U</tt> disables Unicode in regex patterns; patterns such as <tt>\xa3</tt> match a byte, not the U+00a3 multi-byte code point
-<li>option <tt>--hexdump</tt> takes optional argument <tt>[1-8][a][bch][A[NUM]][B[NUM]][C[NUM]]</tt> to output 1, 2, 3 or up to 8 columns of hexadecimal octets (default is 2), <tt>a</tt> outputs a <tt>*</tt> for all hex lines that are identical to the previous hex line, <tt>b</tt> removes all space breaks, <tt>c</tt> removes the character column, <tt>h</tt> removes hex spacing, <tt>A</tt> includes up to <tt>NUM</tt> hex lines after a match, <tt>B</tt> includes up to <tt>NUM</tt> hex lines before a match and <tt>C</tt> includes up to <tt>NUM</tt> hex lines before and after a match.
+<li>option <tt>-U</tt> disables Unicode in regex patterns; patterns such as <tt>\xa3</tt> match a single byte, not the Unicode U+00a3 code point
+<li>option <tt>--hexdump</tt> takes an optional argument of the form <tt>[1-8][a][bch][A[NUM]][B[NUM]][C[NUM]]</tt> to output 1, 2, 3 or up to 8 columns of hexadecimal octets (default is 2), <tt>a</tt> outputs a <tt>*</tt> for all hex lines that are identical to the previous hex line, <tt>b</tt> removes all space breaks, <tt>c</tt> removes the character column, <tt>h</tt> removes hex spacing, <tt>A</tt> includes up to <tt>NUM</tt> hex lines after a match, <tt>B</tt> includes up to <tt>NUM</tt> hex lines before a match and <tt>C</tt> includes up to <tt>NUM</tt> hex lines before and after a match.
 </ol>
 
 <a name="constraints">&nbsp;</a>
@@ -616,9 +616,9 @@ sudo make install # install as desired
 
 <dl>
 <dt>--help <i>WHAT</i></dt>     <dd>display help on <tt><i>WHAT</i></tt> you are looking for</dd>
-<dt>--help count</dt>           <dd>display help on option <tt>-c</tt> (or <tt>--count</tt>) and <tt>-m [MIN,][MAX]</tt> (or <tt>--min-count=MIN</tt>, <tt>--max-count=MAX</tt>)</dd>
-<dt>--help regex</dt>           <dd>display help with details on regex patterns</dd>
-<dt>--help globs</dt>           <dd>display help with details on glob patterns, e.g. for option <tt>-g</tt></dd>
+<dt>--help regex</dt>           <dd>display help in detail on regex patterns</dd>
+<dt>--help globs</dt>           <dd>display help in detail on glob patterns, e.g. for option <tt>-g</tt></dd>
+<dt>--help format</dt>          <dd>display help in detail on output formatting with option <tt>--format</tt> and <tt>--replace</tt></dd>
 </dl>
 
 <a name="regex">&nbsp;</a>
