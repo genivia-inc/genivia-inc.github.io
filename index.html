@@ -551,9 +551,9 @@ sudo make install # install as desired
 <dt>--ignore-files=<i>FILE</i></dt>
                                 <dd>obey gitignore rules in recursive searches using local <tt><i>FILE</i></tt> along directory search paths</dd>
 <dt>--exclude-from=<i>FILE</i></dt>
-                                <dd>exclude files and directories specified as gitignore globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+                                <dd>exclude files or directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>--include-from=<i>FILE</i></dt>
-                                <dd>only search the files and directories specified as gitignore globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
+                                <dd>only search the files and directories specified as globs in <tt><i>FILE</i></tt>, see also <a href="#globs"><tt>ug --help globs</tt></a></dd>
 <dt>--from=<i>FILE</i></dt>     <dd>read additional pathnames of files to search from <tt><i>FILE</i></tt></dd>
 <dt>--filter=<i>"COMMANDS"</i></dt>
                                 <dd>filter files first before searching them by executing a utility on a file based on its type, see also <a href="#filter"><tt>ug --help filter</tt></a></dd>
@@ -828,11 +828,12 @@ sudo make install # install as desired
 </table>
 
 <ol>
+<li><tt>--ignore-files</tt> globs ignore both file and directory names that match per gitignore rules, whereas all other globbing-related options match directory names only when a glob ends with a <tt>/</tt>
 <li>to prevent the shell from expanding globs, you must quote globs like <tt>"*.cpp"</tt> in command-line options such as <tt>-g"*.cpp"</tt>,  
 <li>a glob pattern starting with a <tt>^</tt> or a <tt>!</tt> inverts matching: instead of matching a filename or directory name, the directory or file is ignored and excluded from the search
 <li>when a glob pattern contains a <tt>/</tt>, the full pathname is matched, otherwise, the basename of a file or directory is matched in recursive searches
-<li>when a glob pattern starts with a <tt>/</tt>, the glob matches files and directories from the working directory path, not recursively
-<li>when a glob pattern ends with a <tt>/</tt>, the glob matches directories, not files
+<li>when a glob pattern starts with a <tt>/</tt>, the glob matches file and directory names from the working directory path, not recursively
+<li>when a glob pattern ends with a <tt>/</tt>, the glob matches directory names, not filenames
 </ol>
 
 <a name="types">&nbsp;</a>
